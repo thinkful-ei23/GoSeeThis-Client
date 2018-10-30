@@ -29,10 +29,6 @@ export default class Movie extends React.Component{
                     <h3>Release Date</h3>
                     <p>23 August 1998</p>
                 </section>
-                <section className="movie-rating">
-                    <h3>User Score</h3>
-                    <p>7.5/10</p>
-                </section>
             </section>
             <section className="recommended">
                 <section className="recommended-count">
