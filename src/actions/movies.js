@@ -1,4 +1,5 @@
-import {API_BASE_URL} from '../config';
+import {API_BASE_URL, MOVIE_SEARCH_BASE_URL} from '../config';
+import { normalizeResponseErrors } from './utils';
 
 export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST';
 export const fetchMoviesRequest = () => ({
@@ -17,9 +18,16 @@ export const fetchMoviesError = (error) => ({
   error
 });
 
-export const fetchMovies = () => (dispatch, getState) => {
+export const fetchMovies = (searchQuery) => dispatch => {
   dispatch(fetchMoviesRequest());
-  authToken = getState().auth.authToken;
-
-  fetch(`${API_BASE_URL}/movies`)
+  fetch(`${MOVIE_SEARCH_BASE_URL}&query=${searchQuery}&page=1`, {
+    method: 'GET'
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(results => {
+    fetchMoviesSuccess(results);
+  })
+  .catch(err => {
+    fetchMoviesError(err);
+  })
 }
