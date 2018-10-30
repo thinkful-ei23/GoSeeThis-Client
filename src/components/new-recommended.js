@@ -1,10 +1,11 @@
 import React from 'react';
-import {Field} from 'redux-form';
+import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
+
 
 import './new-recommended.css';
 
-export default class NewRecommended extends React.Component{
+export class NewRecommended extends React.Component{
     render(){
         return(
             <form
@@ -25,3 +26,8 @@ export default class NewRecommended extends React.Component{
     }
 }
 
+export default reduxForm({
+    form: 'recomendation',
+    onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('recomendation', Object.keys(errors)[0]))
+})(NewRecommended);
