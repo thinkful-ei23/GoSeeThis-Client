@@ -14,6 +14,8 @@ export default class Movie extends React.Component{
                     <h1>Blade</h1>
                 </section>
                 <section className="movie-poster">
+                    <img src="https://i.ebayimg.com/images/g/6IsAAOxyjPNRFV2p/s-l300.jpg" 
+                    alt="Blade Poster"></img>
                 </section>
             </section>
             <section className="movie-info">
