@@ -3,6 +3,8 @@ import {Field, reduxForm} from 'redux-form';
 import Input from './input';
 import {connect} from 'react-redux';
 
+import './new-recommended.css';
+
 export default class NewRecommended extends React.Component{
     render(){
         return(

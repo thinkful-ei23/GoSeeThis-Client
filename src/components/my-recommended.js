@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import './my-recommended.css';
+
 export default class MyRecommended extends React.Component{
     
     render(){

@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import './movie.css';
+
 export default class Movie extends React.Component{
     
 
