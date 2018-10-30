@@ -13,6 +13,9 @@ export default class MyRecommended extends React.Component{
                 <section className="recommended-list">
                     <ul>
                         <section className="recommended">
+                            <section className="recomendation-header">
+                                <h2>My Recomendations:</h2>
+                            </section>
                             <section className="movie-title">
                                 <h3>Blade</h3>
                             </section>
