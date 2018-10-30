@@ -10,7 +10,7 @@ const initialState = {
   error: false
 }
 
-export default function reducer(state=initalState, action) {
+export default function reducer(state=initialState, action) {
   if (action.type === FETCH_MOVIES_REQUEST) {
     return Object.assign({}, state, {
       loading: true
