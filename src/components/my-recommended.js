@@ -1,30 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-export class MyRecommended extends React.Component{
+export default class MyRecommended extends React.Component{
     
     render(){
         return(
             <section className="myRecommended">
                 <section className="username">
-                    <h2>{this.props.username}</h2>
+                    <h2>Graves</h2>
                 </section>
-            
-            
-            
-            
+                <section className="recommended-list">
+                    <ul>
+                        <section className="recommended">
+                            <section className="movie-title">
+                                <h3>Blade</h3>
+                            </section>
+                            <section className="recommend-desc">
+                                <p>I really like this dumb movie.</p>
+                            </section>
+                            <section className="score">
+                                <p>8/10</p>
+                            </section>
+                        </section>
+                    </ul>
+                </section>
             </section>
         )
     }
 
     
 }
-
-const mapStateToProps = state => {
-    const {currentUser} = state.auth;
-    return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
-        protectedData: state.protectedData.data
-    };
-};

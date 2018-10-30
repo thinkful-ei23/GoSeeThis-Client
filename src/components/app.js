@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
+import Movie from './movie';
+import Profile from './my-recommended';
+import NewRec from './new-recommended';
 
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
@@ -45,6 +48,9 @@ export class App extends React.Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={RegistrationPage} />
+                <Route exact path="/movie" component={Movie} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/recommend" component={NewRec} />
             </div>
         );
     }
