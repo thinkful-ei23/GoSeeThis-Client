@@ -1,7 +1,6 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {Field} from 'redux-form';
 import Input from './input';
-import {connect} from 'react-redux';
 
 import './new-recommended.css';
 
