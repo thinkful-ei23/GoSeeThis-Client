@@ -38,10 +38,12 @@ export default class Movie extends React.Component{
                 <section className="recommendations">
                     <h2>Recommendations</h2>
                     <ul>
-                        <li>
-                            Graves: Love this movie.
-                            9/10 stars
-                        </li>
+                        <section className="recommend-description">
+                            <p>I really love this dumb movie</p>
+                        </section>
+                        <section className="user-rating">
+                            <p>8/10 Stars</p>
+                        </section>
                     </ul>
                 </section>
             </section>
