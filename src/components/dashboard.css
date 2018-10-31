@@ -1,0 +1,9 @@
+.recentActivity{
+    float: left;
+    width: 50%;
+}
+
+.myRecommendations{
+    float: right;
+    width: 50%;
+}

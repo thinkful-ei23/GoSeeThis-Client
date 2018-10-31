@@ -1,8 +1,9 @@
 import React from 'react';
-
+import requiresLogin from './requires-login';
+import {connect} from 'react-redux';
 import './my-recommended.css';
 
-export default class MyRecommended extends React.Component{
+export class MyRecommended extends React.Component{
     
     render(){
         return(
@@ -35,3 +36,12 @@ export default class MyRecommended extends React.Component{
     
 }
 
+const mapStateToProps = state => {
+    const {currentUser} = state.auth;
+    return {
+        username: state.auth.currentUser.username,
+        name: `${currentUser.firstName} ${currentUser.lastName}`,
+    };
+};
+
+export default requiresLogin()(connect(mapStateToProps)(MyRecommended));
