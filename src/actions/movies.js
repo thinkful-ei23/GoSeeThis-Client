@@ -1,4 +1,4 @@
-import {API_BASE_URL, MOVIE_SEARCH_BASE_URL} from '../config';
+import {MOVIE_SEARCH_BASE_URL} from '../config';
 import { normalizeResponseErrors } from './utils';
 
 export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST';
