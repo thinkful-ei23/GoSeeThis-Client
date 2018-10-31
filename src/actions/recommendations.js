@@ -18,6 +18,13 @@ export const fetchRecsError = (error) => ({
   error
 });
 
+export const ADD_REC = 'ADD_REC';
+export const addRec = (recommendation) => ({
+    type: ADD_REC,
+    title: recommendation.title,
+    recDesc: recommendation.recDesc,
+});
+
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
   fetch(`${API_BASE_URL}/recommendations`, {
@@ -31,3 +38,27 @@ export const fetchRecs = () => dispatch => {
     dispatch(fetchRecsError(err));
   });
 }
+
+export const saveRecs = (recommendation) => (dispatch, getState) => {
+  dispatch(addRec(recommendation));
+  const authToken = getState().auth.authToken;
+  return (
+      fetch(`${API_BASE_URL}/api/recommendations/`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${authToken}`
+          },
+          body: JSON.stringify({
+              title: recommendation.title,
+              recDesc: recommendation.recDesc,
+          })
+      })
+      .then(res => {
+          return res.json();
+      })
+      .catch(err => {
+          return err;
+      })
+  );
+};

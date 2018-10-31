@@ -40,10 +40,9 @@ export class MyRecommended extends React.Component{
 }
 
 const mapStateToProps = state => {
-    const {currentUser} = state.auth;
+
     return {
         username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
     };
 };
 

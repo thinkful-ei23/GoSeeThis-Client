@@ -7,10 +7,11 @@ import Input from './input';
 import './new-recommended.css';
 
 export class NewRecommended extends React.Component{
+
     render(){
         return(
             <form
-            className="login-form">
+            className="recommendation-form">
             <legend className="recommend-title">New Recommendation</legend>
             <label htmlFor="title">Movie Title</label>
             <Field component={Input} type="text" name="title" />
