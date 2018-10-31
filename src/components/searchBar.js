@@ -1,11 +1,9 @@
 //todo: change axios
 
-import React from 'react'
+import React from 'react';
 import {connect} from 'react-redux';
-import Suggestions from './suggestions'
+import Suggestions from './suggestions';
 import {fetchMovies} from '../actions/movies';
-import requiresLogin from './requires-login';
-import { Field, reduxForm, focus } from 'redux-form';
 
 
 export class SearchBar extends React.Component {
@@ -17,12 +15,8 @@ constructor(props) {
                 query: '',
     results: []
  
-        }
+        };
     }
-
-  getInfo = () => {
- 	        this.props.dispatch(fetchMovies());
- }
 
   handleInputChange = () => {
     this.setState({
@@ -30,7 +24,7 @@ constructor(props) {
     }, () => {
       if (this.state.query && this.state.query.length > 1) {
         if (this.state.query.length % 2 === 0) {
-          this.getInfo();
+           this.props.dispatch(fetchMovies(this.state.query));
         }
       } else if (!this.state.query) {
       }
@@ -52,17 +46,8 @@ constructor(props) {
 }
 
 const mapStateToProps = state => {
-    const {currentUser} = state.auth;
     return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
-        protectedData: state.protectedData.data
-    };
+   };
 };
-
-export default reduxForm({
-  form: 'SearchBar',
-})(SearchBar);
-
-
+export default connect(mapStateToProps)(SearchBar);
 

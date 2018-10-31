@@ -1,8 +1,9 @@
+//set up onClick
 import React from 'react'
 
 const Suggestions = (props) => {
   const options = props.results.map(r => (
-    <li key={r.id}>
+    <li key={r.id} >
       {r.name}
     </li>
   ))
