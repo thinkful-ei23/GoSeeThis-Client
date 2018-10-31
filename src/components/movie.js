@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import {fetchMovies} from '../actions/movies';
+import {Link} from 'react-router-dom';
 
 import './movie.css';
 
@@ -44,6 +45,15 @@ export class Movie extends React.Component{
                     <ul>
                         <section className="recommend-description">
                             <p>I really love this dumb movie</p>
+                        </section>
+                        <section className="recommended-user">
+                            <p><Link to="/profile">Graves</Link></p>
+                        </section>
+                        <section className="recommend-description">
+                            <p>Good but not as good as Mama Mia</p>
+                        </section>
+                        <section className="recommended-user">
+                            <p><Link to="/profile">Tarik</Link></p>
                         </section>
                     </ul>
                 </section>
