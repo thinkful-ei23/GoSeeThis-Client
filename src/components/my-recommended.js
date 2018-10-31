@@ -10,6 +10,7 @@ export class MyRecommended extends React.Component{
     componentDidMount(){
         this.props.dispatch(fetchRecs())
       }
+
     render(){
         return(
             <section className="myRecommended">

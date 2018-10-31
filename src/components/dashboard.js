@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
+
 import {fetchRecs} from '../actions/recommendations';
 import {Link} from 'react-router-dom';
 
@@ -21,6 +22,8 @@ export class Dashboard extends React.Component {
             </section>
             <section className="username">
                     <h2>Username</h2>
+
+
             </section>
 
             <section className="recentActivity">
