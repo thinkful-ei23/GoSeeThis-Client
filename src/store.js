@@ -4,13 +4,15 @@ import thunk from 'redux-thunk';
 import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
 import moviesReducer from './reducers/movies';
+import recsReducer from './reducers/recommendations';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 
 const store = createStore(
     combineReducers({
         form: formReducer,
         auth: authReducer,
-        movies: moviesReducer
+        movies: moviesReducer,
+        recs: recsReducer
     }),
     applyMiddleware(thunk)
 );
