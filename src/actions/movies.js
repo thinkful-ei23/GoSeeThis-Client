@@ -30,4 +30,4 @@ export const fetchMovies = (searchQuery) => dispatch => {
   .catch(err => {
     fetchMoviesError(err);
   })
-}
+};
