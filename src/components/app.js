@@ -4,6 +4,7 @@ import {Route, withRouter} from 'react-router-dom';
 import Movie from './movie';
 import Profile from './my-recommended';
 import NewRec from './new-recommended';
+import EditProf from './edit-profile';
 
 import HeaderBar from './header-bar';
 import LandingPage from './landing-page';
@@ -51,6 +52,7 @@ export class App extends React.Component {
                 <Route exact path="/movie" component={Movie} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/recommend" component={NewRec} />
+                <Route exact path="/editprofile" component={EditProf} />
             </div>
         );
     }
