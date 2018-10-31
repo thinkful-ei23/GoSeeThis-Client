@@ -15,8 +15,6 @@ export class NewRecommended extends React.Component{
             <Field component={Input} type="text" name="title" />
             <label htmlFor="description">Why Recommended</label>
             <Field component={Input} type="text" name="description" />
-            <label htmlFor="rating">Rating</label>
-            <Field component={Input} type="text" name="rating" />
             <button
                 type="submit">
                 Create

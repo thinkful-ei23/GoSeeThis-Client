@@ -1,30 +1,30 @@
 import {
-  FETCH_MOVIES_REQUEST,
-  FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_ERROR
-} from '../actions/movies';
+  FETCH_RECS_REQUEST,
+  FETCH_RECS_SUCCESS,
+  FETCH_RECS_ERROR
+} from '../actions/recommendations';
 
 const initialState = {
   loading: false,
-  searchResults: null,
+  recs: null,
   error: false
-}
+};
 
 export default function reducer(state=initialState, action) {
-  if (action.type === FETCH_MOVIES_REQUEST) {
+  if (action.type === FETCH_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
     });
   }
-
-  if (action.type === FETCH_MOVIES_SUCCESS) {
+  
+  if (action.type === FETCH_RECS_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
-      searchResults: action.movies
+      recs: action.recs
     });
   }
 
-  if (action.type === FETCH_MOVIES_ERROR) {
+  if (action.type === FETCH_RECS_ERROR) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

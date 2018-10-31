@@ -1,10 +1,14 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import requiresLogin from './requires-login';
+import {fetchMovies} from '../actions/movies';
 
 import './movie.css';
 
-export default class Movie extends React.Component{
-    
+export class Movie extends React.Component{
+    componentDidMount(){
+        this.props.dispatch(fetchMovies())
+      }
 
     render(){
         return(
@@ -41,9 +45,6 @@ export default class Movie extends React.Component{
                         <section className="recommend-description">
                             <p>I really love this dumb movie</p>
                         </section>
-                        <section className="user-rating">
-                            <p>8/10 Stars</p>
-                        </section>
                     </ul>
                 </section>
             </section>
@@ -51,3 +52,13 @@ export default class Movie extends React.Component{
         )
     }
 }
+
+const mapStateToProps = state => {
+    const {currentUser} = state.auth;
+    return {
+        username: state.auth.currentUser.username,
+        name: `${currentUser.firstName} ${currentUser.lastName}`,
+    };
+};
+
+export default requiresLogin()(connect(mapStateToProps)(Movie));
