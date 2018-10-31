@@ -24,10 +24,11 @@ export const fetchMovies = (searchQuery) => dispatch => {
     method: 'GET'
   })
   .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
   .then(res => {
-    fetchMoviesSuccess(res.results);
+    dispatch(fetchMoviesSuccess(res.results));
   })
   .catch(err => {
-    fetchMoviesError(err);
+    dispatch(fetchMoviesError(err));
   })
 };

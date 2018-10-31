@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   loading: false,
-  movies: null,
+  searchResults: null,
   error: false
 }
 
@@ -20,7 +20,7 @@ export default function reducer(state=initialState, action) {
   if (action.type === FETCH_MOVIES_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
-      movies: action.movies
+      searchResults: action.movies
     });
   }
 

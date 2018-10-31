@@ -8,46 +8,62 @@ import {fetchMovies} from '../actions/movies';
 
 export class SearchBar extends React.Component {
 
+	handleInputChange(e) {
+    const query = e.target.value;
+    if (query) {
+      this.props.dispatch(fetchMovies(query));
+    }
 
-	state = {
-		query: '',
-       		results: []
-
-	};
-
-	handleInputChange (e){
-		const query = e.target.value;
-
-		this.setState({
-				query
-		});
-
-		//if (this.state.query && this.state.query.length > 1) {
-		if (this.state.query.length % 2 === 0) {
-		console.log(this.props);
-		this.props.dispatch(fetchMovies(this.state.query));
-		}
-		//} else if (!this.state.query) {
-		//}
+		// //if (this.state.query && this.state.query.length > 1) {
+		// if (this.state.query.length % 2 === 0) {
+		//   this.props.dispatch(fetchMovies(this.state.query));
+		// }
+		// //} else if (!this.state.query) {
+		// //}
 
 	}
 
 	render() {
-		return (
-				<form>
-				<input
-				placeholder="Search for..."
-				onChange={(e)=>this.handleInputChange(e)}
-				/>
-				<Suggestions results={this.state.results} />
-				</form>
-		       )
+
+    if (!this.props.searchResults && !this.props.loading) {
+      return (
+        <form>
+          <input
+          placeholder="Search for..."
+          onChange={(e)=>this.handleInputChange(e)}
+          />
+        </form>
+      )
+    }
+
+    else if (!this.props.searchResults && this.props.loading) {
+      return (
+        <form>
+          <input
+          placeholder="Search for..."
+          onChange={(e)=>this.handleInputChange(e)}
+          />
+          <Suggestions results='Loading...' />
+        </form>
+      )
+    }
+    else {
+      return (
+        <form>
+          <input
+          placeholder="Search for..."
+          onChange={(e)=>this.handleInputChange(e)}
+          />
+          <Suggestions results={this.props.searchResults} />
+        </form>
+      )
+    }
 	}
 }
 
-/*const mapStateToProps = state => {
-  return {
-  };
-  };*/
-export default connect()(SearchBar);
+const mapStateToProps = (state) => ({
+  searchResults: state.movies.searchResults,
+  loading: state.movies.loading
+});
+export default connect(mapStateToProps)(SearchBar);
 
