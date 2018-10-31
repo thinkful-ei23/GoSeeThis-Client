@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
+import LinkButton from './LinkButton';
 
 
 import './dashboard.css';
@@ -14,6 +15,9 @@ export class Dashboard extends React.Component {
             <section className="search">
                 <input type="text" placeholder="Search.."></input>
                 <button type="submit"><i className="fa fa-search"></i></button>
+            </section>
+            <section className="editProfile">
+                <LinkButton to='/editprofile' className='editProfBtn'>Edit Profile</LinkButton>
             </section>
             <section className="header">
                 <h2>Recent Activity</h2>
@@ -34,7 +38,7 @@ export class Dashboard extends React.Component {
                 </ul>
             </section>
             <section className="newButton">
-                <button type="submit">New Recommended</button>
+            <LinkButton to='/recommend' className='recommendBtn'>New Recommendation</LinkButton>
             </section>
         </div>
         );
