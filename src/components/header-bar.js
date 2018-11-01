@@ -20,15 +20,10 @@ export class HeaderBar extends React.Component {
         return (
             <div className="header-bar">
                 <h1>Foo App</h1>
-<<<<<<< HEAD
                 <section className="search">
                 <input type="text" placeholder="Search.."></input>
                 <button type="submit"><i className="fa fa-search"></i></button>
                 </section>
-=======
-		<SearchBar />
-
->>>>>>> development
                 {logOutButton}
             </div>
         );
