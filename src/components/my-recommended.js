@@ -1,14 +1,15 @@
 import React from 'react';
 import { fetchUserRecs } from '../actions/recommendations';
 import { connect } from 'react-redux';
+import { POSTER_PATH_BASE_URL } from '../config';
+import requiresLogin from './requires-login';
 
 import './my-recommended.css';
 
 export class MyRecommended extends React.Component {
-  componentDidUpdate() {
-    if (this.props.user) {
-      return this.props.dispatch(fetchUserRecs(this.props.user.id));
-    }
+  componentDidMount() {
+    let id = this.props.user.id;
+    this.props.dispatch(fetchUserRecs(id));
   }
 
   render() {
@@ -20,7 +21,11 @@ export class MyRecommended extends React.Component {
           <li key={index}>
             <section className="recommended">
               <section className="movie-title">
-                <img src={rec.posterUrl} alt="movie poster" width="75px" />
+                <img
+                  src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                  alt="movie poster"
+                  width="75px"
+                />
                 <h3>{rec.title}</h3>
               </section>
               <section className="recommend-desc">
@@ -50,9 +55,12 @@ export class MyRecommended extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  recs: state.recs.userRecs,
-  user: state.auth.currentUser
-});
+const mapStateToProps = state => {
+  const { currentUser } = state.auth;
+  return {
+    recs: state.recs.userRecs,
+    user: state.auth.currentUser
+  };
+};
 
-export default connect(mapStateToProps)(MyRecommended);
+export default requiresLogin()(connect(mapStateToProps)(MyRecommended));
