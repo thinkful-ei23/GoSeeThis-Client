@@ -5,7 +5,7 @@ import './movie.css';
 
 export class Movie extends React.Component{
     componentDidMount() {
-      this.props.dispatch()
+      this.props.dispatch(fetchMovieRecs(this.props.movieId));
     }
 
     render(){
