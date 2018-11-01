@@ -16,4 +16,4 @@ const Suggestions = (props) => {
   }
 }
 
-export default Suggestions
+export default ReccommendTitleSuggestions

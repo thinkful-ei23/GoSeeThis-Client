@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Suggestions from './suggestions';
 import {fetchMovies} from '../actions/movies';
-
+import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 
 export class SearchBar extends React.Component {
 
