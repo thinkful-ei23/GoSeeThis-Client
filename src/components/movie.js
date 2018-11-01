@@ -1,10 +1,12 @@
 import React from 'react';
-
-
+import {connect} from 'react-redux';
+import {fetchMovieRecs} from '../actions/recommendations';
 import './movie.css';
 
-export default class Movie extends React.Component{
-    
+export class Movie extends React.Component{
+    componentDidMount() {
+      this.props.dispatch()
+    }
 
     render(){
         return(
@@ -51,3 +53,10 @@ export default class Movie extends React.Component{
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+  movieRecs: state.recs.movieRecs,
+  movieId: state.recs.movieId
+});
+
+export default connect(mapStateToProps)(Movie);
