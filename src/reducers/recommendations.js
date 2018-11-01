@@ -36,6 +36,7 @@ export default function reducer(state=initialState, action) {
     });
   }
 
+  //testing local recommendation
   if (action.type === ADD_REC) {
     return Object.assign({}, state, {
       recommendations:[...state.recommendations, {

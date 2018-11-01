@@ -21,7 +21,7 @@ export class Dashboard extends React.Component {
                 <LinkButton to='/editprofile' className='editProfBtn'>Edit Profile</LinkButton>
             </section>
             <section className="username">
-                    <h2>Username</h2>
+                    <h2>{this.props.username}</h2>
 
 
             </section>

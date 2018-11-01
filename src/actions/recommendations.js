@@ -18,13 +18,6 @@ export const fetchRecsError = (error) => ({
   error
 });
 
-export const ADD_REC = 'ADD_REC';
-export const addRec = (recommendation) => ({
-    type: ADD_REC,
-    title: recommendation.title,
-    recDesc: recommendation.recDesc,
-});
-
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
   fetch(`${API_BASE_URL}/recommendations`, {
@@ -62,3 +55,11 @@ export const saveRecs = (recommendation) => (dispatch, getState) => {
       })
   );
 };
+
+//testing local recommendation
+export const ADD_REC = 'ADD_REC';
+export const addRec = (recommendation) => ({
+    type: ADD_REC,
+    title: recommendation.title,
+    recDesc: recommendation.recDesc,
+});

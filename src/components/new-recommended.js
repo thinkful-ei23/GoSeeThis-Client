@@ -1,33 +1,74 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
-import requiresLogin from './requires-login';
-import Input from './input';
+import { connect } from 'react-redux';
+import { addRec } from '../actions/recommendations';
 
-
-import './new-recommended.css';
-
-export class NewRecommended extends React.Component{
-
-    render(){
-        return(
-            <form
-            className="recommendation-form">
-            <legend className="recommend-title">New Recommendation</legend>
-            <label htmlFor="title">Movie Title</label>
-            <Field component={Input} type="text" name="title" />
-            <label htmlFor="description">Why Recommended</label>
-            <Field component={Input} type="text" name="description" />
-            <button
-                type="submit">
-                Create
-            </button>
-        </form>
-        )
+export class NewRecommend extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          formdata: {
+            title: '',
+            description: ''
+          },
+        };
+      }
+    
+      handleInput = (event, name) => {
+        const newFormData = {
+          ...this.state.formdata,
+        };
+        newFormData[name] = event.target.value;
+    
+        this.setState({
+          formdata: newFormData,
+        });
+      };
+    
+      submitForm = e => {
+        e.preventDefault();
+        this.props.dispatch(
+          addRec({
+            ...this.state.formdata
+          })
+        );
+        console.log(this.state.formdata.title);
+      };
+    
+      render() {
+        return (
+          <div className="rl_container article">
+            <form onSubmit={this.submitForm}>
+              <h2>New recommendation</h2>
+              <label htmlFor="title">Title</label>
+              <div className="form_element">
+                <input
+                  type="text"
+                  placeholder="Movie Title"
+                  value={this.state.formdata.title}
+                  onChange={event => this.handleInput(event, 'title')}
+                />
+              </div>
+              <div>
+              <label htmlFor="title">Why Are You Recommending It</label>
+              </div>
+              <textarea
+                value={this.state.formdata.description}
+                onChange={event => this.handleInput(event, 'description')}
+              />
+              <section>
+              <button type="submit">Add Recommendation</button>
+              </section>
+            </form>
+          </div>
+        );
+      }
     }
-}
-
-export default reduxForm({
-    form: 'recomendation',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('recomendation', Object.keys(errors)[0]))
-})(NewRecommended);
+    
+    function mapStateToProps(state) {
+      return {
+        recommendation: state.recommendation,
+      };
+    }
+    
+    export default connect(mapStateToProps)(NewRecommend);

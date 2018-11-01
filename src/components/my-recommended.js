@@ -15,7 +15,7 @@ export class MyRecommended extends React.Component{
         return(
             <section className="myRecommended">
                 <section className="username">
-                    <h2>Username</h2>
+                    <h2>{this.props.username}</h2>
                 </section>
                 <section className="recommended-list">
                     <ul>
@@ -24,6 +24,7 @@ export class MyRecommended extends React.Component{
                                 <h2>My Recomendations:</h2>
                             </section>
                             <section className="movie-title">
+                    
                                 <h3><Link to="/movie">Blade</Link></h3>
                             </section>
                             <section className="recommend-desc">
