@@ -18,6 +18,18 @@ export const fetchRecsError = (error) => ({
   error
 });
 
+export const CREATE_REC_DATA_SUCCESS = 'CREATE_REC_DATA_SUCCESS';
+export const createRecDataSuccess = (rec) => ({
+  type: CREATE_REC_DATA_SUCCESS,
+  rec
+});
+
+export const CREATE_REC_DATA_ERROR = 'CREATE_REC_DATA_ERROR';
+export const createRecDataError = (error) => ({
+  type: CREATE_REC_DATA_ERROR,
+  error
+});
+
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
   fetch(`${API_BASE_URL}/recommendations`, {
@@ -31,3 +43,30 @@ export const fetchRecs = () => dispatch => {
     dispatch(fetchRecsError(err));
   });
 }
+
+export const deleteRec = id => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/recommendations/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  });
+};
+
+export const createRec = rec => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/recommendations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(rec)
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(({ data }) => dispatch(createRecDataSuccess(data)))
+  .catch(err => dispatch(createRecDataError(err)));
+};
