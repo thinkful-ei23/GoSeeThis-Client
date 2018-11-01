@@ -121,16 +121,28 @@ export const fetchUserRecsError = (error) => ({
 });
 
 export const fetchUserRecs = (userId) => dispatch => {
-  dispatch(fetchMovieRecsRequest());
+  dispatch(fetchUserRecsRequest());
   fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
   })
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(recs => {
-    dispatch(fetchMovieRecsSuccess(recs));
+    dispatch(fetchUserRecsSuccess(recs));
   })
   .catch(err => {
-    dispatch(fetchMovieRecsError(err));
+    dispatch(fetchUserRecsError(err));
   });
 };
+
+export const SELECT_MOVIE = 'SELECT_MOVIE';
+export const selectMovie = (movieId) => ({
+  type: SELECT_MOVIE,
+  movieId
+});
+
+export const SELECT_USER = 'SELECT_USER';
+export const selectUser = (userId) => ({
+  type: SELECT_USER,
+  userId
+});

@@ -1,4 +1,4 @@
-import {MOVIE_SEARCH_BASE_URL} from '../config';
+import {MOVIE_SEARCH_BASE_URL, MOVIE_DATA_BASE_URL, API_KEY} from '../config';
 import { normalizeResponseErrors } from './utils';
 
 export const FETCH_MOVIES_REQUEST = 'FETCH_MOVIES_REQUEST';
@@ -30,4 +30,36 @@ export const fetchMovies = (searchQuery) => dispatch => {
   .catch(err => {
     fetchMoviesError(err);
   })
+};
+
+export const FETCH_MOVIE_DATA_REQUEST = 'FETCH_MOVIE_DATA_REQUEST';
+export const fetchMovieDataRequest = () => ({
+  type: FETCH_MOVIE_DATA_REQUEST
+});
+
+export const FETCH_MOVIE_DATA_SUCCESS = 'FETCH_MOVIE_DATA_SUCCESS';
+export const fetchMovieDataSuccess = (data) => ({
+  type: FETCH_MOVIE_DATA_SUCCESS,
+  data
+});
+
+export const FETCH_MOVIE_DATA_ERROR = 'FETCH_MOVIE_DATA_ERROR';
+export const fetchMovieDataError = (error) => ({
+  type: FETCH_MOVIE_DATA_ERROR,
+  error
+});
+
+export const fetchMovieData = (movieId) => dispatch => {
+  dispatch(fetchMovieDataRequest());
+  fetch(`${MOVIE_DATA_BASE_URL}/${movieId}?api_key=${API_KEY}`, {
+    method: 'GET'
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(data => {
+    dispatch(fetchMovieDataSuccess(data));
+  })
+  .catch(err => {
+    dispatch(fetchMovieDataError(err));
+  });
 };
