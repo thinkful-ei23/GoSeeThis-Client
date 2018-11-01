@@ -103,8 +103,6 @@ export const saveRecs = (recommendation) => (dispatch, getState) => {
   );
 };
 
-<<<<<<< HEAD
-=======
 export const fetchMovieRecs = (movieId) => dispatch => {
   dispatch(fetchMovieRecsRequest());
   fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
@@ -151,4 +149,3 @@ export const fetchUserRecs = (userId) => dispatch => {
     dispatch(fetchMovieRecsError(err));
   });
 };
->>>>>>> development
