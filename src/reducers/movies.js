@@ -4,13 +4,14 @@ import {
   FETCH_MOVIES_ERROR,
   FETCH_MOVIE_DATA_REQUEST,
   FETCH_MOVIE_DATA_SUCCESS,
-  FETCH_MOVIE_DATA_ERROR
+  FETCH_MOVIE_DATA_ERROR,
+  STORE_REC_MOVIE
 } from '../actions/movies';
 
 const initialState = {
   loading: false,
   searchResults: null,
-
+  recMovieData: null,
   error: false,
   movieData: null,
   genres: [
@@ -124,6 +125,12 @@ export default function reducer(state=initialState, action) {
     return Object.assign({}, state, {
       loading: false,
       movieData: action.data
+    });
+  }
+
+  if (action.type == STORE_REC_MOVIE) { 
+    return Object.assign({},state,{
+    recMovieData: action.data
     });
   }
 
