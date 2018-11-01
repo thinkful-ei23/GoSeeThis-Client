@@ -41,7 +41,6 @@ export default function reducer(state = initialState, action) {
     });
   }
 
-
   if (action.type === CREATE_REC_DATA_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
@@ -50,18 +49,18 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === CREATE_REC_DATA_ERROR) {
-      return Object.assign({}, state, {
+    return Object.assign({}, state, {
       loading: false,
       error: action.error
     });
   }
-  
+
   if (action.type === FETCH_MOVIE_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
     });
   }
-  
+
   if (action.type === FETCH_MOVIE_RECS_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
