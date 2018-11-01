@@ -7,12 +7,11 @@ import {
 
 const initialState = {
   loading: false,
-  recs: null,
-  error: false,
-  recommendations: [{
+  recs: [{
     title: null,
     recDesc: null
-  }]
+  }],
+  error: false,
 };
 
 export default function reducer(state=initialState, action) {

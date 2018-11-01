@@ -32,6 +32,14 @@ export const fetchRecs = () => dispatch => {
   });
 }
 
+//Just a quick setup for me testing the form. Can use or delete for post action
+export const ADD_REC = 'ADD_REC';
+export const addRec = (recommendation) => ({
+    type: ADD_REC,
+    title: recommendation.title,
+    recDesc: recommendation.recDesc,
+});
+
 export const saveRecs = (recommendation) => (dispatch, getState) => {
   dispatch(addRec(recommendation));
   const authToken = getState().auth.authToken;
@@ -56,10 +64,3 @@ export const saveRecs = (recommendation) => (dispatch, getState) => {
   );
 };
 
-//testing local recommendation
-export const ADD_REC = 'ADD_REC';
-export const addRec = (recommendation) => ({
-    type: ADD_REC,
-    title: recommendation.title,
-    recDesc: recommendation.recDesc,
-});
