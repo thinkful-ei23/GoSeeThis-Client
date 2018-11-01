@@ -71,37 +71,22 @@ export const createRec = rec => (dispatch, getState) => {
     .catch(err => dispatch(createRecDataError(err)));
 };
 
-//Just a quick setup for me testing the form. Can use or delete for post action
-export const ADD_REC = 'ADD_REC';
-export const addRec = (recommendation) => ({
-    type: ADD_REC,
-    title: recommendation.title,
-    recDesc: recommendation.recDesc,
+export const FETCH_MOVIE_RECS_REQUEST = 'FETCH_MOVIE_RECS_REQUEST';
+export const fetchMovieRecsRequest = () => ({
+  type: FETCH_MOVIE_RECS_REQUEST
 });
 
-export const saveRecs = (recommendation) => (dispatch, getState) => {
-  dispatch(addRec(recommendation));
-  const authToken = getState().auth.authToken;
-  return (
-      fetch(`${API_BASE_URL}/api/recommendations/`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${authToken}`
-          },
-          body: JSON.stringify({
-              title: recommendation.title,
-              recDesc: recommendation.recDesc,
-          })
-      })
-      .then(res => {
-          return res.json();
-      })
-      .catch(err => {
-          return err;
-      })
-  );
-};
+export const FETCH_MOVIE_RECS_SUCCESS = 'FETCH_MOVIE_RECS_SUCCESS';
+export const fetchMovieRecsSuccess = (recs) => ({
+  type: FETCH_MOVIE_RECS_SUCCESS,
+  recs
+});
+
+export const FETCH_MOVIE_RECS_ERROR = 'FETCH_MOVIE_RECS_ERROR';
+export const fetchMovieRecsError = (error) => ({
+  type: FETCH_MOVIE_RECS_ERROR,
+  error
+});
 
 export const fetchMovieRecs = (movieId) => dispatch => {
   dispatch(fetchMovieRecsRequest());
