@@ -63,5 +63,5 @@ const mapStateToProps = (state) => ({
   searchResults: state.movies.searchResults,
   loading: state.movies.loading
 });
-export default connect(mapStateToProps)(SearchBar);
+export default connect(mapStateToProps)(ReccomendTitleInput);
 

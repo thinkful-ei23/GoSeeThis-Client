@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './input';
-
+import ReccomendTitleInput from './reccomendtitleinput';
 
 import './new-recommended.css';
 
@@ -15,8 +15,6 @@ export class NewRecommended extends React.Component{
             <Field component={Input} type="text" name="title" />
             <label htmlFor="description">Why Recommended</label>
             <Field component={Input} type="text" name="description" />
-            <label htmlFor="rating">Rating</label>
-            <Field component={Input} type="text" name="rating" />
             <button
                 type="submit">
                 Create
