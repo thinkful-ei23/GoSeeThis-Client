@@ -10,6 +10,7 @@ import {
 const initialState = {
   loading: false,
   searchResults: null,
+
   error: false,
   movieData: null,
   genres: [

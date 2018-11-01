@@ -6,7 +6,10 @@ import requiresLogin from './requires-login';
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
-
+	componentDidMount()
+	{
+		console.log(this.props);
+	}
 
     render() {
         return (

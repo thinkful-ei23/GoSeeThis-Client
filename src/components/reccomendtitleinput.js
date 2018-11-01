@@ -2,20 +2,20 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import Suggestions from './suggestions';
 import {fetchMovies} from '../actions/movies';
+import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 
-
-export class SearchBar extends React.Component {
+export class ReccomendTitleInput extends React.Component {
 
 	//add state
 	state = {
-		query: ''
+    query: '',
+    searchResultTitle: ''
 	}
 
 	handleInputChange(e) {
     const query = e.target.value;
-    this.setState({query});
+    this.setState({query, searchResultTitle:e.target.value});
     if (query) {
       this.props.dispatch(fetchMovies(query));
     }
@@ -41,7 +41,7 @@ export class SearchBar extends React.Component {
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
-          <Suggestions results='Loading...' />
+          <ReccomendTitleSuggestions results='Loading...' />
         </form>
       )
     }
@@ -51,8 +51,9 @@ export class SearchBar extends React.Component {
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
+          value = {this.state.searchResultTitle}
           />
-          <Suggestions results={this.props.searchResults} />
+          <ReccomendTitleSuggestions results={this.props.searchResults} />
         </form>
       )
     }
@@ -63,5 +64,5 @@ const mapStateToProps = (state) => ({
   searchResults: state.movies.searchResults,
   loading: state.movies.loading
 });
-export default connect(mapStateToProps)(SearchBar);
+export default connect(mapStateToProps)(ReccomendTitleInput);
 
