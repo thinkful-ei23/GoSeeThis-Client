@@ -64,3 +64,10 @@ export const fetchMovieData = (movieId) => dispatch => {
     dispatch(fetchMovieDataError(err));
   });
 };
+
+export const STORE_REC_MOVIE = 'STORE_REC_MOVIE';
+export const storeRecMovie = (data) => ({
+	type: STORE_REC_MOVIE,
+	data
+});
+
