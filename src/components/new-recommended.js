@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addRec } from '../actions/recommendations';
+// import { addRec } from '../actions/recommendations';
 
 export class NewRecommend extends React.Component {
     constructor(props) {
@@ -25,15 +25,15 @@ export class NewRecommend extends React.Component {
         });
       };
     
-      submitForm = e => {
-        e.preventDefault();
-        this.props.dispatch(
-          addRec({
-            ...this.state.formdata
-          })
-        );
-        console.log(this.state.formdata.title);
-      };
+    //   submitForm = e => {
+    //     e.preventDefault();
+    //     this.props.dispatch(
+    //       addRec({
+    //         ...this.state.formdata
+    //       })
+    //     );
+    //     console.log(this.state.formdata.title);
+    //   };
     
       render() {
         return (

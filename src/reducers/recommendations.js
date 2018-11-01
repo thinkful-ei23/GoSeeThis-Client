@@ -15,11 +15,9 @@ import {
 const initialState = {
   loading: false,
   recs: null,
-  error: false,
-  recommendations: [{
-    title: null,
-    recDesc: null
-  }]
+  movieRecs: null,
+  userRecs: null,
+  error: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -60,11 +58,15 @@ export default function reducer(state = initialState, action) {
   
   if (action.type === FETCH_MOVIE_RECS_REQUEST) {
     return Object.assign({}, state, {
-      recommendations:[...state.recommendations, {
-        title: action.title,
-        recDesc: action.recDesc
-      }]
-    })
+      loading: true
+    });
+  }
+  
+  if (action.type === FETCH_MOVIE_RECS_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      movieRecs: action.recs
+    });
   }
 
   if (action.type === FETCH_MOVIE_RECS_ERROR) {
