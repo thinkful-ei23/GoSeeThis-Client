@@ -54,8 +54,8 @@ export class App extends React.Component {
                 <Route exact path="/recommend" component={NewRec} />
                 <Route exact path="/editprofile" component={EditProf} />
             </div>
-        );
-    }
+        ); 
+    } 
 }
 
 const mapStateToProps = state => ({
