@@ -1,14 +1,18 @@
 import {
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_ERROR
+  FETCH_MOVIES_ERROR,
+  FETCH_MOVIE_DATA_REQUEST,
+  FETCH_MOVIE_DATA_SUCCESS,
+  FETCH_MOVIE_DATA_ERROR
 } from '../actions/movies';
 
 const initialState = {
   loading: false,
   searchResults: null,
   error: false,
-  genre: [
+  movieData: null,
+  genres: [
     {
       "id": 28,
       "name": "Action"
@@ -109,5 +113,25 @@ export default function reducer(state=initialState, action) {
     });
   }
 
+  if (action.type === FETCH_MOVIE_DATA_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true
+    });
+  }
+
+  if (action.type === FETCH_MOVIE_DATA_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      movieData: action.data
+    });
+  }
+
+  if (action.type === FETCH_MOVIE_DATA_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  
   return state;
 }
