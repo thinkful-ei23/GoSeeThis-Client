@@ -82,17 +82,17 @@ export const fetchUserRecsError = (error) => ({
 });
 
 export const fetchUserRecs = (userId) => dispatch => {
-  dispatch(fetchMovieRecsRequest());
+  dispatch(fetchUserRecsRequest());
   fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
   })
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(recs => {
-    dispatch(fetchMovieRecsSuccess(recs));
+    dispatch(fetchUserRecsSuccess(recs));
   })
   .catch(err => {
-    dispatch(fetchMovieRecsError(err));
+    dispatch(fetchUserRecsError(err));
   });
 };
 
