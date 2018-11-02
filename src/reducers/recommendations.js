@@ -11,7 +11,9 @@ import {
   FETCH_USER_RECS_SUCCESS,
   FETCH_USER_RECS_ERROR,
   SELECT_MOVIE,
-  SELECT_USER
+  SELECT_USER,
+  EDIT_REC_SUCCESS,
+  EDIT_REC_ERROR
 } from '../actions/recommendations';
 
 const initialState = {
@@ -19,8 +21,7 @@ const initialState = {
   recs: null,
   movieRecs: null,
   userRecs: null,
-  movieId: null,
-  userId: null,
+  user: null,
   error: false
 };
 
@@ -97,16 +98,17 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
-  
-  if (action.type === SELECT_MOVIE) {
+
+  if (action.type === EDIT_REC_SUCCESS) {
     return Object.assign({}, state, {
-      movieId: action.movieId
+      loading: false
     });
   }
 
-  if (action.type === SELECT_USER) {
+  if (action.type === EDIT_REC_ERROR) {
     return Object.assign({}, state, {
-      userId: action.userId
+      loading: false,
+      error: action.error
     });
   }
   

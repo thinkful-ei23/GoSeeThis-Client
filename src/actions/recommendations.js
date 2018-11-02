@@ -45,7 +45,6 @@ export const createRecDataError = error => ({
   error
 });
 
-
 export const deleteRec = id => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/recommendations/${id}`, {
@@ -55,6 +54,34 @@ export const deleteRec = id => (dispatch, getState) => {
       Authorization: `Bearer ${authToken}`
     }
   }).then(() => dispatch(fetchRecs()));
+};
+
+export const EDIT_REC_SUCCESS = 'EDIT_REC_SUCCESS';
+export const editRecSuccess = data => ({
+  type: EDIT_REC_SUCCESS,
+  data
+});
+
+export const EDIT_REC_ERROR = 'EDIT_REC_ERROR';
+export const editRecError = err => ({
+  type: EDIT_REC_ERROR,
+  err
+});
+
+export const editRec = (id, update) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/recommendations/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(update)
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(data => dispatch(editRecSuccess(data)))
+    .then(err => dispatch(editRecError(err)));
 };
 
 export const createRec = rec => (dispatch, getState) => {
@@ -123,30 +150,17 @@ export const fetchUserRecsError = error => ({
   error
 });
 
-export const fetchUserRecs = (userId) => dispatch => {
+export const fetchUserRecs = userId => dispatch => {
   dispatch(fetchUserRecsRequest());
   fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
   })
-
-  .then(res => normalizeResponseErrors(res))
-  .then(res => res.json())
-  .then(recs => {
-    dispatch(fetchUserRecsSuccess(recs));
-  })
-  .catch(err => {
-    dispatch(fetchUserRecsError(err));
-  });
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(recs => {
+      dispatch(fetchUserRecsSuccess(recs));
+    })
+    .catch(err => {
+      dispatch(fetchUserRecsError(err));
+    });
 };
-
-export const SELECT_MOVIE = 'SELECT_MOVIE';
-export const selectMovie = (movieId) => ({
-  type: SELECT_MOVIE,
-  movieId
-});
-
-export const SELECT_USER = 'SELECT_USER';
-export const selectUser = (userId) => ({
-  type: SELECT_USER,
-  userId
-});

@@ -22,8 +22,17 @@ export class SearchBar extends React.Component {
 	}
 
 	render() {
-
-    if (!this.props.searchResults && !this.props.loading || !this.state.query) {
+    if (!this.state.query) {
+      return (
+        <form>
+          <input
+          placeholder="Search for..."
+          onChange={(e)=>this.handleInputChange(e)}
+          />
+        </form>
+      )
+    }
+    if (!this.props.searchResults && !this.props.loading) {
       return (
         <form>
           <input
