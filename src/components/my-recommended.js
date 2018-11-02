@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchUserRecs } from '../actions/recommendations';
+import { fetchUserRecs, deleteRec } from '../actions/recommendations';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -12,6 +12,12 @@ export class MyRecommended extends React.Component {
     let id = this.props.user.id;
     this.props.dispatch(fetchUserRecs(id));
   }
+
+  handleDelete = (rec) => {
+  			   this.props.dispatch(deleteRec(rec.id)).then(() =>
+				this.props.dispatch(fetchUserRecs(this.props.user.id)));
+			   	
+			   }
 
   render() {
     let recs;
@@ -29,6 +35,9 @@ export class MyRecommended extends React.Component {
                 />
               </Link>
               </section>
+		<section className="delete-button">
+		<p onClick = {() => this.handleDelete(rec)}>x</p>
+		</section>
               <section className="container">
               <section className="movie-title">
               <h3><Link to={`/movie/${rec.movieId}`}>{rec.title}</Link></h3></section>
