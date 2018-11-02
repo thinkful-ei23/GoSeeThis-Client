@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import ReccomendTitleInput from './reccomendtitleinput';
-import {createRec} from '../actions/recommendations';
-import {required} from './stupidvalidator';
+import { createRec } from '../actions/recommendations';
+import { required } from './stupidvalidator';
 import './new-recommended.css';
 import { Redirect } from 'react-router-dom';
 
@@ -12,42 +12,35 @@ export class NewRecommended extends React.Component {
   constructor(props) {
     super(props);
 
-        this.state = {
-            searchResultTitle: '',
-                redirectToNewPage: false,
-        }
-    }
+    this.state = {
+      searchResultTitle: '',
+      redirectToNewPage: false
+    };
+  }
 
-
-    onSubmit(values){
-        console.log(values);
-        const recDesc = values.description;
-        const {
-            title,
-            poster_path,
-            genre_ids,
-            id
-        } = this.props.recMovieData;
-        console.log(title,poster_path,genre_ids);
-        const newRec = {
-            title,
-            posterUrl: poster_path,
-            genre_ids,
-            movieId: id,
-            recDesc
-        }
-        console.log(newRec);
-        this.props.dispatch(createRec(newRec)).then(() => {
+  onSubmit(values) {
+    console.log(values);
+    const recDesc = values.description;
+    const { title, poster_path, genre_ids, id } = this.props.recMovieData;
+    console.log(title, poster_path, genre_ids);
+    const newRec = {
+      title,
+      posterUrl: poster_path,
+      genre_ids,
+      movieId: id,
+      recDesc
+    };
+    console.log(newRec);
+    this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
-    }
+    });
+  }
 
   render() {
-  
-    
-  if (this.state.redirectToNewPage) {
+    if (this.state.redirectToNewPage) {
       this.setState({ redirectToNewPage: false });
       return <Redirect to="/dashboard" />;
-  }
+    }
     return (
       <form
         className="login-form"
@@ -57,7 +50,12 @@ export class NewRecommended extends React.Component {
         <label htmlFor="title">Movie Title</label>
         <ReccomendTitleInput />
         <label htmlFor="description">Why Recommended</label>
-        <Field component={Input} type="text" name="description"  validate={[required]} />
+        <Field
+          component={Input}
+          type="text"
+          name="description"
+          validate={[required]}
+        />
         <button type="submit">Create</button>
       </form>
     );
@@ -72,6 +70,6 @@ export default connect(mapStateToProps)(
   reduxForm({
     form: 'recomendation',
     onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('recomendation', Object.keys(errors)[0]))
-})(NewRecommended));
-
+      dispatch(focus('recomendation', Object.keys(errors)[0]))
+  })(NewRecommended)
+);
