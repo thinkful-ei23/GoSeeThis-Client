@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
-
+import {deleteRec} from '../actions/recommendations';
 import './my-recommended.css';
 
 export class MyRecommended extends React.Component {
@@ -12,6 +12,12 @@ export class MyRecommended extends React.Component {
     let id = this.props.user.id;
     this.props.dispatch(fetchUserRecs(id));
   }
+
+  handleDelete = (rec) => {
+  			   this.props.dispatch(deleteRec(rec.id)).then(() =>
+				this.props.dispatch(fetchUserRecs(this.props.user.id)));
+			   	
+			   }
 
   render() {
     let recs;
@@ -28,6 +34,9 @@ export class MyRecommended extends React.Component {
                   alt="movie poster"
                 />
               </section>
+		<section className="delete-button">
+		<p onClick = {() => this.handleDelete(rec)}>x</p>
+		</section>
               <section className="container">
               <section className="movie-title">
               <h3>{rec.title}</h3></section>
