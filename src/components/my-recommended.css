@@ -23,8 +23,11 @@ li {
 
 .movie-poster img{
     float: left;
-    height: 125px;
-    padding: 10px;
+    height: 145px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-right: 5px;
+    
 }
 .delete-button {float: right; padding: 10px;}
 .container .movie-title {

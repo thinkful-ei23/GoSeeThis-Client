@@ -17,8 +17,10 @@
 
 .dash-movie-poster img{
     float: left;
-    height: 125px;
-    padding: 10px;
+    height: 145px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-right: 5px;
 }
 
 .recommendation-header {
