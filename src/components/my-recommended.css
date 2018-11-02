@@ -26,7 +26,7 @@ li {
     height: 125px;
     padding: 10px;
 }
-
+.delete-button {float: right; padding: 10px;}
 .container .movie-title {
     padding-top: 1px;
 }
