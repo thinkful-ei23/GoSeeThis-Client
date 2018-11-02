@@ -3,6 +3,7 @@ import { fetchUserRecs } from '../actions/recommendations';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
+import LinkButton from './LinkButton';
 
 import './my-recommended.css';
 
@@ -18,21 +19,25 @@ export class MyRecommended extends React.Component {
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
         return (
+          <section className="card">
           <li key={index}>
             <section className="recommended">
-              <section className="movie-title">
+              <section className="movie-poster">
                 <img
                   src={POSTER_PATH_BASE_URL + rec.posterUrl}
                   alt="movie poster"
-                  width="75px"
                 />
-                <h3>{rec.title}</h3>
               </section>
+              <section className="container">
+              <section className="movie-title">
+              <h3>{rec.title}</h3></section>
               <section className="recommend-desc">
                 <p>{rec.recDesc}</p>
               </section>
+              </section>
             </section>
           </li>
+          </section>
         );
       });
     }
@@ -44,6 +49,12 @@ export class MyRecommended extends React.Component {
         <section className="username">
           <h2>{username}</h2>
         </section>
+        <section className="editButton">
+            <LinkButton to='/editprofile' className='editBtn'>Edit Profile</LinkButton>
+            </section>
+            <section className="recommendButton">
+            <LinkButton to='/recommend' className='recBtn'>+ Recommend</LinkButton>
+            </section>
         <section className="recommended-list">
           <section className="recomendation-header">
             <h2>My Recomendations:</h2>

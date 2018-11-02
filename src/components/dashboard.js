@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
+import LinkButton from './LinkButton';
+import { fetchRecs } from '../actions/recommendations';
+import { POSTER_PATH_BASE_URL } from '../config';
 
 
 import './dashboard.css';
@@ -8,48 +11,62 @@ import './dashboard.css';
 export class Dashboard extends React.Component {
 	componentDidMount()
 	{
-		console.log(this.props);
+        console.log(this.props);
+        this.props.dispatch(fetchRecs());
 	}
 
     render() {
+        let recs;
+        if (this.props.recs) {
+            recs = this.props.recs.map((rec, index) => {
+              return (
+                <section className="card">
+                <li key={index}>
+                  <section className="dash-recommended">
+                    <section className="dash-movie-poster">
+                      <img
+                        src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                        alt="movie poster"
+                      />
+                    </section>
+                    <section className="dash-container">
+                    <section className="dash-rec-user">
+                    <h3>{rec.userId.username}</h3></section>
+                    <section className="dash-movie-title">
+                    <h3>{rec.title}</h3></section>
+                    <section className="dash-recommend-desc">
+                      <p>{rec.recDesc}</p>
+                    </section>
+                    </section>
+                  </section>
+                </li>
+                </section>
+              );
+            });
+          }
+
         return (
-            <div className="dashboard">
-            <section className="search">
-                <input type="text" placeholder="Search.."></input>
-                <button type="submit"><i className="fa fa-search"></i></button>
+            <section className="myRecommended">
+            <section className="profileButton">
+                <LinkButton to='/profile' className='profileBtn'>My Recomendations</LinkButton>
+                </section>
+            <section className="recommended-list">
+              <section className="recommendation-header">
+                <h2>Recent Activity:</h2>
+              </section>
+              <ul> {recs}</ul>
             </section>
-            <section className="header">
-                <h2>Recent Activity</h2>
-            </section>
-            <section className="recentActivity">
-                <ul className="activity">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam 
-                    quis leo viverra, viverra nibh sed, posuere eros. Nullam a nunc 
-                    quis ipsum commodo bibendum. Maecenas vitae lobortis tellus, vitae 
-                    mollis risus. Aliquam a malesuada mi, non accumsan tortor. Ut lorem ex, 
-                    mollis tincidunt eleifend vitae, ultrices eget dui. Etiam iaculis nisi 
-                    sit amet arcu convallis commodo. Aliquam rhoncus ut lectus sit amet 
-                    elementum. Donec cursus tortor id malesuada lobortis. Proin nec quam 
-                    ante. Nam sit amet eleifend ex. Phasellus consequat odio ac viverra 
-                    hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Phasellus tempus finibus massa ullamcorper consequat. Mauris consequat 
-                    iaculis nisl, vitae venenatis dui vestibulum eget.</p>
-                </ul>
-            </section>
-            <section className="newButton">
-                <button type="submit">New Recommended</button>
-            </section>
-        </div>
+          </section>
         );
+      }
     }
-}
 
 const mapStateToProps = state => {
-    const {currentUser} = state.auth;
+    const { currentUser } = state.auth;
     return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
+      recs: state.recs.recs,
+      user: state.auth.currentUser
     };
-};
+  };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
