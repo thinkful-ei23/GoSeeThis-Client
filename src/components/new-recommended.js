@@ -44,7 +44,7 @@ export class NewRecommended extends React.Component{
             <label htmlFor="title">Movie Title</label>
             <ReccomendTitleInput />
             <label htmlFor="description">Why Recommended</label>
-            <Field component={Input} type="text" name="description" />
+            <Field component={Input} type="text" name="description" required />
             <button
                 type="submit">
                 Create
