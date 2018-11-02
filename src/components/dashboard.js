@@ -48,6 +48,9 @@ export class Dashboard extends React.Component {
             <section className="profileButton">
                 <LinkButton to='/profile' className='profileBtn'>My Recomendations</LinkButton>
                 </section>
+                <section className="recommendButton">
+            <LinkButton to='/recommend' className='recBtn'>+ Recommend</LinkButton>
+            </section>
             <section className="recommended-list">
               <section className="recommendation-header">
                 <h2>Recent Activity:</h2>
