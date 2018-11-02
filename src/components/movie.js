@@ -26,23 +26,28 @@ export class Movie extends React.Component{
           const recommendations = this.props.movieRecs.map((rec, index) => (
             <li key={index}>
               <section className="recommend-description">
+              <p>{rec.recDesc}</p>
+              <section className="recommend-description-container">
                 <span>By: {rec.userId.username}</span>
-                <p>{rec.recDesc}</p>
+                </section>
               </section>
             </li>
           ));
 
           return(
           <section className="movie-page">
+          <section className="movie-container">
+            <section className="movie-top">
             <section className="movie-header">
-              <section className="movie-title">
-                <h1>{this.props.movieData.title}</h1>
-              </section>
               <section className="movie-poster">
                 <img src={`${POSTER_PATH_BASE_URL}` + this.props.movieData.poster_path}
                     alt={'Poster for ' + this.props.movieData.title} />
               </section>
             </section>
+            <section className="movie-body">
+            <section className="movie-title">
+                {this.props.movieData.title}
+              </section>
             <section className="movie-info">
               <section className="movie-overview">
                 <h3>Overview</h3>
@@ -58,13 +63,16 @@ export class Movie extends React.Component{
                 <h3>Recommended Count:</h3>
                 <p>{this.props.movieRecs.length}</p>
               </section>
-              <section className="recommendations">
-                <h2>Recommendations</h2>
-                <ul>
+              </section>
+              </section>
+              </section>
+              <section className="movie-recommendations">
+                <h2>{this.props.movieData.title}'s Recommendations</h2>
+                <ul className="movie-page-rec-list">
                   {recommendations}
                 </ul>
               </section>
-            </section>
+              </section>
           </section>
           )
         }

@@ -128,15 +128,16 @@ export class MyRecommended extends React.Component {
     return (
       <section className="myRecommended">
         <section className="username">
-          <h2><Link to={`/user/${this.props.user.id}`}>{username}</Link></h2>
+          <h2><Link to={`/user/${this.props.user.id}`} style={{ textDecoration: 'none', color:'black' }}>{username}</Link></h2>
         </section>
+
+        <section className="recommended-list">
         <section className="editButton">
             <LinkButton to='/editprofile' className='editBtn'>Edit Profile</LinkButton>
             </section>
             <section className="recommendButton">
             <LinkButton to='/recommend' className='recBtn'>+ Recommend</LinkButton>
             </section>
-        <section className="recommended-list">
           <section className="recomendation-header">
             <h2>My Recomendations:</h2>
           </section>

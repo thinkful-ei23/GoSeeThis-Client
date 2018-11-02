@@ -1,17 +1,38 @@
 .header-bar {
-    height: 125px;
+    height: 44px;
+    background-color: #333;
+    margin-bottom: 16px;
+    padding-left: 105px;
+    padding-right: 105px;
 }
+
+.header-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
 .header-bar li {
-    float: right;
+    float: left;
+}
+
+.header-bar li a {
     display: block;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-family: 'Lato', sans-serif;
 }
 
+.right-header {
+    float: right;
+}
 #logo {
-    float: left;
-    text-decoration: none;
     font-family: 'Lato', sans-serif;
+    font-size: 25px;
+}
+
+.active {
+    background-color: #4CAF50;
 }

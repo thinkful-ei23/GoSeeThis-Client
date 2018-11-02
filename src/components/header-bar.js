@@ -21,13 +21,15 @@ export class HeaderBar extends React.Component {
             );
         }
         return (
-            <div className="header-bar">
-            <ul>
-                <li id="logo"><h1><Link to="/dashboard" style={{ textDecoration: 'none', color:'black' }}>GoSeeThis</Link></h1></li>
+            <header className="header-bar">
+            <ul className="header-nav">
+                <li id="logo"><Link to="/dashboard" style={{ textDecoration: 'none', color:'white' }}>GoSeeThis</Link></li>
+                <section className="right-header">
                 <li>{logOutButton}</li>
-		        <li><SearchBar /></li>
+		        <li className="search-bar"><SearchBar /></li>
+                </section>
                 </ul>
-            </div>
+            </header>
         );
     }
 }

@@ -44,15 +44,21 @@ export class Dashboard extends React.Component {
           }
 
         return (
+          <section className="dashboard-container">
             <section className="myRecommended">
+
+            <section className="recommended-list">
             <section className="profileButton">
                 <LinkButton to='/profile' className='profileBtn'>My Recomendations</LinkButton>
                 </section>
-            <section className="recommended-list">
+                <section className="recommendButton">
+            <LinkButton to='/recommend' className='recBtn'>+ Recommend</LinkButton>
+            </section>
               <section className="recommendation-header">
                 <h2>Recent Activity:</h2>
               </section>
-              <ul>{recs}</ul>
+              <ul className="recent-activity">{recs}</ul>
+            </section>
             </section>
           </section>
         );
