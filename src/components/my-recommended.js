@@ -1,10 +1,11 @@
 import React from 'react';
-import { fetchUserRecs, deleteRec } from '../actions/recommendations';
+import { fetchUserRecs, deleteRec, editRec } from '../actions/recommendations';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
 import {Link} from 'react-router-dom';
+import EditableRecDesc from './editablerecdesc';
 import './my-recommended.css';
 
 export class MyRecommended extends React.Component {
@@ -19,47 +20,6 @@ export class MyRecommended extends React.Component {
 			   	
 			   }
 
-	handleEdit = (rec) => {
-		   var span, input, text;
-
-        // Get the event (handle MS difference)
-       let event = event || window.event;
-
-        // Get the root element of the event (handle MS difference)
-        span = event.target || event.srcElement;
-
-        // If it's a span...
-        if (span && span.tagName.toUpperCase() === "SPAN") {
-            // Hide it
-            span.style.display = "none";
-
-            // Get its text
-            text = span.innerHTML;
-
-            // Create an input
-            input = document.createElement("input");
-            input.type = "text";
-            input.value = text;
-            input.size = Math.max(text.length / 4 * 3, 4);
-            span.parentNode.insertBefore(input, span);
-
-            // Focus it, hook blur to undo
-            input.focus();
-            input.onblur = function() {
-                // Remove the input
-                span.parentNode.removeChild(input);
-
-                // Update the span
-                span.innerHTML = input.value == "" ? "&nbsp;" : input.value;
-
-                // Show the span again
-                span.style.display = "";
-
-		//console.log(input.value);
-		//this.props.dispatch(editRec(rec.id,input.value));
-            };
-        }
-}
 
   render() {
     let recs;
@@ -84,7 +44,9 @@ export class MyRecommended extends React.Component {
               <section className="movie-title">
               <h3><Link to={`/movie/${rec.movieId}`}>{rec.title}</Link></h3></section>
               <section className="recommend-desc">
-                <p onClick = {() => this.handleEdit(rec)}><span>{rec.recDesc}</span></p>
+                <section>
+		            <EditableRecDesc rec = {rec.desc} />
+            		</section>
               </section>
               </section>
             </section>
