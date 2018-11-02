@@ -97,6 +97,7 @@ export const createRec = rec => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(({ data }) => dispatch(createRecDataSuccess(data)))
+    .then(() => dispatch(fetchRecs()))
     .catch(err => dispatch(createRecDataError(err)));
 };
 
