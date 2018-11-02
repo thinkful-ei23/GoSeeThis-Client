@@ -45,7 +45,7 @@ export class UserRecommended extends React.Component {
       return (
         <section className="myRecommended">
           <section className="username">
-            <h2><Link to={`/user/${this.props.userId}`}>{username}</Link></h2>
+            <h2><Link to={`/user/${this.props.userId}`}  style={{ textDecoration: 'none', color:'black' }}>{username}</Link></h2>
           </section>
           <section className="recommended-list">
             <section className="recomendation-header">

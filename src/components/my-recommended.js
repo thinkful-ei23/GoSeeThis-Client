@@ -56,7 +56,7 @@ export class MyRecommended extends React.Component {
     return (
       <section className="myRecommended">
         <section className="username">
-          <h2><Link to={`/user/${this.props.user.id}`}>{username}</Link></h2>
+          <h2><Link to={`/user/${this.props.user.id}`} style={{ textDecoration: 'none', color:'black' }}>{username}</Link></h2>
         </section>
         <section className="editButton">
             <LinkButton to='/editprofile' className='editBtn'>Edit Profile</LinkButton>

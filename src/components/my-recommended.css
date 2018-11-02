@@ -10,6 +10,8 @@ li {
     font-family: 'Lato', sans-serif;
 }
 
+
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -23,11 +25,10 @@ li {
 
 .movie-poster img{
     float: left;
-    height: 145px;
+    height: 205px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding-right: 5px;
-    
 }
 .delete-button {float: right; padding: 10px;}
 .container .movie-title {
