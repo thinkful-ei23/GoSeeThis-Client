@@ -100,18 +100,6 @@ export default function reducer(state = initialState, action) {
     });
   }
 
-  if (action.type === SELECT_MOVIE) {
-    return Object.assign({}, state, {
-      movieId: action.movieId
-    });
-  }
-
-  if (action.type === SELECT_USER) {
-    return Object.assign({}, state, {
-      userId: action.userId
-    });
-  }
-
   if (action.type === EDIT_REC_SUCCESS) {
     return Object.assign({}, state, {
       loading: false
@@ -124,6 +112,6 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
-
+  
   return state;
 }

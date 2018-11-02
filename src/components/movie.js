@@ -71,10 +71,13 @@ export class Movie extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => ({
-  movieRecs: state.recs.movieRecs,
-  movieId: state.recs.movieId,
-  movieData: state.movies.movieData
-});
+const mapStateToProps = (state, props) => {
+  const movieId = props.match.params.movieId;
+  return {
+    movieRecs: state.recs.movieRecs,
+    movieId,
+    movieData: state.movies.movieData
+  }
+};
 
 export default connect(mapStateToProps)(Movie);
