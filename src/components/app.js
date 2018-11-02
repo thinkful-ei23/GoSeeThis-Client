@@ -49,7 +49,7 @@ export class App extends React.Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={RegistrationPage} />
-                <Route exact path="/movie" component={Movie} />
+                <Route exact path="/movie/:movieId" component={Movie} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/recommend" component={NewRec} />
                 <Route exact path="/editprofile" component={EditProf} />

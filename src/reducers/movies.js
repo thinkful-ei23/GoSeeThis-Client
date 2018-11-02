@@ -128,7 +128,7 @@ export default function reducer(state=initialState, action) {
     });
   }
 
-  if (action.type == STORE_REC_MOVIE) { 
+  if (action.type === STORE_REC_MOVIE) { 
     return Object.assign({},state,{
     recMovieData: action.data
     });

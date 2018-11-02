@@ -137,15 +137,3 @@ export const fetchUserRecs = (userId) => dispatch => {
     dispatch(fetchUserRecsError(err));
   });
 };
-
-export const SELECT_MOVIE = 'SELECT_MOVIE';
-export const selectMovie = (movieId) => ({
-  type: SELECT_MOVIE,
-  movieId
-});
-
-export const SELECT_USER = 'SELECT_USER';
-export const selectUser = (userId) => ({
-  type: SELECT_USER,
-  userId
-});

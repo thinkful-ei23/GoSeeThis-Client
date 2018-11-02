@@ -67,7 +67,6 @@ export class MyRecommended extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { currentUser } = state.auth;
   return {
     recs: state.recs.userRecs,
     user: state.auth.currentUser
