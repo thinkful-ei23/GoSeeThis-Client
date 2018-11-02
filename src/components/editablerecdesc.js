@@ -55,8 +55,14 @@ export class EditableRecDesc extends React.Component {
 
 }
 
+const mapStateToProps = state => {
+	return{
 
-export default connect()(reduxForm({
+	}
+
+};
+
+export default connect(mapStateToProps)(reduxForm({
 	form: 'recomendation',
 	onSubmitFail: (errors, dispatch) =>
 		dispatch(focus('recomendation', Object.keys(errors)[0]))
