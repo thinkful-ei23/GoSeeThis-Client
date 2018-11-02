@@ -17,8 +17,7 @@ const initialState = {
   recs: null,
   movieRecs: null,
   userRecs: null,
-  movieId: null,
-  userId: null,
+  user: null,
   error: false
 };
 

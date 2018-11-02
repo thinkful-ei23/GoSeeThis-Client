@@ -3,14 +3,12 @@ import { fetchUserRecs } from '../actions/recommendations';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
-import LinkButton from './LinkButton';
-import {Link} from 'react-router-dom';
 import './my-recommended.css';
+import {Link} from 'react-router-dom';
 
-export class MyRecommended extends React.Component {
+export class UserRecommended extends React.Component {
   componentDidMount() {
-    let id = this.props.user.id;
-    this.props.dispatch(fetchUserRecs(id));
+    this.props.dispatch(fetchUserRecs(this.props.userId));
   }
 
   render() {
@@ -41,36 +39,39 @@ export class MyRecommended extends React.Component {
         );
       });
     }
-    if (this.props.user) {
-      username = this.props.user.username;
-    }
-    return (
-      <section className="myRecommended">
-        <section className="username">
-          <h2><Link to={`/user/${this.props.user.id}`}>{username}</Link></h2>
-        </section>
-        <section className="editButton">
-            <LinkButton to='/editprofile' className='editBtn'>Edit Profile</LinkButton>
-            </section>
-            <section className="recommendButton">
-            <LinkButton to='/recommend' className='recBtn'>+ Recommend</LinkButton>
-            </section>
-        <section className="recommended-list">
-          <section className="recomendation-header">
-            <h2>My Recomendations:</h2>
+    if (this.props.recs) {
+      const user = this.props.recs[0].userId;
+      username = user.username;
+      return (
+        <section className="myRecommended">
+          <section className="username">
+            <h2><Link to={`/user/${this.props.userId}`}>{username}</Link></h2>
           </section>
-          <ul> {recs}</ul>
+          <section className="recommended-list">
+            <section className="recomendation-header">
+              <h2>{username}'s Recomendations:</h2>
+            </section>
+            <ul>{recs}</ul>
+          </section>
         </section>
+      );
+    }
+
+    return (
+      <section className="loading-page">
+        <p>Loading...</p>
       </section>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
+  const userId = props.match.params.userId
   return {
     recs: state.recs.userRecs,
-    user: state.auth.currentUser
+    userId,
+    user: state.recs.user
   };
 };
 
-export default requiresLogin()(connect(mapStateToProps)(MyRecommended));
+export default requiresLogin()(connect(mapStateToProps)(UserRecommended));

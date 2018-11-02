@@ -30,7 +30,7 @@ export class Dashboard extends React.Component {
                     </section>
                     <section className="dash-container">
                     <section className="dash-rec-user">
-                    <h3>{rec.userId.username}</h3></section>
+                    <h3><Link to={`/user/${rec.userId.id}`}>{rec.userId.username}</Link></h3></section>
                     <section className="dash-movie-title">
                     <h3><Link to={`/movie/${rec.movieId}`}>{rec.title}</Link></h3></section>
                     <section className="dash-recommend-desc">
