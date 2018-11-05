@@ -37,18 +37,12 @@ export class NewRecommended extends React.Component {
 
   render() {
     let err;
-    if (
-      this.state.redirectToNewPage &&
-      !this.props.loading &&
-      this.props.error === null
-    ) {
+    if (this.state.redirectToNewPage && !this.props.loading) {
       return <Redirect to="/dashboard" />;
     }
     if (this.props.error !== null) {
       err = this.props.error;
-      console.log(err);
     }
-    console.log(this.props.error);
     return (
       <form
         className="login-form"
@@ -81,6 +75,6 @@ export default connect(mapStateToProps)(
   reduxForm({
     form: 'recomendation',
     onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('recomendation', Object.keys(errors)[0]))
+      dispatch(focus('recomendation', 'title'))
   })(NewRecommended)
 );

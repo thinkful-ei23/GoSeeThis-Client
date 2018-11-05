@@ -63,7 +63,8 @@ export default function reducer(state = initialState, action) {
 
   if (action.type === CREATE_REC_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: true,
+      error: null
     });
   }
 
