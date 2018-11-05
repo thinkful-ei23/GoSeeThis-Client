@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import ReccomendTitleInput from './reccomendtitleinput';
-import { createRec } from '../actions/recommendations';
+import { createRec, fetchRecs } from '../actions/recommendations';
 import { required } from './stupidvalidator';
 import './new-recommended.css';
 import { Redirect } from 'react-router-dom';
@@ -30,22 +30,31 @@ export class NewRecommended extends React.Component {
       movieId: id,
       recDesc
     };
-    console.log(newRec);
     this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
     });
   }
 
   render() {
-    if (this.state.redirectToNewPage) {
-      this.setState({ redirectToNewPage: false });
+    let err;
+    if (
+      this.state.redirectToNewPage &&
+      !this.props.loading &&
+      this.props.error === null
+    ) {
       return <Redirect to="/dashboard" />;
     }
+    if (this.props.error !== null) {
+      err = this.props.error;
+      console.log(err);
+    }
+    console.log(this.props.error);
     return (
       <form
         className="login-form"
         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
+        <span>{err}</span>
         <legend className="recommend-title">New Recommendation</legend>
         <label htmlFor="title">Movie Title</label>
         <ReccomendTitleInput />
@@ -63,7 +72,9 @@ export class NewRecommended extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  recMovieData: state.movies.recMovieData
+  recMovieData: state.movies.recMovieData,
+  loading: state.recs.loading
+  //   error: state.recs.error.message
 });
 
 export default connect(mapStateToProps)(
