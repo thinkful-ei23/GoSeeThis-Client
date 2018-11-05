@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
-
+import { SubmissionError } from 'redux-form';
 export const FETCH_RECS_REQUEST = 'FETCH_RECS_REQUEST';
 export const fetchRecsRequest = () => ({
   type: FETCH_RECS_REQUEST
@@ -32,6 +32,11 @@ export const fetchRecs = () => dispatch => {
       dispatch(fetchRecsError(err));
     });
 };
+
+export const CREATE_REC_DATA_REQUEST = 'CREATE_REC_DATA_REQUEST';
+export const createRecDataRequest = () => ({
+  type: CREATE_REC_DATA_REQUEST
+});
 
 export const CREATE_REC_DATA_SUCCESS = 'CREATE_REC_DATA_SUCCESS';
 export const createRecDataSuccess = rec => ({
@@ -98,7 +103,14 @@ export const createRec = rec => (dispatch, getState) => {
     .then(res => res.json())
     .then(({ data }) => dispatch(createRecDataSuccess(data)))
     .then(() => dispatch(fetchRecs()))
-    .catch(err => dispatch(createRecDataError(err)));
+    .catch(err => {
+      dispatch(createRecDataError(err));
+      return Promise.reject(
+        new SubmissionError({
+          _error: err.message 
+        }) 
+      );
+    });
 };
 
 export const FETCH_MOVIE_RECS_REQUEST = 'FETCH_MOVIE_RECS_REQUEST';

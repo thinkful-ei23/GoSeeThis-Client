@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   searchResults: null,
   recMovieData: null,
-  error: false,
+  error: null,
   movieData: null,
   genres: [
     {

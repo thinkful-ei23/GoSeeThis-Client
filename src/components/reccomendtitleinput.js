@@ -3,6 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchMovies} from '../actions/movies';
+import {FormSection} from 'redux-form';
 import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 
 export class ReccomendTitleInput extends React.Component {
@@ -24,47 +25,47 @@ export class ReccomendTitleInput extends React.Component {
 	render() {
     if (!this.state.query) {
       return (
-        <form>
+        <FormSection name='title'>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
-        </form>
+        </FormSection>
       )
     }
-    
+
     if (!this.props.searchResults && !this.props.loading) {
       return (
-        <form>
+        <FormSection  name="title">
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
-        </form>
+        </FormSection>
       )
     }
 
     else if (!this.props.searchResults && this.props.loading) {
       return (
-        <form>
+        <FormSection name='title'>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
           <ReccomendTitleSuggestions results='Loading...' />
-        </form>
+        </FormSection>
       )
     }
     else {
       return (
-        <form>
+        <FormSection name='title'>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           value = {this.state.searchResultTitle}
           />
           <ReccomendTitleSuggestions results={this.props.searchResults} />
-        </form>
+        </FormSection>
       )
     }
 	}
