@@ -71,3 +71,9 @@ export const storeRecMovie = (data) => ({
 	data
 });
 
+
+export const DELETE_REC_MOVIE = 'DELETE_REC_MOVIE';
+export const deleteRecMovie = () => ({
+	type: DELETE_REC_MOVIE
+});
+
