@@ -5,7 +5,8 @@ import {
   FETCH_MOVIE_DATA_REQUEST,
   FETCH_MOVIE_DATA_SUCCESS,
   FETCH_MOVIE_DATA_ERROR,
-  STORE_REC_MOVIE
+  STORE_REC_MOVIE,
+  DELETE_REC_MOVIE
 } from '../actions/movies';
 
 const initialState = {
@@ -133,6 +134,14 @@ export default function reducer(state=initialState, action) {
     recMovieData: action.data
     });
   }
+
+   if (action.type === DELETE_REC_MOVIE) {
+    return Object.assign({},state,{
+    recMovieData: null
+    });
+  }
+
+
 
   if (action.type === FETCH_MOVIE_DATA_ERROR) {
     return Object.assign({}, state, {
