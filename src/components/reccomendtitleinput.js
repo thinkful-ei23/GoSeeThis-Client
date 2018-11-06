@@ -1,8 +1,8 @@
 //todo: change axios
 
 import React from 'react';
-import {connect} from 'react-redux';
-import {fetchMovies} from '../actions/movies';
+import { connect } from 'react-redux';
+import { fetchMovies } from '../actions/movies';
 import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 import './reccomendtitleinput.css';
 import {deleteRecMovie} from '../actions/movies';
@@ -24,75 +24,74 @@ export class ReccomendTitleInput extends React.Component {
          }
 	}
 
-	render() {
+  render() {
     if (!this.state.query) {
       return (
-        <form>
-         <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
-	<input
-          placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+=
+        <div>
+          <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
+          <input
+            placeholder="Search for..."
+            onChange={e => this.handleInputChange(e)}
           />
-        </form>
-      )
-    }
-    
-    if (!this.props.searchResults && !this.props.loading) {
-      return (
-        <form>
-           <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
-	  <input
-          placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
-          />
-        </form>
-      )
+        </div>
+      );
     }
 
-    else if (!this.props.searchResults && this.props.loading) {
+    if (!this.props.searchResults && !this.props.loading) {
       return (
-        <form>
+        <div>
+          <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
           <input
-          placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+            placeholder="Search for..."
+            onChange={e => this.handleInputChange(e)}
+          />
+        </div>
+      );
+    } else if (!this.props.searchResults && this.props.loading) {
+      return (
+        <div>
+          <input
+            placeholder="Search for..."
+            onChange={e => this.handleInputChange(e)}
           />
           <ReccomendTitleSuggestions results='Loading...' />
-        </form>
+        </div>
       )
     }
      else if(this.props.recMovieData) {
    return (
-        <form>
+        <div>
          <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: {this.props.recMovieData.title}</span>
 	<input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           value = {this.props.recMovieData.title}
 	  />
-        </form>
+        </div>
       )
     
     }
 
     else {
       return (
-	<form>
+	<div>
          <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
 	 <ReccomendTitleSuggestions results={this.props.searchResults} />
-        </form>
+        </div>
       )
+
     }
-	}
+  }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   searchResults: state.movies.searchResults,
   loading: state.movies.loading,
   recMovieData: state.movies.recMovieData
 });
 export default connect(mapStateToProps)(ReccomendTitleInput);
-

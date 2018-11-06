@@ -33,6 +33,11 @@ export const fetchRecs = () => dispatch => {
     });
 };
 
+export const CREATE_REC_REQUEST = 'CREATE_REC_REQUEST';
+export const createRecRequest = () => ({
+  type: CREATE_REC_REQUEST
+});
+
 export const CREATE_REC_DATA_SUCCESS = 'CREATE_REC_DATA_SUCCESS';
 export const createRecDataSuccess = rec => ({
   type: CREATE_REC_DATA_SUCCESS,
@@ -86,6 +91,7 @@ export const editRec = (id, update) => (dispatch, getState) => {
 
 export const createRec = rec => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
+  dispatch(createRecRequest);
   return fetch(`${API_BASE_URL}/recommendations`, {
     method: 'POST',
     headers: {
