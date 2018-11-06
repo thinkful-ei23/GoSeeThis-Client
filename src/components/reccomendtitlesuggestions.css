@@ -1,9 +1,17 @@
 .searchPoster{
-	height: 20px;
+	height: 60px;
 
 }
 
 .result-title-rec {
 	display: inline-block;
-	color: rgb(209, 195, 195);
+	color: white;
+	position: relative;
 }
+.rec-titles{background-color: silver;
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    left: 2%;
+    overflow-x: hidden;
+    overflow-y: scroll;}
