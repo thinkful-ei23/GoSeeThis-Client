@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, focus, FormSection } from 'redux-form';
+import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import ReccomendTitleInput from './reccomendtitleinput';
-import { createRec, fetchRecs } from '../actions/recommendations';
+import { createRec } from '../actions/recommendations';
 import { required } from './stupidvalidator';
 import './new-recommended.css';
 import { Redirect } from 'react-router-dom';
