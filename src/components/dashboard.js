@@ -17,6 +17,10 @@ export class Dashboard extends React.Component {
     let recs;
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
+        const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
+
         return (
           <li key={index} className="card">
             <section className="dash-recommended">
@@ -34,11 +38,14 @@ export class Dashboard extends React.Component {
                     <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                   </h3>
                 </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
                 <section className="dash-rec-user">
                   <h3>
                     <Link to={`/user/${rec.userId.id}`}>
                       {rec.userId.username}
-                    </Link>
+                    </Link>:
                   </h3>
                 </section>
                 <section className="dash-recommend-desc">
@@ -79,7 +86,8 @@ export class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     recs: state.recs.recs,
-    user: state.auth.currentUser
+    user: state.auth.currentUser,
+    genres: state.movies.genres
   };
 };
 
