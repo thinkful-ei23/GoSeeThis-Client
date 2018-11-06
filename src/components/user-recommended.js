@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
 import './my-recommended.css';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 export class UserRecommended extends React.Component {
   componentDidMount() {
@@ -14,6 +14,11 @@ export class UserRecommended extends React.Component {
   render() {
     let recs;
     let username;
+    
+    if (this.props.userId === this.props.loggedInUserId) {
+      return <Redirect to="/profile" />
+    }
+
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
         return (
@@ -70,7 +75,8 @@ const mapStateToProps = (state, props) => {
   return {
     recs: state.recs.userRecs,
     userId,
-    user: state.recs.user
+    user: state.recs.user,
+    loggedInUserId: state.auth.currentUser.id
   };
 };
 
