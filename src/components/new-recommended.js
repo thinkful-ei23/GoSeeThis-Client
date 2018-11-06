@@ -14,8 +14,17 @@ export class NewRecommended extends React.Component {
 
     this.state = {
       searchResultTitle: '',
-      redirectToNewPage: false
+      redirectToNewPage: false,
+      error: ''
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.error !== prevProps.error) {
+      this.setState({
+        error: this.props.error
+      })
+    }
   }
 
   onSubmit(values) {
@@ -35,23 +44,26 @@ export class NewRecommended extends React.Component {
       this.setState({ redirectToNewPage: true });
     })
     .catch(err => {
-      console.log('Console logging error from inside component -', err.message);
+      this.setState({ redirectToNewPage: false });
     });
   }
 
   render() {
     let err;
-    console.log('this.props.error => ', this.props.error);
-    if (this.props.error && !this.props.loading) {
-      err = (
-        <div className="form-error" aria-live="polite">
-          {this.props.error.message}
-        </div>
-      )
-      console.log('IM HERE, THERES AN ERROR');
+    if (this.state.error !== undefined) {
+      console.log('this.props.error => ', this.props.error);
+      console.log(typeof this.state.error);
     }
+    // if (!this.state.redirectToNewPage && !this.props.loading && this.props.error) {
+    //   err = (
+    //     <div className="form-error" aria-live="polite">
+    //       {this.props.error.message}
+    //     </div>
+    //   )
+    //   console.log('IM HERE, THERES AN ERROR');
+    // }
 
-    if (this.state.redirectToNewPage && !this.props.loading && this.props.error === null) {
+    if (this.state.redirectToNewPage && !this.props.loading) {
       console.log('Page will redirect!');
       return <Redirect to="/dashboard" />;
     }
@@ -64,25 +76,26 @@ export class NewRecommended extends React.Component {
         <legend className="recommend-title">New Recommendation</legend>
         <label htmlFor="title">Movie Title</label>
         <ReccomendTitleInput />
-        <FormSection name='description'>
-          <label htmlFor="description">Why Recommended</label>
-          <Field
-            component={Input}
-            type="text"
-            name="description"
-            validate={[required]}
-          />
-        </FormSection>
+        <label htmlFor="description">Why Recommended</label>
+        <Field
+          component={Input}
+          type="text"
+          name="description"
+          validate={[required]}
+        />
         <button type="submit">Create</button>
       </form>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  recMovieData: state.movies.recMovieData,
-  loading: state.recs.loading
-});
+const mapStateToProps = state => {
+  return {
+    recMovieData: state.movies.recMovieData,
+    loading: state.recs.loading,
+    error: state.recs.error || undefined
+  }
+};
 
 export default connect(mapStateToProps)(
   reduxForm({

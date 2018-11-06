@@ -25,47 +25,47 @@ export class ReccomendTitleInput extends React.Component {
 	render() {
     if (!this.state.query) {
       return (
-        <FormSection name='title'>
+        <div>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
-        </FormSection>
+        </div>
       )
     }
 
     if (!this.props.searchResults && !this.props.loading) {
       return (
-        <FormSection  name="title">
+        <div>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
-        </FormSection>
+        </div>
       )
     }
 
     else if (!this.props.searchResults && this.props.loading) {
       return (
-        <FormSection name='title'>
+        <div>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
           <ReccomendTitleSuggestions results='Loading...' />
-        </FormSection>
+        </div>
       )
     }
     else {
       return (
-        <FormSection name='title'>
+        <div>
           <input
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           value = {this.state.searchResultTitle}
           />
           <ReccomendTitleSuggestions results={this.props.searchResults} />
-        </FormSection>
+        </div>
       )
     }
 	}

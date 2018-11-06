@@ -47,13 +47,15 @@ export default function reducer(state = initialState, action) {
 
   if (action.type === CREATE_REC_DATA_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: true,
+      error: null
     });
   };
 
   if (action.type === CREATE_REC_DATA_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
+      error: null,
       recs: [...state.recs, action.rec]
     });
   }
