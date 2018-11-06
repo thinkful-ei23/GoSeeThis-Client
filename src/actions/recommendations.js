@@ -91,7 +91,7 @@ export const editRec = (id, update) => (dispatch, getState) => {
 
 export const createRec = rec => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  dispatch(createRecRequest);
+  dispatch(createRecDataRequest());
   return fetch(`${API_BASE_URL}/recommendations`, {
     method: 'POST',
     headers: {
