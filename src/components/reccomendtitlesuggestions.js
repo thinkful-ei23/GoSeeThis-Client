@@ -19,7 +19,7 @@ const ReccommendTitleSuggestions = (props) => {
         alt="movie poster"
        />
 
-       <div onClick = {()=>props.dispatch(storeRecMovie(result))}> {result.title}</div>
+       <div onClick = {()=>props.dispatch(storeRecMovie(result))} className="result-title-rec"> {result.title}</div>
       </li>
     ))
     return <ul>{options}</ul>
