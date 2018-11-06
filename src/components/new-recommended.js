@@ -15,17 +15,17 @@ export class NewRecommended extends React.Component {
     this.state = {
       searchResultTitle: '',
       redirectToNewPage: false,
-      error: ''
+      // error: ''
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.error !== prevProps.error) {
-      this.setState({
-        error: this.props.error
-      })
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.error !== prevProps.error) {
+  //     this.setState({
+  //       error: this.props.error
+  //     })
+  //   }
+  // }
 
   onSubmit(values) {
     console.log(values);
@@ -50,23 +50,21 @@ export class NewRecommended extends React.Component {
 
   render() {
     let err;
-    if (this.state.error !== undefined) {
-      console.log('this.props.error => ', this.props.error);
-      console.log(typeof this.state.error);
+
+    if (!this.props.loading && this.props.subError) {
+      err = (
+        <div className="form-error" aria-live="polite">
+          {this.props.subError.message}
+        </div>
+      )
+      console.log('IM HERE, THERES AN ERROR');
     }
-    // if (!this.state.redirectToNewPage && !this.props.loading && this.props.error) {
-    //   err = (
-    //     <div className="form-error" aria-live="polite">
-    //       {this.props.error.message}
-    //     </div>
-    //   )
-    //   console.log('IM HERE, THERES AN ERROR');
-    // }
 
     if (this.state.redirectToNewPage && !this.props.loading) {
       console.log('Page will redirect!');
       return <Redirect to="/dashboard" />;
     }
+
     return (
       <form
         className="login-form"
@@ -93,7 +91,7 @@ const mapStateToProps = state => {
   return {
     recMovieData: state.movies.recMovieData,
     loading: state.recs.loading,
-    error: state.recs.error || undefined
+    subError: state.recs.error || undefined
   }
 };
 
