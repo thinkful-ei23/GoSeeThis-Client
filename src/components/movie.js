@@ -34,6 +34,12 @@ export class Movie extends React.Component{
             </li>
           ));
 
+          console.log(this.props.movieData.genres);
+
+          const genres = this.props.movieData.genres
+            .map(genre => genre.name)
+            .join(' , ');
+          
           return(
           <section className="movie-page">
           <section className="movie-container">
@@ -56,6 +62,10 @@ export class Movie extends React.Component{
               <section className="movie-release">
                 <h3>Release Date</h3>
                 <p>{releaseDate}</p>
+              </section>
+              <section className="genres">
+                <h3>Genre(s)</h3>
+                <p>{genres}</p>
               </section>
             </section>
             <section className="recommended">
