@@ -1,8 +1,5 @@
 .suggestions {
     width: 211px;
     background-color: black;
-}
-
-.sugggestion-list {
-    color: black;
+    position: absolute;
 }
