@@ -9,14 +9,46 @@ import { Link } from 'react-router-dom';
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      genreVal: '',
+      searchVal: ''
+    };
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchRecs());
   }
 
+  setFilterGenre(e) {
+    this.setState({ genreVal: e.target.value });
+  }
+
   render() {
     let recs;
+    let filteredRecs;
+    let arr;
+
     if (this.props.recs) {
-      recs = this.props.recs.map((rec, index) => {
+      if (this.state.genreVal) {
+        let arr = this.props.recs;
+        let val = parseInt(this.state.genreVal);
+        filteredRecs = arr.filter(rec => {
+          const found = rec.genre_ids.find(element => {
+            return element === val;
+          });
+          if (found) {
+            return rec;
+          }
+        });
+      }
+      if (filteredRecs) {
+        arr = filteredRecs;
+      } else {
+        arr = this.props.recs;
+      }
+      recs = arr.map((rec, index) => {
         return (
           <li key={index} className="card">
             <section className="dash-recommended">
@@ -67,8 +99,11 @@ export class Dashboard extends React.Component {
             </section>
             <section className="recommendation-header">
               <h2>Recent Activity:</h2>
-              <select>
-                <option>Filter by Genre</option>
+              <select
+                onChange={e => this.setFilterGenre(e)}
+                value={this.state.value}
+              >
+                <option value="">Filter by Genre</option>
                 <option value="28">Action</option>
                 <option value="12">Adventure</option>
                 <option value="16">Animation</option>
