@@ -10,7 +10,7 @@ const Suggestions = (props) => {
   else {
     const options = props.results.map((result, index) => (
       <li  key={index} onClick = {console.log(result.title)}>
-       <a href={result.id} className="sugggestion-list"> {result.title}</a>
+       <a href={`/movie/${result.id}`} className="sugggestion-list"> {result.title}</a>
       </li>
     ))
     return <ul className="suggestions">{options}</ul>
