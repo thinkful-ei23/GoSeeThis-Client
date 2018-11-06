@@ -1,8 +1,8 @@
 //todo: change axios
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchMovies } from '../actions/movies';
+import {connect} from 'react-redux';
+import {fetchMovies} from '../actions/movies';
 import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 import './reccomendtitleinput.css';
 import { deleteRecMovie } from '../actions/movies';
@@ -95,4 +95,5 @@ const mapStateToProps = state => ({
   loading: state.movies.loading,
   recMovieData: state.movies.recMovieData
 });
+
 export default connect(mapStateToProps)(ReccomendTitleInput);

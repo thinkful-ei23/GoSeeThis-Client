@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Suggestions from './suggestions';
 import {fetchMovies} from '../actions/movies';
-
+import './searchBar.css';
 
 export class SearchBar extends React.Component {
 
@@ -24,8 +24,9 @@ export class SearchBar extends React.Component {
 	render() {
     if (!this.state.query) {
       return (
-        <form>
+        <form >
           <input
+          className="searchbar"
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
@@ -34,8 +35,9 @@ export class SearchBar extends React.Component {
     }
     if (!this.props.searchResults && !this.props.loading) {
       return (
-        <form>
+        <form >
           <input
+          className="searchbar"
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
@@ -45,8 +47,9 @@ export class SearchBar extends React.Component {
 
     else if (!this.props.searchResults && this.props.loading) {
       return (
-        <form>
+        <form >
           <input
+          className="searchbar"
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
@@ -56,8 +59,9 @@ export class SearchBar extends React.Component {
     }
     else {
       return (
-        <form>
+        <form >
           <input
+          className="searchbar"
           placeholder="Search for..."
           onChange={(e)=>this.handleInputChange(e)}
           />
@@ -73,4 +77,3 @@ const mapStateToProps = (state) => ({
   loading: state.movies.loading
 });
 export default connect(mapStateToProps)(SearchBar);
-

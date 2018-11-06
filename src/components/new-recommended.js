@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import ReccomendTitleInput from './reccomendtitleinput';
-import { createRec, fetchRecs } from '../actions/recommendations';
+import { createRec } from '../actions/recommendations';
 import { required } from './stupidvalidator';
 import './new-recommended.css';
 import { Redirect } from 'react-router-dom';
@@ -32,23 +32,34 @@ export class NewRecommended extends React.Component {
     };
     this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
+    })
+    .catch(err => {
+      this.setState({ redirectToNewPage: false });
     });
   }
 
   render() {
     let err;
+    if (!this.props.loading && this.props.subError) {
+      err = (
+        <div className="form-error" aria-live="polite">
+          {this.props.subError.message}
+        </div>
+      )
+      console.log('IM HERE, THERES AN ERROR');
+    }
+
     if (this.state.redirectToNewPage && !this.props.loading) {
+      console.log('Page will redirect!');
       return <Redirect to="/dashboard" />;
     }
-    if (this.props.error !== null) {
-      err = this.props.error;
-    }
+    
     return (
       <form
         className="login-form"
         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
-        <span>{err}</span>
+        {err}
         <legend className="recommend-title">New Recommendation</legend>
         <label htmlFor="title">Movie Title</label>
         <ReccomendTitleInput />
@@ -65,11 +76,13 @@ export class NewRecommended extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  recMovieData: state.movies.recMovieData,
-  loading: state.recs.loading
-  //   error: state.recs.error.message
-});
+const mapStateToProps = state => {
+  return {
+    recMovieData: state.movies.recMovieData,
+    loading: state.recs.loading,
+    subError: state.recs.error || undefined
+  }
+};
 
 export default connect(mapStateToProps)(
   reduxForm({

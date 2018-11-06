@@ -2,6 +2,7 @@ import {
   FETCH_RECS_REQUEST,
   FETCH_RECS_SUCCESS,
   FETCH_RECS_ERROR,
+  CREATE_REC_DATA_REQUEST,
   CREATE_REC_DATA_SUCCESS,
   CREATE_REC_DATA_ERROR,
   FETCH_MOVIE_RECS_REQUEST,
@@ -10,11 +11,8 @@ import {
   FETCH_USER_RECS_REQUEST,
   FETCH_USER_RECS_SUCCESS,
   FETCH_USER_RECS_ERROR,
-  SELECT_MOVIE,
-  SELECT_USER,
   EDIT_REC_SUCCESS,
-  EDIT_REC_ERROR,
-  CREATE_REC_REQUEST
+  EDIT_REC_ERROR
 } from '../actions/recommendations';
 
 const initialState = {
@@ -23,7 +21,7 @@ const initialState = {
   movieRecs: null,
   userRecs: null,
   user: null,
-  error: false
+  error: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -47,9 +45,17 @@ export default function reducer(state = initialState, action) {
     });
   }
 
+  if (action.type === CREATE_REC_DATA_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  };
+
   if (action.type === CREATE_REC_DATA_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
+      error: null,
       recs: [...state.recs, action.rec]
     });
   }
@@ -58,13 +64,6 @@ export default function reducer(state = initialState, action) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error
-    });
-  }
-
-  if (action.type === CREATE_REC_REQUEST) {
-    return Object.assign({}, state, {
-      loading: true,
-      error: null
     });
   }
 

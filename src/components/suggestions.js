@@ -1,5 +1,6 @@
 //set up onClick
 import React from 'react'
+import './suggestions.css';
 
 const Suggestions = (props) => {
   if (props.results === 'Loading...') {
@@ -8,11 +9,11 @@ const Suggestions = (props) => {
 
   else {
     const options = props.results.map((result, index) => (
-      <li key={index} onClick = {console.log(result.title)}>
-       <a href={result.id}> {result.title}</a>
+      <li  key={index} onClick = {console.log(result.title)}>
+       <a href={`/movie/${result.id}`} className="sugggestion-list"> {result.title}</a>
       </li>
     ))
-    return <ul>{options}</ul>
+    return <ul className="suggestions">{options}</ul>
   }
 }
 
