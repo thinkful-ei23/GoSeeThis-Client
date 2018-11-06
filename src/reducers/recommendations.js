@@ -12,7 +12,8 @@ import {
   FETCH_USER_RECS_SUCCESS,
   FETCH_USER_RECS_ERROR,
   EDIT_REC_SUCCESS,
-  EDIT_REC_ERROR
+  EDIT_REC_ERROR,
+  CREATE_REC_REQUEST
 } from '../actions/recommendations';
 
 const initialState = {
@@ -67,6 +68,13 @@ export default function reducer(state = initialState, action) {
     });
   }
 
+  if (action.type === CREATE_REC_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+
   if (action.type === FETCH_MOVIE_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
@@ -118,6 +126,6 @@ export default function reducer(state = initialState, action) {
       error: action.error
     });
   }
-  
+
   return state;
 }

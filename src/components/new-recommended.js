@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, focus, FormSection } from 'redux-form';
 import Input from './input';
 import ReccomendTitleInput from './reccomendtitleinput';
-import { createRec } from '../actions/recommendations';
+import { createRec, fetchRecs } from '../actions/recommendations';
 import { required } from './stupidvalidator';
 import './new-recommended.css';
 import { Redirect } from 'react-router-dom';
@@ -14,18 +14,9 @@ export class NewRecommended extends React.Component {
 
     this.state = {
       searchResultTitle: '',
-      redirectToNewPage: false,
-      // error: ''
+      redirectToNewPage: false
     };
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.error !== prevProps.error) {
-  //     this.setState({
-  //       error: this.props.error
-  //     })
-  //   }
-  // }
 
   onSubmit(values) {
     console.log(values);
@@ -39,7 +30,6 @@ export class NewRecommended extends React.Component {
       movieId: id,
       recDesc
     };
-    console.log(newRec);
     this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
     })
@@ -50,7 +40,6 @@ export class NewRecommended extends React.Component {
 
   render() {
     let err;
-
     if (!this.props.loading && this.props.subError) {
       err = (
         <div className="form-error" aria-live="polite">
@@ -64,7 +53,7 @@ export class NewRecommended extends React.Component {
       console.log('Page will redirect!');
       return <Redirect to="/dashboard" />;
     }
-
+    
     return (
       <form
         className="login-form"
@@ -99,6 +88,6 @@ export default connect(mapStateToProps)(
   reduxForm({
     form: 'recomendation',
     onSubmitFail: (errors, dispatch) =>
-      dispatch(focus('recomendation', ))
+      dispatch(focus('recomendation', 'title'))
   })(NewRecommended)
 );
