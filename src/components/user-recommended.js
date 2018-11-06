@@ -21,6 +21,10 @@ export class UserRecommended extends React.Component {
 
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
+        const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
+          
         return (
           <li key={index} className="card">
             <section className="recommended">
@@ -35,6 +39,9 @@ export class UserRecommended extends React.Component {
               <section className="container">
               <section className="movie-title">
               <h3><Link to={`/movie/${rec.movieId}`}>{rec.title}</Link></h3></section>
+              <section className="movie-genres">
+                {genres}
+              </section>
               <section className="recommend-desc">
                 <p>{rec.recDesc}</p>
               </section>
@@ -76,7 +83,8 @@ const mapStateToProps = (state, props) => {
     recs: state.recs.userRecs,
     userId,
     user: state.recs.user,
-    loggedInUserId: state.auth.currentUser.id
+    loggedInUserId: state.auth.currentUser.id,
+    genres: state.movies.genres
   };
 };
 

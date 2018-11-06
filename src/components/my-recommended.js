@@ -88,6 +88,10 @@ export class MyRecommended extends React.Component {
             </li>
           );
         } else {
+          const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
+
           return (
             <li key={index} className="card">
               <section className="recommended">
@@ -107,6 +111,9 @@ export class MyRecommended extends React.Component {
                     <h3>
                       <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                     </h3>
+                  </section>
+                  <section className="movie-genres">
+                    {genres}
                   </section>
                   <section className="recommend-desc">
                     <section>
@@ -158,7 +165,8 @@ export class MyRecommended extends React.Component {
 const mapStateToProps = state => {
   return {
     recs: state.recs.userRecs,
-    user: state.auth.currentUser
+    user: state.auth.currentUser,
+    genres: state.movies.genres
   };
 };
 
