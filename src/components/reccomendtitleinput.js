@@ -27,7 +27,6 @@ export class ReccomendTitleInput extends React.Component {
   render() {
     if (!this.state.query) {
       return (
-=
         <div>
           <span className='displayOfCurrentRecTitleSelection'>Currently Selected Title: None Currently Selected</span>
           <input

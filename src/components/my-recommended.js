@@ -140,11 +140,6 @@ export class MyRecommended extends React.Component {
         </section>
 
         <section className="recommended-list">
-          <section className="editButton">
-            <LinkButton to="/editprofile" className="editBtn">
-              Edit Profile
-            </LinkButton>
-          </section>
           <section className="recommendButton">
             <LinkButton to="/recommend" className="recBtn">
               + Recommend
