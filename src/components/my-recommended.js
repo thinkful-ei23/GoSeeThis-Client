@@ -1,5 +1,6 @@
 import React from 'react';
 import { fetchUserRecs, deleteRec, editRec } from '../actions/recommendations';
+import { getWatchList, addMovieToWatchList } from '../actions/users';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -16,7 +17,16 @@ export class MyRecommended extends React.Component {
   componentDidMount() {
     let id = this.props.user.id;
     this.props.dispatch(fetchUserRecs(id));
+    this.props.dispatch(getWatchList(id));
   }
+
+  handleDeleteWatch = i => {
+    let id = this.props.user.id;
+    let updateWatchList = this.props.watchList.filter(
+      (rec, index) => index !== i
+    );
+    this.props.dispatch(addMovieToWatchList(updateWatchList, id));
+  };
 
   handleDelete = rec => {
     this.props
@@ -50,6 +60,39 @@ export class MyRecommended extends React.Component {
   render() {
     let recs;
     let username;
+    let watch;
+    if (this.props.watchList) {
+      watch = this.props.watchList.map((rec, index) => {
+        console.log(rec);
+        const genres = rec.genres.map(genre => genre.name).join(' , ');
+        return (
+          <li key={index} className="card">
+            <section className="recommended">
+              <section className="movie-poster">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.poster_path}
+                    alt="movie poster"
+                  />
+                </Link>
+              </section>
+              <section className="delete-button">
+                <p onClick={() => this.handleDeleteWatch(rec)}>x</p>
+              </section>
+              <section className="container">
+                <section className="movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                  </h3>
+                </section>
+              </section>
+              <section> {genres}</section>
+            </section>
+          </li>
+        );
+      });
+    }
+    console.log(watch);
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
         if (this.state.editedRec === rec.movieId) {
@@ -89,8 +132,8 @@ export class MyRecommended extends React.Component {
           );
         } else {
           const genres = rec.genre_ids
-          .map(genre => this.props.genres[String(genre)])
-          .join(' , ');
+            .map(genre => this.props.genres[String(genre)])
+            .join(' , ');
 
           return (
             <li key={index} className="card">
@@ -112,9 +155,7 @@ export class MyRecommended extends React.Component {
                       <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                     </h3>
                   </section>
-                  <section className="movie-genres">
-                    {genres}
-                  </section>
+                  <section className="movie-genres">{genres}</section>
                   <section className="recommend-desc">
                     <section>
                       <p>{rec.recDesc}</p>
@@ -157,6 +198,10 @@ export class MyRecommended extends React.Component {
           </section>
           <ul> {recs}</ul>
         </section>
+        <section>
+          <section>My Watchlist:</section>
+          <ul> {watch}</ul>
+        </section>
       </section>
     );
   }
@@ -166,7 +211,8 @@ const mapStateToProps = state => {
   return {
     recs: state.recs.userRecs,
     user: state.auth.currentUser,
-    genres: state.movies.genres
+    genres: state.movies.genres,
+    watchList: state.user.watchList
   };
 };
 

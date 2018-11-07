@@ -14,7 +14,14 @@ export class Movie extends React.Component {
 
   addToWatchlist() {
     let obj = {
-      watchList: [this.props.movieId]
+      watchList: [
+        {
+          id: this.props.movieId,
+          title: this.props.movieData.title,
+          poster_path: this.props.movieData.poster_path,
+          genres: this.props.movieData.genres
+        }
+      ]
     };
     let userId = this.props.currentUser.id;
     this.props.dispatch(addMovieToWatchList(obj, userId));

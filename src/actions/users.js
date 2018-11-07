@@ -61,3 +61,38 @@ export const addToWatchListError = error => ({
   type: ADD_TO_WATCH_LIST_ERROR,
   error
 });
+
+export const getWatchList = id => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(getWatchListRequest());
+  return fetch(`${API_BASE_URL}/users/${id}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(data => {
+      const { watchList } = data;
+      dispatch(getWatchListSuccess(watchList));
+    })
+    .catch(err => dispatch(getWatchListError(err)));
+};
+
+export const GET_WATCH_LIST_REQUEST = 'GET_WATCH_LIST_REQUEST';
+export const getWatchListRequest = () => ({
+  type: GET_WATCH_LIST_REQUEST
+});
+
+export const GET_WATCH_LIST_SUCCESS = 'GET_WATCH_LIST_SUCCESS';
+export const getWatchListSuccess = watchList => ({
+  type: GET_WATCH_LIST_SUCCESS,
+  watchList
+});
+export const GET_WATCH_LIST_ERROR = 'GET_WATCH_LIST_ERROR';
+export const getWatchListError = error => ({
+  type: ADD_TO_WATCH_LIST_ERROR,
+  error
+});
