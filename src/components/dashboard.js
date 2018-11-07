@@ -21,20 +21,31 @@ export class Dashboard extends React.Component {
     this.props.dispatch(fetchRecs());
   }
 
+  handleInputChange(e) {
+    const searchVal = e.target.value;
+    this.setState({ searchVal });
+  }
+
   setFilterGenre(e) {
     this.setState({ genreVal: e.target.value });
   }
 
+  setSearchFilter(e) {
+    this.setState({ filterBy: e.target.value });
+  }
+
   render() {
     let recs;
-    let filteredRecs;
+    let genreFilteredRecs;
+    let titleFilteredRecs;
+    let fullFilteredRecs;
     let arr;
 
     if (this.props.recs) {
       if (this.state.genreVal) {
         let arr = this.props.recs;
         let val = parseInt(this.state.genreVal);
-        filteredRecs = arr.filter(rec => {
+        genreFilteredRecs = arr.filter(rec => {
           const found = rec.genre_ids.find(element => {
             return element === val;
           });
@@ -43,8 +54,30 @@ export class Dashboard extends React.Component {
           }
         });
       }
-      if (filteredRecs) {
-        arr = filteredRecs;
+
+      if (this.state.searchVal) {
+        let arr = this.props.recs;
+        let val = this.state.searchVal;
+        titleFilteredRecs = arr.filter(rec => {
+          const title = rec.title.toLowerCase();
+          val = val.toLowerCase();
+          return title.includes(val);
+        });
+      }
+
+      if (this.state.searchVal && this.state.genreVal) {
+        fullFilteredRecs = genreFilteredRecs.filter(rec => {
+          const title = rec.title.toLowerCase();
+          let val = this.state.searchVal.toLowerCase();
+          return title.includes(val);
+        });
+      }
+      if (fullFilteredRecs) {
+        arr = fullFilteredRecs;
+      } else if (titleFilteredRecs) {
+        arr = titleFilteredRecs;
+      } else if (genreFilteredRecs) {
+        arr = genreFilteredRecs;
       } else {
         arr = this.props.recs;
       }
@@ -64,7 +97,7 @@ export class Dashboard extends React.Component {
                 </Link>
               </section>
               <section className="dash-container">
-              <section className="dash-movie-title">
+                <section className="dash-movie-title">
                   <h3>
                     <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                   </h3>
@@ -76,7 +109,8 @@ export class Dashboard extends React.Component {
                   <h3>
                     <Link to={`/user/${rec.userId.id}`}>
                       {rec.userId.username}
-                    </Link>:
+                    </Link>
+                    :
                   </h3>
                 </section>
                 <section className="dash-recommend-desc">
@@ -105,31 +139,37 @@ export class Dashboard extends React.Component {
             </section>
             <section className="recommendation-header">
               <h2>Recent Activity:</h2>
-              <select
-                onChange={e => this.setFilterGenre(e)}
-                value={this.state.value}
-              >
-                <option value="">Filter by Genre</option>
-                <option value="28">Action</option>
-                <option value="12">Adventure</option>
-                <option value="16">Animation</option>
-                <option value="35">Comedy</option>
-                <option value="80">Crime</option>
-                <option value="99">Documentary</option>
-                <option value="18">Drama</option>
-                <option value="10751">Family</option>
-                <option value="14">Fantasy</option>
-                <option value="36">History</option>
-                <option value="27">Horror</option>
-                <option value="10402">Music</option>
-                <option value="9648">Mystery</option>
-                <option value="10749">Romance</option>
-                <option value="878">Science Fiction</option>
-                <option value="10770">TV Movie</option>
-                <option value="53">Thriller</option>
-                <option value="10752">War</option>
-                <option value="37">Western</option>
-              </select>
+              <div>
+                <input
+                  placeholder={`Search for title`}
+                  onChange={e => this.handleInputChange(e)}
+                />
+                <select
+                  onChange={e => this.setFilterGenre(e)}
+                  value={this.state.value}
+                >
+                  <option value="">Filter by Genre</option>
+                  <option value="28">Action</option>
+                  <option value="12">Adventure</option>
+                  <option value="16">Animation</option>
+                  <option value="35">Comedy</option>
+                  <option value="80">Crime</option>
+                  <option value="99">Documentary</option>
+                  <option value="18">Drama</option>
+                  <option value="10751">Family</option>
+                  <option value="14">Fantasy</option>
+                  <option value="36">History</option>
+                  <option value="27">Horror</option>
+                  <option value="10402">Music</option>
+                  <option value="9648">Mystery</option>
+                  <option value="10749">Romance</option>
+                  <option value="878">Science Fiction</option>
+                  <option value="10770">TV Movie</option>
+                  <option value="53">Thriller</option>
+                  <option value="10752">War</option>
+                  <option value="37">Western</option>
+                </select>
+              </div>
             </section>
             <ul className="recent-activity">{recs}</ul>
           </section>
