@@ -13,8 +13,7 @@ export class Dashboard extends React.Component {
     super(props);
     this.state = {
       genreVal: '',
-      searchVal: '',
-      filterBy: ''
+      searchVal: ''
     };
   }
 
@@ -37,14 +36,16 @@ export class Dashboard extends React.Component {
 
   render() {
     let recs;
-    let filteredRecs;
+    let genreFilteredRecs;
+    let titleFilteredRecs;
+    let fullFilteredRecs;
     let arr;
 
     if (this.props.recs) {
       if (this.state.genreVal) {
         let arr = this.props.recs;
         let val = parseInt(this.state.genreVal);
-        filteredRecs = arr.filter(rec => {
+        genreFilteredRecs = arr.filter(rec => {
           const found = rec.genre_ids.find(element => {
             return element === val;
           });
@@ -53,8 +54,30 @@ export class Dashboard extends React.Component {
           }
         });
       }
-      if (filteredRecs) {
-        arr = filteredRecs;
+
+      if (this.state.searchVal) {
+        let arr = this.props.recs;
+        let val = this.state.searchVal;
+        titleFilteredRecs = arr.filter(rec => {
+          const title = rec.title.toLowerCase();
+          val = val.toLowerCase();
+          return title.includes(val);
+        });
+      }
+
+      if (this.state.searchVal && this.state.genreVal) {
+        fullFilteredRecs = genreFilteredRecs.filter(rec => {
+          const title = rec.title.toLowerCase();
+          let val = this.state.searchVal.toLowerCase();
+          return title.includes(val);
+        });
+      }
+      if (fullFilteredRecs) {
+        arr = fullFilteredRecs;
+      } else if (titleFilteredRecs) {
+        arr = titleFilteredRecs;
+      } else if (genreFilteredRecs) {
+        arr = genreFilteredRecs;
       } else {
         arr = this.props.recs;
       }
@@ -118,17 +141,9 @@ export class Dashboard extends React.Component {
               <h2>Recent Activity:</h2>
               <div>
                 <input
-                  placeholder={`Search for ${this.state.filterBy}`}
+                  placeholder={`Search for title`}
                   onChange={e => this.handleInputChange(e)}
                 />
-                <select
-                  onChange={e => this.setSearchFilter(e)}
-                  value={this.state.value}
-                >
-                  <option value="">No Filter</option>
-                  <option value="title">Title</option>
-                  <option value="user">User</option>
-                </select>
                 <select
                   onChange={e => this.setFilterGenre(e)}
                   value={this.state.value}
