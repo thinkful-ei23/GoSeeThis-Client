@@ -20,7 +20,7 @@ export const fetchFollowingError = (error) => ({
 
 export const fetchFollowing = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  dispatch(fetchFollowersRequest());
+  dispatch(fetchFollowingRequest());
   return fetch(`${API_BASE_URL}/following`, {
     method: 'GET',
     headers: {
@@ -30,10 +30,10 @@ export const fetchFollowing = () => (dispatch, getState) => {
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(following => {
-    dispatch(fetchFollowersSuccess(following));
+    dispatch(fetchFollowingSuccess(following));
   })
   .catch(err => {
-    dispatch(fetchFollowersError(err));
+    dispatch(fetchFollowingError(err));
   });
 };
 
