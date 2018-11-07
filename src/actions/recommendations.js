@@ -20,7 +20,7 @@ export const fetchRecsError = error => ({
 
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations`, {
+  return fetch(`${API_BASE_URL}/recommendations`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
@@ -133,7 +133,7 @@ export const fetchMovieRecsError = error => ({
 
 export const fetchMovieRecs = movieId => dispatch => {
   dispatch(fetchMovieRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
+  return fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
@@ -165,7 +165,7 @@ export const fetchUserRecsError = error => ({
 
 export const fetchUserRecs = userId => dispatch => {
   dispatch(fetchUserRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
+  return fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))

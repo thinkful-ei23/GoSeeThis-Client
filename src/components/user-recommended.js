@@ -63,6 +63,9 @@ export class UserRecommended extends React.Component {
             <section className="recomendation-header">
               <h2>{username}'s Recomendations:</h2>
             </section>
+            <section className="follow-user">
+              <button type="button">Follow</button>
+            </section>
             <ul>{recs}</ul>
           </section>
         </section>
