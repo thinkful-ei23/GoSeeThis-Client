@@ -12,7 +12,10 @@ import {
   FETCH_USER_RECS_SUCCESS,
   FETCH_USER_RECS_ERROR,
   EDIT_REC_SUCCESS,
-  EDIT_REC_ERROR
+  EDIT_REC_ERROR,
+  FETCH_FOLLOWING_RECS_REQUEST,
+  FETCH_FOLLOWING_RECS_SUCCESS,
+  FETCH_FOLLOWING_RECS_ERROR
 } from '../actions/recommendations';
 
 const initialState = {
@@ -20,6 +23,7 @@ const initialState = {
   recs: null,
   movieRecs: null,
   userRecs: null,
+  followingRecs: null,
   user: null,
   error: null
 };
@@ -113,6 +117,27 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === EDIT_REC_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+
+  if (action.type === FETCH_FOLLOWING_RECS_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+
+  if (action.type === FETCH_FOLLOWING_RECS_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      followingRecs: action.recs
+    });
+  }
+
+  if (action.type === FETCH_FOLLOWING_RECS_ERROR) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error
