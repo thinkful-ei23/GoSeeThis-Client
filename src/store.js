@@ -6,6 +6,7 @@ import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import moviesReducer from './reducers/movies';
 import recsReducer from './reducers/recommendations';
+import followReducer from './reducers/follow';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 
 const store = createStore(
@@ -13,7 +14,8 @@ const store = createStore(
     form: formReducer,
     auth: authReducer,
     movies: moviesReducer,
-    recs: recsReducer
+    recs: recsReducer,
+    follow: followReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

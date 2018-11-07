@@ -54,7 +54,24 @@ export const fetchFollowersError = (error) => ({
   error
 });
 
-
+export const fetchFollowers = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(fetchFollowersRequest());
+  return fetch(`${API_BASE_URL}/followers`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(followers => {
+    dispatch(fetchFollowersSuccess(followers));
+  })
+  .catch(err => {
+    dispatch(fetchFollowersError(err));
+  });
+};
 
 export const FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST';
 export const followUserRequest = () => ({
@@ -62,9 +79,8 @@ export const followUserRequest = () => ({
 });
 
 export const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS';
-export const followUserSuccess = (follow) => ({
-  type: FOLLOW_USER_SUCCESS,
-  follow
+export const followUserSuccess = () => ({
+  type: FOLLOW_USER_SUCCESS
 });
 
 export const FOLLOW_USER_ERROR = 'FOLLOW_USER_ERROR';
@@ -72,3 +88,27 @@ export const followUserError = (error) => ({
   type: FOLLOW_USER_ERROR,
   error
 });
+
+export const followUser = (user) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(followUserRequest());
+  return fetch(`${API_BASE_URL}/follow`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(user)
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(() => {
+    dispatch(fetchFollowing());
+  })
+  .then(() => {
+    dispatch(followUserSuccess());
+  })
+  .catch(err => {
+    dispatch(followUserError(err));
+  });
+};
