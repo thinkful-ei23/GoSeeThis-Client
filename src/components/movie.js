@@ -149,7 +149,6 @@ this.state = {recInput: ''};
               </section>
               </section>
           </section>
-        </section>
       );
     }
   }
