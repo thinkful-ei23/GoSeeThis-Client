@@ -87,6 +87,30 @@ this.state = {recInput: ''};
         </li>
       ));
 
+
+	let recCheck = this.props.movieRecs;
+	let checkedDuplicate = false;
+	for(let i = 0; i < recCheck.length;i++){
+		if(recCheck[i].userId.id === this.props.currentUser.id){
+		checkedDuplicate = true
+		}
+	}
+
+	let recEntryWindow = '';
+	if(!checkedDuplicate){
+		
+		recEntryWindow = <form onSubmit = {e => this.handleSubmit(e)}>  
+		<label>Add a Reccomendation:</label>
+		<input type = 'text' onChange = {e => this.handleChange(e)} />
+        <button type="submit">Create</button>
+      </form>;
+	}
+	else{
+	recEntryWindow = '';
+	}
+
+
+	
           const genres = this.props.movieData.genres
             .map(genre => genre.name)
             .join(' , ');
@@ -139,10 +163,7 @@ this.state = {recInput: ''};
               <section className="movie-recommendations">
                 <h2>{this.props.movieData.title}'s Recommendations</h2>
               <label htmlFor="description">Why Recommended</label>
-      <form onSubmit = {e => this.handleSubmit(e)}>  
-      <input type = 'text' onChange = {e => this.handleChange(e)} />
-        <button type="submit">Create</button>
-      </form>
+	      {recEntryWindow}
 	      <ul className="movie-page-rec-list">
                   {recommendations}
                 </ul>
