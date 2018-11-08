@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
-import { fetchRecs } from '../actions/recommendations';
+import { fetchRecs, fetchFollowingRecs } from '../actions/recommendations';
 import { POSTER_PATH_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ export class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchRecs());
+    this.props.dispatch(fetchFollowingRecs());
   }
 
   handleInputChange(e) {
@@ -123,19 +124,108 @@ export class Dashboard extends React.Component {
       });
     }
 
+    let followRecs;
+    let genreFilteredFollowRecs;
+    let titleFilteredFollowRecs;
+    let fullFilteredFollowRecs;
+    let followArr;
+
+    if (this.props.followingRecs) {
+      if (this.state.genreVal) {
+        let arr = this.props.followingRecs;
+        let val = parseInt(this.state.genreVal);
+        genreFilteredFollowRecs = arr.filter(rec => {
+          const found = rec.genre_ids.find(element => {
+            return element === val;
+          });
+          if (found) {
+            return rec;
+          }
+        });
+      }
+
+      if (this.state.searchVal) {
+        let arr = this.props.followingRecs;
+        let val = this.state.searchVal;
+        titleFilteredFollowRecs = arr.filter(rec => {
+          const title = rec.title.toLowerCase();
+          val = val.toLowerCase();
+          return title.includes(val);
+        });
+      }
+
+      if (this.state.searchVal && this.state.genreVal) {
+        fullFilteredFollowRecs = genreFilteredFollowRecs.filter(rec => {
+          const title = rec.title.toLowerCase();
+          let val = this.state.searchVal.toLowerCase();
+          return title.includes(val);
+        });
+      }
+      if (fullFilteredFollowRecs) {
+        followArr = fullFilteredFollowRecs;
+      } else if (titleFilteredFollowRecs) {
+        followArr = titleFilteredFollowRecs;
+      } else if (genreFilteredFollowRecs) {
+        followArr = genreFilteredFollowRecs;
+      } else {
+        followArr = this.props.followingRecs;
+      }
+
+      followRecs = followArr.map((rec, index) => {
+        const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
+        return (
+          <li key={index} className="card">
+            <section className="dash-recommended">
+              <section className="dash-movie-poster">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                    alt="movie poster"
+                  />
+                </Link>
+              </section>
+              <section className="dash-container">
+                <section className="dash-movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                  </h3>
+                </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
+                <section className="dash-rec-user">
+                  <h3>
+                    <Link to={`/user/${rec.userId.id}`}>
+                      {rec.userId.username}
+                    </Link>
+                    :
+                  </h3>
+                </section>
+                <section className="dash-recommend-desc">
+                  <p>{rec.recDesc}</p>
+                </section>
+              </section>
+            </section>
+          </li>
+        );
+      });
+    }
+
     return (
       <section className="dash">
-      <section className="dash-buttons">
-        <section className="profileButton">
-          <LinkButton to="/profile" className="profileBtn">
-            My Recomendations
-              </LinkButton>
-        </section>
-        <section className="recommendButton">
-          <LinkButton to="/recommend" className="recBtn">
-            + Recommend
-              </LinkButton>
-        </section>
+        <section className="dash-buttons">
+          <section className="profileButton">
+            <LinkButton to="/profile" className="profileBtn">
+              My Recomendations
+            </LinkButton>
+          </section>
+          <section className="recommendButton">
+            <LinkButton to="/recommend" className="recBtn">
+              + Recommend
+            </LinkButton>
+          </section>
         </section>
         <section className="dashboard-container-left">
           <section className="myRecommended">
@@ -221,7 +311,7 @@ export class Dashboard extends React.Component {
               </section>
               <section className="global-activity">
                 <section className="overflow">
-                  <ul className="recent-activity">{recs}</ul>
+                  <ul className="recent-activity">{followRecs}</ul>
                 </section>
               </section>
             </section>
@@ -236,9 +326,9 @@ const mapStateToProps = state => {
   return {
     recs: state.recs.recs,
     user: state.auth.currentUser,
-    genres: state.movies.genres
+    genres: state.movies.genres,
+    followingRecs: state.recs.followingRecs
   };
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
-
