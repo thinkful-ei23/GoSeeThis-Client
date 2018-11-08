@@ -215,17 +215,17 @@ export class Dashboard extends React.Component {
 
     return (
       <section className="dash">
-      <section className="dash-buttons">
-        <section className="profileButton">
-          <LinkButton to="/profile" className="profileBtn">
-            My Recomendations
-              </LinkButton>
-        </section>
-        <section className="recommendButton">
-          <LinkButton to="/recommend" className="recBtn">
-            + Recommend
-              </LinkButton>
-        </section>
+        <section className="dash-buttons">
+          <section className="profileButton">
+            <LinkButton to="/profile" className="profileBtn">
+              My Recomendations
+            </LinkButton>
+          </section>
+          <section className="recommendButton">
+            <LinkButton to="/recommend" className="recBtn">
+              + Recommend
+            </LinkButton>
+          </section>
         </section>
         <section className="dashboard-container-left">
           <section className="myRecommended">
@@ -332,4 +332,3 @@ const mapStateToProps = state => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
-
