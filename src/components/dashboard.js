@@ -2,12 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
-<<<<<<< HEAD
-import { fetchRecs } from '../actions/recommendations';
-import { addMovieToWatchList } from '../actions/watchList';
-=======
 import { fetchRecs, fetchFollowingRecs } from '../actions/recommendations';
->>>>>>> ead237caeb02b4ea0a905388d8398fb8d7edfbe3
 import { POSTER_PATH_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 
@@ -220,17 +215,17 @@ export class Dashboard extends React.Component {
 
     return (
       <section className="dash">
-      <section className="dash-buttons">
-        <section className="profileButton">
-          <LinkButton to="/profile" className="profileBtn">
-            My Recomendations
-              </LinkButton>
-        </section>
-        <section className="recommendButton">
-          <LinkButton to="/recommend" className="recBtn">
-            + Recommend
-              </LinkButton>
-        </section>
+        <section className="dash-buttons">
+          <section className="profileButton">
+            <LinkButton to="/profile" className="profileBtn">
+              My Recomendations
+            </LinkButton>
+          </section>
+          <section className="recommendButton">
+            <LinkButton to="/recommend" className="recBtn">
+              + Recommend
+            </LinkButton>
+          </section>
         </section>
         <section className="dashboard-container-left">
           <section className="myRecommended">
@@ -337,4 +332,3 @@ const mapStateToProps = state => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
-

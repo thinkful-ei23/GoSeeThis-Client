@@ -16,7 +16,7 @@ const store = createStore(
     auth: authReducer,
     movies: moviesReducer,
     recs: recsReducer,
-    user: userReducer
+    user: userReducer,
     follow: followReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
