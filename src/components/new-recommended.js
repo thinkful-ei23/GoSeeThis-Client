@@ -19,10 +19,8 @@ export class NewRecommended extends React.Component {
   }
 
   onSubmit(values) {
-    console.log(values);
     const recDesc = values.description;
     const { title, poster_path, genre_ids, id } = this.props.recMovieData;
-    console.log(title, poster_path, genre_ids);
     const newRec = {
       title,
       posterUrl: poster_path,
@@ -30,6 +28,7 @@ export class NewRecommended extends React.Component {
       movieId: id,
       recDesc
     };
+    console.log(newRec);
     this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
     })
