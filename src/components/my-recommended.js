@@ -60,8 +60,8 @@ export class MyRecommended extends React.Component {
     let username;
     let watch;
     if (this.props.watchList) {
+      console.log(this.props.watchList);
       watch = this.props.watchList.map((rec, index) => {
-        console.log(rec);
         const genres = rec.genres.map(genre => genre.name).join(' , ');
         return (
           <li key={index} className="card">

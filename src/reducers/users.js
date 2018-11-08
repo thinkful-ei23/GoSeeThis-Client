@@ -8,7 +8,7 @@ import {
 } from '../actions/watchList';
 
 const initialState = {
-  watchList: null,
+  watchList: [],
   loading: false,
   error: null
 };
@@ -23,8 +23,7 @@ export default function reducer(state = initialState, action) {
 
   if (action.type === ADD_TO_WATCH_LIST_SUCCESS) {
     return Object.assign({}, state, {
-      loading: false,
-      watchList: action.data
+      loading: false
     });
   }
 

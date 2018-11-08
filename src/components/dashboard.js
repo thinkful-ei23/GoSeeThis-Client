@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
 import { fetchRecs } from '../actions/recommendations';
+import { addMovieToWatchList } from '../actions/watchList';
 import { POSTER_PATH_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 

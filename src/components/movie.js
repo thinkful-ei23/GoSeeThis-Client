@@ -19,7 +19,6 @@ export class Movie extends React.Component {
       poster_path: this.props.movieData.poster_path,
       genres: this.props.movieData.genres
     };
-    console.log(obj);
     let userId = this.props.currentUser.id;
     this.props.dispatch(addMovieToWatchList(obj, userId));
   }

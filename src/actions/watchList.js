@@ -27,9 +27,8 @@ export const addToWatchListRequest = () => ({
 });
 
 export const ADD_TO_WATCH_LIST_SUCCESS = 'ADD_TO_WATCH_LIST_SUCCESS';
-export const addToWatchListSuccess = data => ({
-  type: ADD_TO_WATCH_LIST_SUCCESS,
-  data
+export const addToWatchListSuccess = () => ({
+  type: ADD_TO_WATCH_LIST_SUCCESS
 });
 export const ADD_TO_WATCH_LIST_ERROR = 'ADD_TO_WATCH_LIST_ERROR';
 export const addToWatchListError = error => ({
