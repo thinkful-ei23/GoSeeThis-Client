@@ -1,6 +1,7 @@
 import React from 'react';
 import { fetchUserRecs, deleteRec, editRec } from '../actions/recommendations';
 import { getWatchList, removeMovieFromWatchList } from '../actions/watchList';
+import { fetchFollowing, fetchFollowers } from '../actions/follow';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -18,6 +19,8 @@ export class MyRecommended extends React.Component {
     let id = this.props.user.id;
     this.props.dispatch(fetchUserRecs(id));
     this.props.dispatch(getWatchList(id));
+    this.props.dispatch(fetchFollowing());
+    this.props.dispatch(fetchFollowers());
   }
 
   handleDeleteWatch = i => {
@@ -59,6 +62,25 @@ export class MyRecommended extends React.Component {
     let recs;
     let username;
     let watch;
+    let followers;
+    let following;
+
+    if (this.props.following) {
+      following = this.props.following.map((follow, index) => (
+        <li key={index}>
+          <p><Link to={`/user/${follow.id}`}>{follow.username}</Link></p>
+        </li>
+      )); 
+    }
+
+    if (this.props.followers) {
+      followers = this.props.followers.map((follower, index) => (
+        <li key={index}>
+          <p><Link to={`/user/${follower.id}`}>{follower.username}</Link></p>
+        </li>
+      ));
+    }
+
     if (this.props.watchList) {
       console.log(this.props.watchList);
       watch = this.props.watchList.map((rec, index) => {
@@ -200,6 +222,18 @@ export class MyRecommended extends React.Component {
           <section>My Watchlist:</section>
           <ul> {watch}</ul>
         </section>
+        <section className='following-list'>
+          <h2>Following: </h2>
+          <ul>
+            {following}
+          </ul>
+        </section>
+        <section className='followers-list'>
+          <h2>Followers: </h2>
+          <ul>
+            {followers}
+          </ul>
+        </section>
       </section>
     );
   }
@@ -210,7 +244,9 @@ const mapStateToProps = state => {
     recs: state.recs.userRecs,
     user: state.auth.currentUser,
     genres: state.movies.genres,
-    watchList: state.user.watchList
+    watchList: state.user.watchList,
+    following: state.follow.following,
+    followers: state.follow.followers
   };
 };
 
