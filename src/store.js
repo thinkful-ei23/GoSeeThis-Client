@@ -7,6 +7,7 @@ import authReducer from './reducers/auth';
 import moviesReducer from './reducers/movies';
 import recsReducer from './reducers/recommendations';
 import userReducer from './reducers/users';
+import followReducer from './reducers/follow';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 
 const store = createStore(
@@ -16,6 +17,7 @@ const store = createStore(
     movies: moviesReducer,
     recs: recsReducer,
     user: userReducer
+    follow: followReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

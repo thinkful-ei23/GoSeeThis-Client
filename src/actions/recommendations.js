@@ -20,7 +20,7 @@ export const fetchRecsError = error => ({
 
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations`, {
+  return fetch(`${API_BASE_URL}/recommendations`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
@@ -133,7 +133,7 @@ export const fetchMovieRecsError = error => ({
 
 export const fetchMovieRecs = movieId => dispatch => {
   dispatch(fetchMovieRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
+  return fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
@@ -165,7 +165,7 @@ export const fetchUserRecsError = error => ({
 
 export const fetchUserRecs = userId => dispatch => {
   dispatch(fetchUserRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
+  return fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
@@ -176,4 +176,40 @@ export const fetchUserRecs = userId => dispatch => {
     .catch(err => {
       dispatch(fetchUserRecsError(err));
     });
+};
+
+export const FETCH_FOLLOWING_RECS_REQUEST = 'FETCH_FOLLOWING_RECS_REQUEST';
+export const fetchFollowingRecsRequest = () => ({
+  type: FETCH_FOLLOWING_RECS_REQUEST
+});
+
+export const FETCH_FOLLOWING_RECS_SUCCESS = 'FETCH_FOLLOWING_RECS_SUCCESS';
+export const fetchFollowingRecsSuccess = (recs) => ({
+  type: FETCH_FOLLOWING_RECS_SUCCESS,
+  recs
+});
+
+export const FETCH_FOLLOWING_RECS_ERROR = 'FETCH_FOLLOWING_RECS_ERROR';
+export const fetchFollowingRecsError = (error) => ({
+  type: FETCH_FOLLOWING_RECS_ERROR,
+  error
+});
+
+export const fetchFollowingRecs = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(fetchFollowingRecsRequest());
+  return fetch(`${API_BASE_URL}/recommendations/following`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(recs => {
+    dispatch(fetchFollowingRecsSuccess(recs));
+  })
+  .catch(err => {
+    dispatch(fetchFollowingRecsError(err));
+  });
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { fetchUserRecs } from '../actions/recommendations';
+import { followUser, fetchFollowing } from '../actions/follow';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -9,11 +10,37 @@ import {Link, Redirect} from 'react-router-dom';
 export class UserRecommended extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchUserRecs(this.props.userId));
+    this.props.dispatch(fetchFollowing());
   }
 
+  follow() {
+    const newFollow = {
+      following: this.props.userId
+    }
+
+    this.props.dispatch(followUser(newFollow));
+  }
   render() {
     let recs;
     let username;
+    let followButton;
+
+    if (this.props.userId && this.props.following) {
+      if (!this.props.following.map(follow => follow.id).includes(this.props.userId)) {
+        followButton = 
+          <section className="follow-user" >
+            <button type="button" onClick={() => this.follow()}>Follow</button>
+          </section>
+        
+      }
+
+      else {
+        followButton = 
+          <section className="following">
+            <p>Following</p>
+          </section>
+      }
+    }
     
     if (this.props.userId === this.props.loggedInUserId) {
       return <Redirect to="/profile" />
@@ -51,6 +78,7 @@ export class UserRecommended extends React.Component {
         );
       });
     }
+
     if (this.props.recs) {
       const user = this.props.recs[0].userId;
       username = user.username;
@@ -63,6 +91,7 @@ export class UserRecommended extends React.Component {
             <section className="recomendation-header">
               <h2>{username}'s Recomendations:</h2>
             </section>
+            {followButton}
             <ul>{recs}</ul>
           </section>
         </section>
@@ -84,7 +113,8 @@ const mapStateToProps = (state, props) => {
     userId,
     user: state.recs.user,
     loggedInUserId: state.auth.currentUser.id,
-    genres: state.movies.genres
+    genres: state.movies.genres,
+    following: state.follow.following
   };
 };
 
