@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchUserRecs } from '../actions/recommendations';
-import { followUser, fetchFollowing } from '../actions/follow';
+import { followUser, fetchFollowing, unfollowUser } from '../actions/follow';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -20,6 +20,16 @@ export class UserRecommended extends React.Component {
 
     this.props.dispatch(followUser(newFollow));
   }
+
+  unFollow() {
+    console.log('unFollow ran!')
+    const unfollowed = {
+      following: this.props.userId
+    }
+    
+    this.props.dispatch(unfollowUser(unfollowed));
+  }
+
   render() {
     let recs;
     let username;
@@ -36,7 +46,7 @@ export class UserRecommended extends React.Component {
 
       else {
         followButton = 
-          <section className="following">
+          <section className="following" onClick={() => this.unFollow()}>
             <p>Following</p>
           </section>
       }

@@ -112,3 +112,38 @@ export const followUser = (user) => (dispatch, getState) => {
     dispatch(followUserError(err));
   });
 };
+
+export const UNFOLLOW_USER_REQUEST = 'UNFOLLOW_USER_REQUEST';
+export const unfollowUserRequest = () => ({
+  type: UNFOLLOW_USER_REQUEST
+});
+
+export const UNFOLLOW_USER_SUCCESS = 'UNFOLLOW_USER_SUCCESS';
+export const unfollowUserSuccess = () => ({
+  type: UNFOLLOW_USER_SUCCESS
+});
+
+export const UNFOLLOW_USER_ERROR = 'UNFOLLOW_USER_ERROR';
+export const unfollowUserError = (error) => ({
+  type: UNFOLLOW_USER_ERROR,
+  error
+});
+
+export const unfollowUser = (user) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(unfollowUserRequest());
+  return fetch(`${API_BASE_URL}/unfollow`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(user)
+  })
+  .then(() => {
+    dispatch(fetchFollowing());
+  })
+  .then(() => {
+    dispatch(unfollowUserSuccess());
+  });
+};
