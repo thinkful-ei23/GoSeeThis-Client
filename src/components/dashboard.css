@@ -4,6 +4,16 @@
     flex-direction: column;
 }
 
+.dash{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 1050px;
+    border-radius: 5px;
+    width: 95%;
+    padding-top: 25px;
+    background: white;
+    margin: auto;
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -15,12 +25,13 @@
     background: white;
 }
 
-.profileButton{
-    float: left;
-}
+.dash-buttons {
+    display: flex;
+    padding-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-.recommendButton{
-    float: right;
 }
 
 .dash-movie-poster img{
@@ -51,4 +62,22 @@
     margin-bottom: 25px;
     padding: 12px;
     background: white;
+}
+
+.overflow {
+        width: 700px;
+        height: 750px;
+        overflow: auto;
+}
+
+.dashboard-container-left{
+    float: left;
+    width: 40%;
+    padding-left: 100px;
+}
+
+.dashboard-container-right{
+    float: right;
+    width: 40%;
+    padding-right: 100px;
 }
