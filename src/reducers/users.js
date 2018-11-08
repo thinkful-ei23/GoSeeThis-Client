@@ -5,7 +5,7 @@ import {
   GET_WATCH_LIST_REQUEST,
   GET_WATCH_LIST_SUCCESS,
   GET_WATCH_LIST_ERROR
-} from '../actions/users';
+} from '../actions/watchList';
 
 const initialState = {
   watchList: null,
@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action) {
   if (action.type === ADD_TO_WATCH_LIST_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
-      watchList: action.watchList
+      watchList: action.data
     });
   }
 

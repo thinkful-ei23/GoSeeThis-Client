@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchUserRecs, deleteRec, editRec } from '../actions/recommendations';
-import { getWatchList, addMovieToWatchList } from '../actions/users';
+import { getWatchList, removeMovieFromWatchList } from '../actions/watchList';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
@@ -21,11 +21,9 @@ export class MyRecommended extends React.Component {
   }
 
   handleDeleteWatch = i => {
-    let id = this.props.user.id;
-    let updateWatchList = this.props.watchList.filter(
-      (rec, index) => index !== i
-    );
-    this.props.dispatch(addMovieToWatchList(updateWatchList, id));
+    let userId = this.props.user.id;
+    let id = i.id;
+    this.props.dispatch(removeMovieFromWatchList(id, userId));
   };
 
   handleDelete = rec => {

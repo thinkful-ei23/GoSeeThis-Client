@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMovieRecs } from '../actions/recommendations';
 import { fetchMovieData } from '../actions/movies';
-import { addMovieToWatchList } from '../actions/users';
+import { addMovieToWatchList } from '../actions/watchList';
 import { POSTER_PATH_BASE_URL } from '../config';
 import './movie.css';
 
@@ -14,15 +14,12 @@ export class Movie extends React.Component {
 
   addToWatchlist() {
     let obj = {
-      watchList: [
-        {
-          id: this.props.movieId,
-          title: this.props.movieData.title,
-          poster_path: this.props.movieData.poster_path,
-          genres: this.props.movieData.genres
-        }
-      ]
+      movieId: this.props.movieId,
+      title: this.props.movieData.title,
+      poster_path: this.props.movieData.poster_path,
+      genres: this.props.movieData.genres
     };
+    console.log(obj);
     let userId = this.props.currentUser.id;
     this.props.dispatch(addMovieToWatchList(obj, userId));
   }
@@ -48,8 +45,6 @@ export class Movie extends React.Component {
           </section>
         </li>
       ));
-
-      console.log(this.props.movieData.genres);
 
       const genres = this.props.movieData.genres
         .map(genre => genre.name)
