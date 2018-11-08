@@ -5,11 +5,53 @@ import { fetchMovieData } from '../actions/movies';
 import { addMovieToWatchList } from '../actions/watchList';
 import { POSTER_PATH_BASE_URL } from '../config';
 import './movie.css';
+import { createRec } from '../actions/recommendations';
+import Input from './input';
+
+
 
 export class Movie extends React.Component {
+  
+    constructor(props) {
+    super(props);
+this.state = {recInput: ''};
+  }
+  
   componentDidMount() {
     this.props.dispatch(fetchMovieRecs(this.props.movieId));
     this.props.dispatch(fetchMovieData(this.props.movieId));
+  }
+  
+      handleSubmit = (e) => {
+   e.preventDefault();
+   console.log(this.state.recInput);
+   let processed = this.props.movieData.genres;
+  let genreArr = [];
+  for (let i = 0; i < processed.length; i++){
+   	genreArr.push(processed[i].id); 
+   } 
+   console.log(genreArr);
+       const newRec = {
+      title: this.props.movieData.title,
+      posterUrl: this.props.movieData.poster_path,
+      genre_ids: genreArr,
+      movieId: this.props.movieData.id,
+      recDesc: this.state.recInput
+    };
+    console.log(newRec);
+    this.props.dispatch(createRec(newRec)).then(() => {
+   	this.props.dispatch(fetchMovieRecs(this.props.movieId));
+	this.props.dispatch(fetchMovieData(this.props.movieId));
+   })
+    .catch(err => {
+   	this.props.dispatch(fetchMovieRecs(this.props.movieId));
+   });
+   //this.props.dispatch(createRec(newRec));
+    }
+
+
+    handleChange=(event)=>{
+    this.setState({recInput: event.target.value});
   }
 
   addToWatchlist() {
@@ -45,12 +87,13 @@ export class Movie extends React.Component {
         </li>
       ));
 
-      const genres = this.props.movieData.genres
-        .map(genre => genre.name)
-        .join(' , ');
+          const genres = this.props.movieData.genres
+            .map(genre => genre.name)
+            .join(' , ');
+          
+          return(
+          <section className="movie-page">
 
-      return (
-        <section className="movie-page">
           <section className="movie-container">
             <section className="movie-top">
               <section className="movie-header">
@@ -82,24 +125,29 @@ export class Movie extends React.Component {
                     <p>{genres}</p>
                   </section>
                 </section>
-                <section className="recommended">
-                  <section className="recommended-count">
-                    <h3>Recommended Count:</h3>
-                    <p>{this.props.movieRecs.length}</p>
-                  </section>
+            <section className="recommended">
+              <section className="recommended-count">
+                <h3>Recommended Count:</h3>
+                <p>{this.props.movieRecs.length}</p>
+              </section>
                   <button onClick={() => this.addToWatchlist()}>
                     Add To Watchlist
                   </button>
-                </section>
               </section>
-            </section>
-            <section className="movie-recommendations">
-              <h2>
-                {this.props.movieData.title}
-                's Recommendations
-              </h2>
-              <ul className="movie-page-rec-list">{recommendations}</ul>
-            </section>
+              </section>
+              </section>
+              <section className="movie-recommendations">
+                <h2>{this.props.movieData.title}'s Recommendations</h2>
+              <label htmlFor="description">Why Recommended</label>
+      <form onSubmit = {e => this.handleSubmit(e)}>  
+      <input type = 'text' onChange = {e => this.handleChange(e)} />
+        <button type="submit">Create</button>
+      </form>
+	      <ul className="movie-page-rec-list">
+                  {recommendations}
+                </ul>
+              </section>
+              </section>
           </section>
         </section>
       );
