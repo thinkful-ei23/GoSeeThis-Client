@@ -7,7 +7,10 @@ import {
   FOLLOW_USER_ERROR,
   FETCH_FOLLOWERS_REQUEST,
   FETCH_FOLLOWERS_SUCCESS,
-  FETCH_FOLLOWERS_ERROR
+  FETCH_FOLLOWERS_ERROR,
+  UNFOLLOW_USER_REQUEST,
+  UNFOLLOW_USER_SUCCESS,
+  UNFOLLOW_USER_ERROR
 } from '../actions/follow';
 
 const initialState = {
@@ -74,6 +77,26 @@ export default function reducer(state=initialState, action) {
   }
 
   if (action.type === FOLLOW_USER_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+
+  if (action.type === UNFOLLOW_USER_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+
+  if (action.type === UNFOLLOW_USER_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  }
+
+  if (action.type === UNFOLLOW_USER_ERROR) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error
