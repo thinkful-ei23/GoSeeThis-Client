@@ -107,7 +107,8 @@ export class MyRecommended extends React.Component {
                 </section>
               </section>
               <section> {genres}</section>
-            </section>
+            <section>{rec.overview}</section>
+	</section>
           </li>
         );
       });
