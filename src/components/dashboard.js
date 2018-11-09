@@ -87,7 +87,7 @@ export class Dashboard extends React.Component {
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
         return (
-          <li key={index} className="card">
+          <li key={index} className="dash-card">
             <section className="dash-recommended">
               <section className="dash-movie-poster">
                 <Link to={`/movie/${rec.movieId}`}>
@@ -106,6 +106,7 @@ export class Dashboard extends React.Component {
                 <section className="dash-movie-genres">
                   <p>{genres}</p>
                 </section>
+                <section className="dash-complete-rec">
                 <section className="dash-rec-user">
                   <h3>
                     <Link to={`/user/${rec.userId.id}`}>
@@ -117,6 +118,7 @@ export class Dashboard extends React.Component {
                 <section className="dash-recommend-desc">
                   <p>{rec.recDesc}</p>
                 </section>
+              </section>
               </section>
             </section>
           </li>
@@ -176,158 +178,156 @@ export class Dashboard extends React.Component {
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
         return (
-          <li key={index} className="dash-card">
-          <section className="dash-recommended">
-            <section className="dash-movie-poster">
-              <Link to={`/movie/${rec.movieId}`}>
-                <img
-                  src={POSTER_PATH_BASE_URL + rec.posterUrl}
-                  alt="movie poster"
-                />
-              </Link>
+          <li key={index} className="card">
+            <section className="dash-recommended">
+              <section className="dash-movie-poster">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                    alt="movie poster"
+                  />
+                </Link>
+              </section>
+              <section className="dash-container">
+                <section className="dash-movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                  </h3>
+                </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
+                <section className="dash-rec-user">
+                  <h3>
+                    <Link to={`/user/${rec.userId.id}`}>
+                      {rec.userId.username}
+                    </Link>
+                    :
+                  </h3>
+                </section>
+                <section className="dash-recommend-desc">
+                  <p>{rec.recDesc}</p>
+                </section>
+              </section>
             </section>
-            <section className="dash-container">
-              <section className="dash-movie-title">
-                <h3>
-                  <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
-                </h3>
-              </section>
-              <section className="dash-movie-genres">
-                <p>{genres}</p>
-              </section>
-              <section className="dash-complete-rec">
-              <section className="dash-rec-user">
-                <h3>
-                  <Link to={`/user/${rec.userId.id}`}>
-                    {rec.userId.username}
-                  </Link>
-                  :
-                </h3>
-              </section>
-              <section className="dash-recommend-desc">
-                <p>{rec.recDesc}</p>
-              </section>
-            </section>
-            </section>
-          </section>
-        </li>
+          </li>
         );
       });
     }
 
     return (
-<section className="dash">
-<section className="dash-buttons">
-  <section className="profileButton">
-    <LinkButton to="/profile" className="profileBtn">
-      My Recomendations
-      </LinkButton>
-  </section>
-  <section className="recommendButton">
-    <LinkButton to="/recommend" className="recBtn">
-      + Recommend
-      </LinkButton>
-  </section>
-</section>
+      <section className="dash">
+        <section className="dash-buttons">
+          <section className="profileButton">
+            <LinkButton to="/profile" className="profileBtn">
+              My Recomendations
+              </LinkButton>
+          </section>
+          <section className="recommendButton">
+            <LinkButton to="/recommend" className="recBtn">
+              + Recommend
+              </LinkButton>
+          </section>
+        </section>
+  
+        <input type="radio" name="tabs" id="tab1" checked />
+        <label for="tab1" role="tab" aria-controls="col1" id="tab1label">Global |</label>
+        <input type="radio" name="tabs" id="tab2" />
+        <label for="tab2" role="tab" aria-controls="col2" id="tab2label"> Following</label>
 
-<input type="radio" name="tabs" id="tab1" checked />
-<label for="tab1" role="tab" aria-controls="col1" id="tab1label">Global |</label>
-<input type="radio" name="tabs" id="tab2" />
-<label for="tab2" role="tab" aria-controls="col2" id="tab2label"> Following</label>
-
-<section className="tab-panel dashboard-container-left" id="col1">
-  <section className="dashRecommended">
-    <section className="dash-recommended-list">
-      <section className="dash-recommendation-header">
-        <h2>Global Recent Activity:</h2>
-        <div>
-          <input
-            placeholder={`Search for title`}
-            onChange={e => this.handleInputChange(e)}
-          />
-          <select
-            onChange={e => this.setFilterGenre(e)}
-            value={this.state.value}
-            id="genre-filter-dropdown"
-          >
-            <option value="">Filter by Genre</option>
-            <option value="28">Action</option>
-            <option value="12">Adventure</option>
-            <option value="16">Animation</option>
-            <option value="35">Comedy</option>
-            <option value="80">Crime</option>
-            <option value="99">Documentary</option>
-            <option value="18">Drama</option>
-            <option value="10751">Family</option>
-            <option value="14">Fantasy</option>
-            <option value="36">History</option>
-            <option value="27">Horror</option>
-            <option value="10402">Music</option>
-            <option value="9648">Mystery</option>
-            <option value="10749">Romance</option>
-            <option value="878">Science Fiction</option>
-            <option value="10770">TV Movie</option>
-            <option value="53">Thriller</option>
-            <option value="10752">War</option>
-            <option value="37">Western</option>
-          </select>
-        </div>
-      </section>
-      <section className="global-activity">
-        <section className="overflow">
-          <ul className="recent-activity">{recs}</ul>
+        <section className="tab-panel dashboard-container-left" id="col1">
+          <section className="dashRecommended">
+            <section className="dash-recommended-list">
+              <section className="dash-recommendation-header">
+                <h2>Global Recent Activity:</h2>
+                <div>
+                  <input
+                    placeholder={`Search for title`}
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                  <select
+                    onChange={e => this.setFilterGenre(e)}
+                    value={this.state.value}
+                    id="genre-filter-dropdown"
+                  >
+                    <option value="">Filter by Genre</option>
+                    <option value="28">Action</option>
+                    <option value="12">Adventure</option>
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">History</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Music</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10749">Romance</option>
+                    <option value="878">Science Fiction</option>
+                    <option value="10770">TV Movie</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">War</option>
+                    <option value="37">Western</option>
+                  </select>
+                </div>
+              </section>
+              <section className="global-activity">
+                <section className="overflow">
+                  <ul className="recent-activity">{recs}</ul>
+                </section>
+              </section>
+            </section>
+          </section>
+        </section>
+        <section className="tab-panel dashboard-container-right" id="col2">
+          <section className="dashRecommended">
+            <section className="dash-recommended-list">
+              <section className="dash-recommendation-header">
+                <h2>Following Activity:</h2>
+                <div>
+                  <input
+                    placeholder={`Search for title`}
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                  <select
+                    onChange={e => this.setFilterGenre(e)}
+                    value={this.state.value}
+                    id="genre-filter-dropdown"
+                  >
+                    <option value="">Filter by Genre</option>
+                    <option value="28">Action</option>
+                    <option value="12">Adventure</option>
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">History</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Music</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10749">Romance</option>
+                    <option value="878">Science Fiction</option>
+                    <option value="10770">TV Movie</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">War</option>
+                    <option value="37">Western</option>
+                  </select>
+                </div>
+              </section>
+              <section className="global-activity">
+                <section className="overflow">
+                  <ul className="recent-activity">{followRecs}</ul>
+                </section>
+              </section>
+            </section>
+          </section>
         </section>
       </section>
-    </section>
-  </section>
-</section>
-<section className="tab-panel dashboard-container-right" id="col2">
-  <section className="dashRecommended">
-    <section className="dash-recommended-list">
-      <section className="dash-recommendation-header">
-        <h2>Following Activity:</h2>
-        <div>
-          <input
-            placeholder={`Search for title`}
-            onChange={e => this.handleInputChange(e)}
-          />
-          <select
-            onChange={e => this.setFilterGenre(e)}
-            value={this.state.value}
-            id="genre-filter-dropdown"
-          >
-            <option value="">Filter by Genre</option>
-            <option value="28">Action</option>
-            <option value="12">Adventure</option>
-            <option value="16">Animation</option>
-            <option value="35">Comedy</option>
-            <option value="80">Crime</option>
-            <option value="99">Documentary</option>
-            <option value="18">Drama</option>
-            <option value="10751">Family</option>
-            <option value="14">Fantasy</option>
-            <option value="36">History</option>
-            <option value="27">Horror</option>
-            <option value="10402">Music</option>
-            <option value="9648">Mystery</option>
-            <option value="10749">Romance</option>
-            <option value="878">Science Fiction</option>
-            <option value="10770">TV Movie</option>
-            <option value="53">Thriller</option>
-            <option value="10752">War</option>
-            <option value="37">Western</option>
-          </select>
-        </div>
-      </section>
-      <section className="global-activity">
-        <section className="overflow">
-          <ul className="recent-activity">{followRecs}</ul>
-        </section>
-      </section>
-    </section>
-  </section>
-</section>
-</section>
     );
   }
 }
@@ -342,3 +342,4 @@ const mapStateToProps = state => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+
