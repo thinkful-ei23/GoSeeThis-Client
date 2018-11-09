@@ -36,7 +36,8 @@ export default function reducer(state = initialState, action) {
 
   if (action.type === GET_WATCH_LIST_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: true,
+      error: null
     });
   }
 
