@@ -88,7 +88,7 @@ export class UserRecommended extends React.Component {
       });
     }
 
-    if (this.props.recs) {
+    if (this.props.recs && this.props.recs.length) {
       const user = this.props.recs[0].userId;
       username = user.username;
       return (
