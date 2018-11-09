@@ -74,7 +74,7 @@ export class Movie extends React.Component {
     console.log('removeFromWatchList ran!');
     const id = this.props.watchList
       .filter(movie => movie.movieId === this.props.movieData.id)
-      .map(movie => movie.id);
+      .map(movie => movie.id)[0];
     const userId = this.props.currentUser.id;
     this.props.dispatch(removeMovieFromWatchList(id, userId));
     // this.props.dispatch(this.getWatchList(this.props.currentUser.id));
