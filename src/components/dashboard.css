@@ -1,4 +1,4 @@
-.dashboard {
+/* .dashboard {
     display: flex;
     padding: 20px;
     flex-direction: column;
@@ -80,4 +80,252 @@
     float: right;
     width: 40%;
     padding-right: 100px;
+} */
+
+.dashboard {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+}
+
+#genre-filter-dropdown{
+    padding-bottom: 5px;
+}
+.dash{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 1050px;
+    border-radius: 5px;
+    width: 95%;
+    padding-top: 25px;
+    background: white;
+    margin: auto;
+}
+.dash-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 25%;
+    border-radius: 5px;
+    height: 205px;
+    margin-bottom: 25px;
+    background: white;
+}
+
+.dash-buttons {
+    display: flex;
+    padding-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dash-movie-poster img{
+    float: left;
+    height: 203px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-right: 5px;
+}
+
+.recommendation-header {
+    font-family: 'Lato', sans-serif;
+}
+.dash-container .dash-movie-title {
+    padding-top: 1px;
+}
+
+.dashRecommended .dash-recommended-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 50%;
+    border-radius: 5px;
+
+    
+    background: white;
+}
+
+.overflow {
+        width: 700px;
+        height: 750px;
+        overflow: auto;
+}
+
+.dashboard-container-left{
+    float: left;
+    width: 40%;
+    padding-left: 100px;
+}
+
+.dashboard-container-right{
+    float: right;
+    width: 40%;
+    padding-right: 100px;
+}
+
+#tab1{
+    display: none;
+}
+
+#tab2{
+    display: none;
+}
+
+#tab1label{
+    display: none;
+}
+
+#tab2label{
+    display: none;
+}
+
+@media only screen and (max-width: 600px){
+.tab-panel {
+    /* apply these styles in mobile ony */
+    float: none;
+    display: none;
+  }
+  
+  input[name="tabs"] {
+    display: none;
+  }
+
+  #tab1label{
+    display: inline;
+    padding-left: 145px;
+
+}
+
+#tab2label{
+    display: inline;
+    text-align: center;
+}
+
+  input[name="tabs"]:checked + label {
+    font-weight: bold;
+  }
+  
+  input[id="tab1"]:checked ~ .tab-panel#col1 {
+    display: block;
+  }
+  
+  input[id="tab2"]:checked ~ .tab-panel#col2 {
+    display: block;
+  }
+
+  .dashRecommended{
+      width: 100%;
+  }
+
+  .dashRecommended .dash-recommended-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+
+    background: white;
+}
+.dashboard-container-left{
+    padding-left: 0px;
+    width: 100%;
+}
+
+.dashboard-container-right{
+    padding-right: 0px;
+    float: right;
+    width: 100%;
+}
+
+.dash-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    height: 130px;
+    margin-bottom: 25px;
+    background: white;
+}
+
+.dash{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 100vh;
+    border-radius: 5px;
+    width: 100%;
+    padding-top: 25px;
+    background: white;
+    margin: auto;
+}
+
+.dash-movie-poster img{
+    float: left;
+    height: 130px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-right: 5px;
+}
+
+.overflow {
+    width: 100%;
+    height: 535px;
+    overflow: auto;
+}
+
+.dash-container .dash-movie-title h3{
+    padding-top: 1px;
+    font-size: 20px;
+}
+
+.dash-rec-user h3{
+    font-size: 15px;
+    float: left;
+}
+
+.dash-movie-genres{
+    font-size: 12px;
+}
+
+.dash-buttons {
+display: inline;
+
+}
+
+.profileButton{
+    float: left;
+    padding-bottom: 20px;
+}
+
+.recommendButton{
+    float: right;
+    padding-bottom: 20px;
+}
+
+.dash-recommendation-header{
+    border-top: 1px solid black;
+}
+
+.dash-complete-rec{
+    display: flex;
+    flex-direction: row;
+}
+
+.dash-recommend-desc{
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.recent-activity{
+    padding: 10px;
+}
+
 }
