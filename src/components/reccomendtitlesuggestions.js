@@ -12,14 +12,14 @@ const ReccommendTitleSuggestions = (props) => {
 
   else {
     const options = props.results.map((result, index) => (
-      <li key={index}>
+      <li key={index} onClick = {()=>props.dispatch(storeRecMovie(result))} >
       <img
         className = 'searchPoster'
         src={POSTER_PATH_BASE_URL + result.poster_path}
         alt="movie poster"
        />
 
-       <div onClick = {()=>props.dispatch(storeRecMovie(result))} className="result-title-rec"> {result.title}</div>
+       <div className="result-title-rec"> {result.title}</div>
       </li>
     ))
     return <ul className = "rec-titles">{options}</ul>
