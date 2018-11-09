@@ -33,6 +33,23 @@ export const fetchMovies = (searchQuery) => dispatch => {
   })
 };
 
+export const fetchMoviesWithPromise = (searchQuery) => dispatch => {
+  dispatch(fetchMoviesRequest());
+  return fetch(`${MOVIE_SEARCH_BASE_URL}&query=${searchQuery}&page=1`, {
+    method: 'GET'
+  })
+  .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
+  .then(res => {
+    dispatch(fetchMoviesSuccess(res.results));
+  })
+  .catch(err => {
+    dispatch(fetchMoviesError(err));
+  })
+};
+
+
+
 export const FETCH_MOVIE_DATA_REQUEST = 'FETCH_MOVIE_DATA_REQUEST';
 export const fetchMovieDataRequest = () => ({
   type: FETCH_MOVIE_DATA_REQUEST

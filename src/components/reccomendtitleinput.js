@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchMovies} from '../actions/movies';
+import {fetchMovies, fetchMoviesWithPromise} from '../actions/movies';
 import ReccomendTitleSuggestions from './reccomendtitlesuggestions';
 import './reccomendtitleinput.css';
 import { deleteRecMovie } from '../actions/movies';
@@ -19,7 +19,11 @@ export class ReccomendTitleInput extends React.Component {
     const query = e.target.value;
     this.setState({ query, searchResultTitle: e.target.value });
     if (query) {
-      this.props.dispatch(fetchMovies(query));
+      this.props.dispatch(fetchMoviesWithPromise(query)).then(() => {
+          document.getElementById("recTitleInput").focus();
+      }).catch(err => {
+          this.setState({ redirectToNewPage: false });
+      });
     }
   }
 
@@ -31,6 +35,7 @@ export class ReccomendTitleInput extends React.Component {
             Currently Selected Title: None Currently Selected
           </span>
           <input
+	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
           />
@@ -45,6 +50,7 @@ export class ReccomendTitleInput extends React.Component {
             Currently Selected Title: None Currently Selected
           </span>
           <input
+	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
           />
@@ -54,6 +60,7 @@ export class ReccomendTitleInput extends React.Component {
       return (
         <div>
           <input
+	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
           />
@@ -67,6 +74,7 @@ export class ReccomendTitleInput extends React.Component {
             Currently Selected Title: {this.props.recMovieData.title}
           </span>
           <input
+	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
             value={this.props.recMovieData.title}
@@ -80,6 +88,7 @@ export class ReccomendTitleInput extends React.Component {
             Currently Selected Title: None Currently Selected
           </span>
           <input
+	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
           />
