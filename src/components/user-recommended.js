@@ -40,8 +40,7 @@ export class UserRecommended extends React.Component {
         followButton = 
           <section className="follow-user" >
             <button type="button" onClick={() => this.follow()}>Follow</button>
-          </section>
-        
+          </section>   
       }
 
       else {
