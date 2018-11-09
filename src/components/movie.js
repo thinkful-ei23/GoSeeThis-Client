@@ -7,7 +7,7 @@ import { POSTER_PATH_BASE_URL } from '../config';
 import './movie.css';
 import { createRec } from '../actions/recommendations';
 import Input from './input';
-
+import { Link } from 'react-router-dom';
 
 
 export class Movie extends React.Component {
@@ -81,7 +81,11 @@ this.state = {recInput: ''};
           <section className="recommend-description">
             <p>{rec.recDesc}</p>
             <section className="recommend-description-container">
-              <span>By: {rec.userId.username}</span>
+              <span>
+	          By: <Link to={`/user/${rec.userId.id}`}>
+		  {rec.userId.username}
+		  </Link>
+	      </span>
             </section>
           </section>
         </li>
