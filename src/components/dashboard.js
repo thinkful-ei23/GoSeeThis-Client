@@ -178,7 +178,7 @@ export class Dashboard extends React.Component {
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
         return (
-          <li key={index} className="card">
+          <li key={index} className="dash-card">
             <section className="dash-recommended">
               <section className="dash-movie-poster">
                 <Link to={`/movie/${rec.movieId}`}>
@@ -197,6 +197,7 @@ export class Dashboard extends React.Component {
                 <section className="dash-movie-genres">
                   <p>{genres}</p>
                 </section>
+                <section className="dash-complete-rec">
                 <section className="dash-rec-user">
                   <h3>
                     <Link to={`/user/${rec.userId.id}`}>
@@ -209,6 +210,7 @@ export class Dashboard extends React.Component {
                   <p>{rec.recDesc}</p>
                 </section>
               </section>
+              </section>
             </section>
           </li>
         );
@@ -218,11 +220,6 @@ export class Dashboard extends React.Component {
     return (
       <section className="dash">
         <section className="dash-buttons">
-          <section className="profileButton">
-            <LinkButton to="/profile" className="profileBtn">
-              My Recomendations
-              </LinkButton>
-          </section>
           <section className="recommendButton">
             <LinkButton to="/recommend" className="recBtn">
               + Recommend

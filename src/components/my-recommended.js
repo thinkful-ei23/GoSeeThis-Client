@@ -70,7 +70,7 @@ export class MyRecommended extends React.Component {
         <li key={index}>
           <p><Link to={`/user/${follow.id}`}>{follow.username}</Link></p>
         </li>
-      )); 
+      ));
     }
 
     if (this.props.followers) {
@@ -86,9 +86,9 @@ export class MyRecommended extends React.Component {
       watch = this.props.watchList.map((rec, index) => {
         const genres = rec.genres.map(genre => genre.name).join(' , ');
         return (
-          <li key={index} className="card">
-            <section className="recommended">
-              <section className="movie-poster">
+          <li key={index} className="profile-watch-card">
+            <section className="watch-recommended">
+              <section className="watch-movie-poster">
                 <Link to={`/movie/${rec.movieId}`}>
                   <img
                     src={POSTER_PATH_BASE_URL + rec.poster_path}
@@ -96,17 +96,17 @@ export class MyRecommended extends React.Component {
                   />
                 </Link>
               </section>
-              <section className="delete-button">
+              <section className="watch-delete-button">
                 <p onClick={() => this.handleDeleteWatch(rec)}>x</p>
               </section>
-              <section className="container">
-                <section className="movie-title">
+              <section className="watch-container">
+                <section className="watch-movie-title">
                   <h3>
                     <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                   </h3>
                 </section>
               </section>
-              <section> {genres}</section>
+              <section className="watch-genre"> {genres}</section>
             </section>
           </li>
         );
@@ -117,9 +117,9 @@ export class MyRecommended extends React.Component {
       recs = this.props.recs.map((rec, index) => {
         if (this.state.editedRec === rec.movieId) {
           return (
-            <li key={index} className="card">
-              <section className="recommended">
-                <section className="movie-poster">
+            <li key={index} className="profile-rec-card">
+              <section className="profile-recommended">
+                <section className="profile-movie-poster">
                   <Link to={`/movie/${rec.movieId}`}>
                     <img
                       src={POSTER_PATH_BASE_URL + rec.posterUrl}
@@ -127,16 +127,16 @@ export class MyRecommended extends React.Component {
                     />
                   </Link>
                 </section>
-                <section className="delete-button">
+                <section className="profile-delete-button">
                   <p onClick={() => this.handleDelete(rec)}>x</p>
                 </section>
-                <section className="container">
-                  <section className="movie-title">
+                <section className="profile-container">
+                  <section className="profile-movie-title">
                     <h3>
                       <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                     </h3>
                   </section>
-                  <section className="recommend-desc">
+                  <section className="profile-recommend-desc">
                     <form onSubmit={e => this.handleEdit(rec, e)}>
                       <input
                         type="text"
@@ -156,9 +156,9 @@ export class MyRecommended extends React.Component {
             .join(' , ');
 
           return (
-            <li key={index} className="card">
-              <section className="recommended">
-                <section className="movie-poster">
+            <li key={index} className="profile-card">
+              <section className="profile-recommended">
+                <section className="profile-movie-poster">
                   <Link to={`/movie/${rec.movieId}`}>
                     <img
                       src={POSTER_PATH_BASE_URL + rec.posterUrl}
@@ -166,22 +166,22 @@ export class MyRecommended extends React.Component {
                     />
                   </Link>
                 </section>
-                <section className="delete-button">
+                <section className="profile-delete-button">
                   <p onClick={() => this.handleDelete(rec)}>x</p>
                 </section>
-                <section className="container">
-                  <section className="movie-title">
+                <section className="profile-container">
+                  <section className="profile-movie-title">
                     <h3>
                       <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
                     </h3>
                   </section>
-                  <section className="movie-genres">{genres}</section>
-                  <section className="recommend-desc">
+                  <section className="profile-movie-genres">{genres}</section>
+                  <section className="profile-recommend-desc">
                     <section>
-                      <p>{rec.recDesc}</p>
-                      <section onClick={() => this.handleToggle(rec)}>
+                    <section onClick={() => this.handleToggle(rec)}>
                         <button>Edit Description</button>
                       </section>
+                      <p>{rec.recDesc}</p>
                     </section>
                   </section>
                 </section>
@@ -195,7 +195,7 @@ export class MyRecommended extends React.Component {
       username = this.props.user.username;
     }
     return (
-      <section className="myRecommended">
+      <section className="myProfile">
         <section className="username">
           <h2>
             <Link
@@ -206,33 +206,36 @@ export class MyRecommended extends React.Component {
             </Link>
           </h2>
         </section>
-
-        <section className="recommended-list">
-          <section className="recommendButton">
+        <section className="myProfileBody">
+          <section className="recommended-list-section">
+            <section className="recomendation-header">
+            <section className="recommendButton">
             <LinkButton to="/recommend" className="recBtn">
               + Recommend
-            </LinkButton>
+              </LinkButton>
           </section>
-          <section className="recomendation-header">
-            <h2>My Recomendations:</h2>
+              <h2>My Recomendations:</h2>
+            </section>
+            <ul> {recs}</ul>
           </section>
-          <ul> {recs}</ul>
-        </section>
-        <section>
-          <section>My Watchlist:</section>
-          <ul> {watch}</ul>
-        </section>
-        <section className='following-list'>
-          <h2>Following: </h2>
-          <ul>
-            {following}
-          </ul>
-        </section>
-        <section className='followers-list'>
-          <h2>Followers: </h2>
-          <ul>
-            {followers}
-          </ul>
+          <section className="myWatchlist-section">
+            <h2>My Watchlist:</h2>
+            <ul > {watch}</ul>
+          </section>
+          <section className="follow-section">
+          <section className='following-list'>
+            <h2>Following: </h2>
+            <ul>
+              {following}
+            </ul>
+          </section>
+          <section className='followers-list'>
+            <h2>Followers: </h2>
+            <ul>
+              {followers}
+            </ul>
+          </section>
+          </section>
         </section>
       </section>
     );

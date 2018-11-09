@@ -158,7 +158,6 @@
 
 .dashboard-container-right{
     padding-right: 0px;
-    float: right;
     width: 100%;
 }
 
@@ -233,6 +232,7 @@ display: inline;
 .dash-complete-rec{
     display: flex;
     flex-direction: row;
+    margin: 0px;
 }
 
 .dash-recommend-desc{
