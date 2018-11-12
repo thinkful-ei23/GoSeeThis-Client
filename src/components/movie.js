@@ -117,15 +117,29 @@ export class Movie extends React.Component {
       let watchList;
       if (this.props.watchList && this.props.movieData) {
         if (this.props.watchList.map(movie => movie.movieId).includes(this.props.movieData.id)) {
-          watchList =
+          if (this.props.loading) {
+            watchList =
+            <button disabled className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
+              Remove from Watchlist
+            </button>;
+          } else {
+            watchList =
             <button className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
               Remove from Watchlist
             </button>;
+          }
         } else {
-          watchList =
+          if (this.props.loading) {
+            watchList =
+            <button disabled onClick={() => this.addToWatchlist()}>
+              Add To Watchlist
+            </button>
+          } else {
+            watchList =
             <button onClick={() => this.addToWatchlist()}>
               Add To Watchlist
             </button>
+          }
         }
       }
 
