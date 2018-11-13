@@ -26,3 +26,14 @@ Our application uses the Movie Database's (tMDB) extensive film data library to 
 * passport
 * mongoose
 * jwt
+
+## Features List
+### V1
+
+### V2
+
+## Contributors
+* [Tarik Desire](https://github.com/tdesire)
+* [David Folks](https://github.com/DFolks)
+* [David Graves](https://github.com/DaGraves)
+* [Ryan Ureta](https://github.com/rcureta)
