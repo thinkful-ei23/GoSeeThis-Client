@@ -10,25 +10,25 @@ export class SearchBar extends React.Component {
 
 	//add state
 	state = {
-		query: ''
+		searchQuery: ''
 	}
 
-	handleInputChange(e) {
-    const query = e.target.value;
-    this.setState({query});
-    if (query) {
-      this.props.dispatch(fetchMovies(query));
+	handleSearchInputChange(e) {
+    const searchQuery = e.target.value;
+    this.setState({searchQuery});
+    if (searchQuery) {
+      this.props.dispatch(fetchMovies(searchQuery));
     }
 	}
 
 	render() {
-    if (!this.state.query) {
+    if (!this.state.searchQuery) {
       return (
         <form >
           <input
           className="searchbar"
           placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+          onChange={(e)=>this.handleSearchInputChange(e)}
           />
         </form>
       )
@@ -39,7 +39,7 @@ export class SearchBar extends React.Component {
           <input
           className="searchbar"
           placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+          onChange={(e)=>this.handleSearchInputChange(e)}
           />
         </form>
       )
@@ -51,7 +51,7 @@ export class SearchBar extends React.Component {
           <input
           className="searchbar"
           placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+          onChange={(e)=>this.handleSearchInputChange(e)}
           />
           <Suggestions results='Loading...' />
         </form>
@@ -63,7 +63,7 @@ export class SearchBar extends React.Component {
           <input
           className="searchbar"
           placeholder="Search for..."
-          onChange={(e)=>this.handleInputChange(e)}
+          onChange={(e)=>this.handleSearchInputChange(e)}
           />
           <Suggestions results={this.props.searchResults} />
         </form>

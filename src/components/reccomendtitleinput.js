@@ -43,7 +43,7 @@ export class ReccomendTitleInput extends React.Component {
       );
     }
 
-    if (!this.props.searchResults && !this.props.loading) {
+    if (!this.props.inputSearchResults && !this.props.loading) {
       return (
         <div>
           <span className="displayOfCurrentRecTitleSelection">
@@ -56,7 +56,7 @@ export class ReccomendTitleInput extends React.Component {
           />
         </div>
       );
-    } else if (!this.props.searchResults && this.props.loading) {
+    } else if (!this.props.inputSearchResults && this.props.loading) {
       return (
         <div>
           <input
@@ -92,7 +92,7 @@ export class ReccomendTitleInput extends React.Component {
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
           />
-          <ReccomendTitleSuggestions results={this.props.searchResults} />
+          <ReccomendTitleSuggestions results={this.props.inputSearchResults} />
         </div>
       );
     }
@@ -100,7 +100,7 @@ export class ReccomendTitleInput extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  searchResults: state.movies.searchResults,
+  inputSearchResults: state.movies.inputSearchResults,
   loading: state.movies.loading,
   recMovieData: state.movies.recMovieData
 });

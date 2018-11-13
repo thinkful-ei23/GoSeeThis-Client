@@ -12,7 +12,7 @@ const ReccommendTitleSuggestions = (props) => {
 
   else {
     const options = props.results.map((result, index) => (
-      <li key={index} onClick = {()=>props.dispatch(storeRecMovie(result))} >
+      <li className = 'searchResultListing' key={index} onClick = {()=>props.dispatch(storeRecMovie(result))} >
       <img
         className = 'searchPoster'
         src={POSTER_PATH_BASE_URL + result.poster_path}
