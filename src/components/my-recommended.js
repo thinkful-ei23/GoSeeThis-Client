@@ -40,6 +40,10 @@ export class MyRecommended extends React.Component {
     });
   };
   handleEdit = (rec, e) => {
+    if(this.state.editStorage === null){
+    	alert('Description cannot be null.');
+	return; 	
+    }
     e.preventDefault();
     const newDesc = { recDesc: this.state.editStorage };
     console.log(newDesc);
@@ -141,8 +145,10 @@ export class MyRecommended extends React.Component {
                     <form onSubmit={e => this.handleEdit(rec, e)}>
                       <input
                         type="text"
-                        defaultValue={rec.recDesc}
+                        className = 'editRecInput'
+		       defaultValue={rec.recDesc}
                         onChange={this.handleEditChange}
+			required
                       />
                       <button type="submit">Edit</button>
                     </form>

@@ -19,6 +19,10 @@ export class NewRecommended extends React.Component {
   }
 
   onSubmit(values) {
+	if(values.description === null){
+		alert('Please add a description for your reccomendation.');
+		return;
+	}
     const recDesc = values.description;
     const { title, poster_path, genre_ids, id } = this.props.recMovieData;
     const newRec = {
