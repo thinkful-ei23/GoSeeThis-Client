@@ -29,8 +29,22 @@ Our application uses the Movie Database's (tMDB) extensive film data library to 
 
 ## Features List
 ### V1
+* Add a movie recommendation (from add form and from movie page)
+* Global recommendations feed (ordered by most recent)
+* User profile page
+  * User recommendations
+  * Follow a user
+* Following recommendations feed (ordered by most recent)
+* MyProfile page
+  * My recommendations list
+  * Following/Followers lists
+  * My watchlist
+* Add (and remove) a movie from user watchlist
+* Feed filter (by title and by genre)
+* Movie Search Bar
 
 ### V2
+* Following recommendations feed ordered by level of priority (weighted recs).
 
 ## Contributors
 * [Tarik Desire](https://github.com/tdesire)
