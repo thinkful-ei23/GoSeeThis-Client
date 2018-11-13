@@ -44,6 +44,7 @@ Our application uses the Movie Database's (tMDB) extensive film data library to 
 * Movie Search Bar
 
 ### V2
+* User recommendations become multimedia (television, books, YouTube videos, etc).
 * Following recommendations feed ordered by level of priority (weighted recs).
 
 ## Contributors
