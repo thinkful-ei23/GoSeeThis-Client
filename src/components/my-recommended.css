@@ -2,6 +2,12 @@ li {
     list-style: none;
 }
 
+.recommend-title{font-weight: bold;
+	font-size:30px;
+}
+
+.bold-text{font-weight: bold;}
+
 .myRecommended {
     display: flex;
     flex-direction: column;
