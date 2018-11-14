@@ -12,6 +12,13 @@ export const fetchMoviesSuccess = (movies) => ({
   movies
 });
 
+
+export const FETCH_MOVIES_INPUT_SUCCESS = 'FETCH_MOVIES_INPUT_SUCCESS';
+export const fetchMoviesInputSuccess = (movies) => ({
+  type: FETCH_MOVIES_INPUT_SUCCESS,
+  movies
+});
+
 export const FETCH_MOVIES_ERROR = 'FETCH_MOVIES_ERROR';
 export const fetchMoviesError = (error) => ({
   type: FETCH_MOVIES_ERROR,
@@ -41,7 +48,7 @@ export const fetchMoviesWithPromise = (searchQuery) => dispatch => {
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(res => {
-    dispatch(fetchMoviesSuccess(res.results));
+    dispatch(fetchMoviesInputSuccess(res.results));
   })
   .catch(err => {
     dispatch(fetchMoviesError(err));

@@ -34,3 +34,7 @@ li {
 .container .movie-title {
     padding-top: 1px;
 }
+.editRecInput{
+	width: 80%;
+
+}

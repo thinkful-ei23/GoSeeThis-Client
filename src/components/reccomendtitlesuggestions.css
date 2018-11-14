@@ -8,7 +8,8 @@
 	color: white;
 	position: relative;
 }
-.rec-titles{background-color: silver;
+.searchResultListing{margin: 7px;}
+.rec-titles{background-color: black;
     position: absolute;
     width: 400px;
     height: 200px;

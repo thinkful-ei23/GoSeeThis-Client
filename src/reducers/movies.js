@@ -1,6 +1,7 @@
 import {
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_SUCCESS,
+  FETCH_MOVIES_INPUT_SUCCESS,
   FETCH_MOVIES_ERROR,
   FETCH_MOVIE_DATA_REQUEST,
   FETCH_MOVIE_DATA_SUCCESS,
@@ -12,6 +13,7 @@ import {
 const initialState = {
   loading: false,
   searchResults: null,
+  inputSearchResults: null,
   recMovieData: null,
   error: null,
   movieData: null,
@@ -49,6 +51,13 @@ export default function reducer(state=initialState, action) {
     return Object.assign({}, state, {
       loading: false,
       searchResults: action.movies
+    });
+  }
+
+ if (action.type === FETCH_MOVIES_INPUT_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      inputSearchResults: action.movies
     });
   }
 
