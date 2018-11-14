@@ -11,8 +11,8 @@
 .searchResultListing{margin: 7px;}
 .rec-titles{background-color: black;
     position: absolute;
-    width: 400px;
+    width: 87.5%;
     height: 200px;
-    left: 2%;
+    left: 6.2%;
     overflow-x: hidden;
     overflow-y: scroll;}

@@ -25,9 +25,10 @@ export class HeaderBar extends React.Component {
             <ul className="header-nav">
                 <li id="logo"><Link to="/dashboard" style={{ textDecoration: 'none', color:'white' }}>GoSeeThis</Link></li>
                 <section className="right-header">
-                <li>{logOutButton}</li>
 		        <li className="search-bar"><SearchBar /></li>
-                </section>
+                         <li className="logOutButton">{logOutButton}</li>
+
+	 </section>
                 </ul>
             </header>
         );
