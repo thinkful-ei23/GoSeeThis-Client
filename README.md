@@ -1,4 +1,5 @@
 # GoSeeThis
+Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://dashboard.heroku.com/apps/goseethis-client)**
 
 ## Introduction
 How many times have you been interested in a movie, newly released or otherwise, only to write it off because a few of your friends decided the movie wasn't worth watching. If you were to ask them whether they'd actually seen the movie, they'd probably tell you no, followed by a remark that "the movie got some scathing reviews on Rotten Tomatoes."
@@ -7,6 +8,9 @@ This scenario points to an interesting phenomenon: **our impressions of a work, 
 
 ## How it Works
 Our application uses the Movie Database's (tMDB) extensive film data library to populate the user's title searches with relevant metadata via their public web API. Users can visit movie pages, add movies to a personal watchlist, and create recommendations on the fly. Recommendations posted by all users are accessible through a global feed on the user's dashboard. However, we wanted to give the user more control over how they experience the app by allowing them to filter the feed by title and genre. More importantly, users can follow their favorite recommenders and develop a more personalized, nuanced network that caters to their personal tastes. All of our app's features contribute to our goal of fostering a dynamic, user-driven environment that encourages, yup. You guessed it. **Exploration, expression, and discovery.**
+
+## Server-Side
+The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23/GoSeeThis-server).
 
 ## Tech Stack
 ### MERN
@@ -46,6 +50,7 @@ Our application uses the Movie Database's (tMDB) extensive film data library to 
 ### V2
 * User recommendations become multimedia (television, books, YouTube videos, etc).
 * Following recommendations feed ordered by level of priority (weighted recs).
+* Feature movie trailers on movie page
 
 ## Contributors
 * [Tarik Desire](https://github.com/tdesire)
