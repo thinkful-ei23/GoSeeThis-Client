@@ -36,3 +36,17 @@
 .active {
     background-color: #4CAF50;
 }
+
+.search-bar{
+	margin-right: 3px;
+    padding: 1% 0;
+
+}
+.logOutButton{
+    padding: 2% 0;
+
+}
+
+#logo{      top: 10%;
+    transform: translate(0%, -15%);
+}

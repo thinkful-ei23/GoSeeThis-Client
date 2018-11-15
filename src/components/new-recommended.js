@@ -59,14 +59,14 @@ export class NewRecommended extends React.Component {
     
     return (
       <form
-        className="login-form"
+        className="submit-new-rec-form"
         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
         {err}
         <legend className="recommend-title">New Recommendation</legend>
-        <label htmlFor="title">Movie Title</label>
+        <label className="bold-text" htmlFor="title">Movie Title</label>
         <ReccomendTitleInput />
-        <label htmlFor="description">Why Recommended</label>
+        <label className="bold-text" htmlFor="description">Why would you Recommended this movie?</label>
         <Field
           component={Input}
           type="text"
