@@ -1,0 +1,66 @@
+.home{
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-image{
+    height: 60vh;
+    background-image: url(../images/landing1.jpg);
+    background-size: cover; 
+    background-position: center; 
+}
+
+.about-section{
+    background: white;
+    height: 35vh;
+}
+
+.about-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+.about-bottom{
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.about-header h2{
+    font-size: 35px;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+
+.about-first{
+    width: 25%;
+    padding: 15px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.about-first h3{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.about-second{
+    width: 25%;
+    padding: 15px;
+}
+
+.about-third{
+    width: 25%;
+    padding: 15px;
+}

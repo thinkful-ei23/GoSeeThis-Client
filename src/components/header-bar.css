@@ -1,38 +1,92 @@
-.header-bar {
-    height: 44px;
-    background-color: #333;
-    margin-bottom: 16px;
-    padding-left: 105px;
-    padding-right: 105px;
+nav {
+    width: 100%;
+    height: 60px;
+    z-index: 1;
 }
 
-.header-bar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+.navbar{
+    width: 100%;
+    background: whitesmoke;
+    padding: 0px;
+    
 }
 
-.header-bar li {
+.logo{
     float: left;
+    padding-top: 10px;
+    padding-left: 25px;
+    color: #333;
+    font-size: 25px;
+    font: bold;
+}
+nav ul{
+    width: 80%;
+    margin-bottom: 0 ;
+    padding: 0;
+    float: right;
+    text-align: right;
+    padding-right: 25px;
 }
 
-.header-bar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
+nav .active li a{
+    color: #333;
+    
+}
+
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+    
+}
+
+nav ul li:hover{
+    background: green;
+}
+
+nav ul li a{
+    color: #333;
     text-decoration: none;
 }
 
-.right-header {
-    float: right;
-}
-#logo {
-    font-family: 'Lato', sans-serif;
-    font-size: 25px;
+.toggle{
+    width: 100%;
+    padding: 10px 20px;
+    background: whitesmoke;
+    text-align: right;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 30px;
+    display: none;
 }
 
-.active {
-    background-color: #4CAF50;
+@media (max-width:768px){
+    .toggle{
+        display: block;
+    }
+
+    .logo{
+        padding-top: 20px;
+    }
+
+    nav ul{
+        width: 100%;
+        display: none;
+    }
+
+    nav ul li{
+        display: block;
+        text-align: center;
+    }
+
+    nav .active{
+        display: block;
+        background: whitesmoke;
+    }
+
+    header nav ul li a form ul{
+        display: block;
+        width: 100%;
+    }
 }

@@ -4,8 +4,8 @@ import { followUser, fetchFollowing, unfollowUser } from '../actions/follow';
 import { connect } from 'react-redux';
 import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
-import './my-recommended.css';
-import {Link, Redirect} from 'react-router-dom';
+import './user-recommended.css';
+import { Link, Redirect } from 'react-router-dom';
 
 export class UserRecommended extends React.Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ export class UserRecommended extends React.Component {
     const unfollowed = {
       following: this.props.userId
     }
-    
+
     this.props.dispatch(unfollowUser(unfollowed));
   }
 
@@ -37,21 +37,21 @@ export class UserRecommended extends React.Component {
 
     if (this.props.userId && this.props.following) {
       if (!this.props.following.map(follow => follow.id).includes(this.props.userId)) {
-        followButton = 
+        followButton =
           <section className="follow-user" >
             <button type="button" onClick={() => this.follow()}>Follow</button>
           </section>
-        
+
       }
 
       else {
-        followButton = 
+        followButton =
           <section className="following" onClick={() => this.unFollow()}>
             <p>Following</p>
           </section>
       }
     }
-    
+
     if (this.props.userId === this.props.loggedInUserId) {
       return <Redirect to="/profile" />
     }
@@ -61,27 +61,32 @@ export class UserRecommended extends React.Component {
         const genres = rec.genre_ids
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
-          
+
         return (
-          <li key={index} className="card">
-            <section className="recommended">
-              <section className="movie-poster">
-              <Link to={`/movie/${rec.movieId}`}>
-                <img
-                  src={POSTER_PATH_BASE_URL + rec.posterUrl}
-                  alt="movie poster"
-                />
-              </Link>
+          <li key={index} className="dash-card">
+            <section className="dash-recommended">
+              <section className="imageWrapper">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                    alt="movie poster"
+                    className="movie-poster"
+                  />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                  </div>
+                </Link>
               </section>
-              <section className="container">
-              <section className="movie-title">
-              <h3><Link to={`/movie/${rec.movieId}`}>{rec.title}</Link></h3></section>
-              <section className="movie-genres">
-                {genres}
-              </section>
-              <section className="recommend-desc">
-                <p>{rec.recDesc}</p>
-              </section>
+              <section className="dash-container">
+                <section className="dash-movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                  </h3>
+                </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
               </section>
             </section>
           </li>
@@ -93,16 +98,19 @@ export class UserRecommended extends React.Component {
       const user = this.props.recs[0].userId;
       username = user.username;
       return (
-        <section className="myRecommended">
-          <section className="username">
-            <h2><Link to={`/user/${this.props.userId}`}  style={{ textDecoration: 'none', color:'black' }}>{username}</Link></h2>
-          </section>
-          <section className="recommended-list">
-            <section className="recomendation-header">
+        <section className="dashRecommended">
+          <section className="user-dash-recommended-list">
+            <section className="dash-recommendation-header">
               <h2>{username}'s Recomendations:</h2>
             </section>
+            <div className="followBtn">
             {followButton}
-            <ul>{recs}</ul>
+            </div>
+            <section className="global-activity">
+              <section className="overflow">
+                <ul className="recent-activity">{recs}</ul>
+              </section>
+            </section>
           </section>
         </section>
       );
