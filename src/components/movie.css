@@ -76,6 +76,7 @@
     border-radius: 5px;
     height: 33vh;
     margin-bottom: 25px;
+    overflow: auto;
     
 }
 
@@ -84,8 +85,8 @@
     transition: 0.3s;
     border-radius: 5px;
     padding: 2px 16px;
+    margin: 10px;
     width: 300px;
-    height: 100px;
     background-color: white;
 }
 
