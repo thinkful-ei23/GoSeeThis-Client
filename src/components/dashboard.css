@@ -9,6 +9,7 @@
 
 .global-activity{
     height: 85vh;
+    overflow: auto;
 }
 
 .movie-poster{
@@ -125,12 +126,6 @@ padding: 16px;
 }
 
 */
-
-.overflow {
-        width: 100%;
-        height: 77vh;
-        overflow: auto;
-}
 
 @media only screen and (max-width: 600px){
     .react-tabs__tab-list{

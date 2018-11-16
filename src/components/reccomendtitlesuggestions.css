@@ -6,7 +6,8 @@
 .result-title-rec {
 	display: inline-block;
 	color: black;
-	position: relative;
+    position: relative;
+    padding-left: 10px;
 }
 .searchResultListing{
     margin: 7px;

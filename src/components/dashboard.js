@@ -264,9 +264,7 @@ export class Dashboard extends React.Component {
                   <h2>Recent Activity:</h2>
                 </section>
                 <section className="global-activity">
-                  <section className="overflow">
                     <ul className="recent-activity">{recs}</ul>
-                  </section>
                 </section>
               </section>
             </section>
@@ -278,9 +276,7 @@ export class Dashboard extends React.Component {
                   <h2>Following Activity:</h2>
                 </section>
                 <section className="global-activity">
-                  <section className="overflow">
                     <ul className="recent-activity">{followRecs}</ul>
-                  </section>
                 </section>
               </section>
             </section>
