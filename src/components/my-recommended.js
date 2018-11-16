@@ -103,18 +103,18 @@ export class MyRecommended extends React.Component {
                   />
                 </Link>
               </section>
-              <section className="watch-delete-button">
-                <p onClick={() => this.handleDeleteWatch(rec)}>x</p>
-              </section>
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
                   <p>{genres}</p>
                 </section>
+                <section className="watch-delete-button">
+                <p className="deleteBttn" onClick={() => this.handleDeleteWatch(rec)}><i class="fas fa-trash-alt"></i></p>
+              </section>
               </section>
             </section>
           </li>
@@ -141,13 +141,10 @@ export class MyRecommended extends React.Component {
                   </div>
                   </Link>
                 </section>
-                <section className="profile-delete-button">
-                  <p onClick={() => this.handleDelete(rec)}>x</p>
-                </section>
                 <section className="dash-container">
                   <section className="dash-movie-title">
                     <h3>
-                      <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                      <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                     </h3>
                   </section>
                   <section className="profile-recommend-desc">
@@ -159,8 +156,12 @@ export class MyRecommended extends React.Component {
                         onChange={this.handleEditChange}
 			required
                       />
-                      <button type="submit">Edit</button>
+                      <button type="submit"><i class="fas fa-check-circle"></i></button>
+                      <section className="profile-delete-button">
+                  <p className="deleteBttn" onClick={() => this.handleDelete(rec)}><i class="fas fa-trash-alt"></i></p>
+                </section>
                     </form>
+
                   </section>
                 </section>
               </section>
@@ -187,24 +188,22 @@ export class MyRecommended extends React.Component {
                   </div>
                   </Link>
                 </section>
-                <section className="profile-delete-button">
-                  <p onClick={() => this.handleDelete(rec)}>x</p>
-                </section>
                 <section className="dash-container">
                   <section className="dash-movie-title">
                     <h3>
-                      <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                      <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                     </h3>
                   </section>
                   <section className="dash-movie-genres">
                     <p>{genres}</p>
                   </section>
                   <section className="profile-recommend-desc">
-                    <section>
-                      <section onClick={() => this.handleToggle(rec)}>
-                        <button>Edit</button>
-                      </section>
+                      <section className="editBtn" onClick={() => this.handleToggle(rec)}>
+                      <i class="fas fa-edit"></i>
                     </section>
+                    <section className="profile-delete-button">
+                  <p className="deleteBttn" onClick={() => this.handleDelete(rec)}><i class="fas fa-trash-alt"></i></p>
+                </section>
                   </section>
                 </section>
               </section>

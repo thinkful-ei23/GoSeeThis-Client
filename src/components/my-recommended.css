@@ -16,11 +16,11 @@
 }
 
 .follow-section h2{
-    font-size:2vw;
+    font-size:24px;
 }
 
 .follow-section{
-    font-size:0.7vw;
+    font-size:16px;
 }
 
 .followers-list{
@@ -45,6 +45,26 @@
     width: 350px;
     overflow: auto;
     height: 500px;
+}
+
+
+.profile-delete-button p {
+    margin: 0;
+}
+
+.fa-check-circle{
+    float: left;
+    width: 50px;  
+}
+
+.editBtn{
+    float: left;
+    width: 50px;
+}
+
+.profile-delete-button{
+    float: right;
+    width: 50px;
 }
 
 @media only screen and (max-width: 768px){

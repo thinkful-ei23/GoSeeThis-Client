@@ -23,6 +23,19 @@
 padding: 16px;
 }
 
+.dash-movie-genres{
+    font-size: 14px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.dash-movie-title h3{
+    padding-top: 5px;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
 .dashRecommended .dash-recommended-list {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -30,7 +43,7 @@ padding: 16px;
     border-radius: 5px;
 
     
-    background: white;
+    background: #F5F5F5;
 } 
 
 .dashRecommended{
@@ -48,6 +61,7 @@ padding: 16px;
 .dash-recommendation-header h2 {
     padding: 15px;
     text-align: center;
+    font-family: 'Oswald', sans-serif;
 }
 /* .dashboard {
     display: flex;
@@ -218,11 +232,6 @@ padding: 16px;
     padding-right: 5px;
 }
 
-.overflow {
-    width: 100%;
-    height: 535px;
-    overflow: auto;
-}
 
 .dash-container .dash-movie-title h3{
     padding-top: 1px;
@@ -238,9 +247,7 @@ padding: 16px;
     float: left;
 }
 
-.dash-movie-genres{
-    font-size: 12px;
-}
+
 
 .dash-buttons {
 display: inline;

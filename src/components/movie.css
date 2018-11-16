@@ -166,7 +166,7 @@
     }
     
     .movie-page .movie-title{
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .movie-overview h3{
@@ -232,7 +232,7 @@
 
     .movie-overview{
         overflow: auto;
-        height: 200px;
+        height: 175px;
     }
 
     .add-button{

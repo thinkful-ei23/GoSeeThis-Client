@@ -101,7 +101,7 @@ export class Dashboard extends React.Component {
                   <div className="cornerLink">
                     <p className="cornerLink-desc">
                       {rec.recDesc}</p>
-                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`}>
+                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`} style={{ textDecoration: 'none', color:'#71ffdd' }}>
                       {rec.userId.username}
                     </Link>
                     </p>
@@ -111,7 +111,7 @@ export class Dashboard extends React.Component {
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`} style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
@@ -198,7 +198,7 @@ export class Dashboard extends React.Component {
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
@@ -261,7 +261,7 @@ export class Dashboard extends React.Component {
             <section className="dashRecommended">
               <section className="dash-recommended-list">
                 <section className="dash-recommendation-header">
-                  <h2>Global Recent Activity:</h2>
+                  <h2>Recent Activity:</h2>
                 </section>
                 <section className="global-activity">
                   <section className="overflow">

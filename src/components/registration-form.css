@@ -23,7 +23,7 @@
     border: 1px solid #333;
     color: #333;
       font-size: 12px;;
-      background-color: #71ffdd;
+      background-color: #00c4cc;
       cursor: pointer;
       padding: 7px 25px;
       display: inline-block;
@@ -37,6 +37,7 @@
       -moz-transition: all 0.3s;
       transition: all 0.3s;
       margin-left: 0;
+      color: white;
   }
 
   .register-btn:hover,

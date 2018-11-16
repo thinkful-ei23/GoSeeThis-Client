@@ -15,21 +15,27 @@ export class HeaderBar extends React.Component {
 
     render() {
         // Only render the log out button if we are logged in
-        let username;
+        let profilebutton;
         let logOutButton;
         let searchbar;
+        let newRecommendBtn;
         if (this.props.loggedIn) {
             logOutButton = (
-                <button onClick={() => this.logOut()}>Log out</button>
+                <button className="logoutBtn" onClick={() => this.logOut()}>Log out</button>
             );
-            if (this.props.user) {
-                username = this.props.user.username;
-            }
         }
 
         if (this.props.loggedIn){
             searchbar = (
                 <SearchBar />
+            )
+            profilebutton = (
+                <Link to="/profile" className="profileBttn" style={{ textDecoration: 'none', color:'#00c4cc' }}><i class="far fa-user fa-2x"></i></Link>
+            )
+            newRecommendBtn = (
+                <LinkButton to="/recommend" className="recBtn" style={{ textDecoration: 'none', color:'white' }}>
+                  Recommend
+              </LinkButton>
             )
         }
         
@@ -44,11 +50,9 @@ export class HeaderBar extends React.Component {
                 </div>
                 <ul>
                     <li><a>{searchbar}</a></li>
-                    <li><a><Link to="/profile" style={{ textDecoration: 'none', color:'#333' }}>{username}</Link></a></li>
-                    <li><a>{logOutButton}</a></li>
-                    <li><a><LinkButton to="/recommend" className="recBtn">
-                  + Recommend
-              </LinkButton></a></li>
+                    <li ><a>{profilebutton}</a></li>
+                    <li><a>{newRecommendBtn}</a></li>
+              <li><a>{logOutButton}</a></li>
                     
                 </ul>
 

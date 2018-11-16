@@ -81,7 +81,7 @@ export class UserRecommended extends React.Component {
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
