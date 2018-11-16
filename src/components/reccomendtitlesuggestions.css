@@ -5,14 +5,25 @@
 
 .result-title-rec {
 	display: inline-block;
-	color: white;
-	position: relative;
+	color: black;
+    position: relative;
+    padding-left: 10px;
 }
-.searchResultListing{margin: 7px;}
-.rec-titles{background-color: black;
+.searchResultListing{
+    margin: 7px;
+    margin: 7px;
+    border-bottom: 1px solid #00c4cc;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 10px;
+    color: black;
+}
+.rec-titles{background-color: #F5F5F5;
     position: absolute;
     width: 87.5%;
     height: 200px;
     left: 6.2%;
-    overflow-x: hidden;
-    overflow-y: scroll;}
+    overflow-x: auto;
+    overflow-y: auto;
+    cursor: pointer;
+}

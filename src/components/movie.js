@@ -24,7 +24,6 @@ export class Movie extends React.Component {
     this.props.dispatch(fetchMovieData(this.props.movieId));
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state.recInput);
@@ -42,7 +41,7 @@ export class Movie extends React.Component {
       recDesc: this.state.recInput
     };
     console.log(newRec);
-      this.props.dispatch(createRec(newRec)).then(() => {
+    this.props.dispatch(createRec(newRec)).then(() => {
       this.props.dispatch(fetchMovieRecs(this.props.movieId));
       this.props.dispatch(fetchMovieData(this.props.movieId));
     })
@@ -119,25 +118,25 @@ export class Movie extends React.Component {
         if (this.props.watchList.map(movie => movie.movieId).includes(this.props.movieData.id)) {
           if (this.props.loading) {
             watchList =
-            <button disabled className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
-              Remove from Watchlist
+              <button disabled className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
+                Remove from Watchlist
             </button>;
           } else {
             watchList =
-            <button className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
-              Remove from Watchlist
+              <button className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
+                Remove from Watchlist
             </button>;
           }
         } else {
           if (this.props.loading) {
             watchList =
-            <button disabled onClick={() => this.addToWatchlist()}>
-              Add To Watchlist
+              <button disabled onClick={() => this.addToWatchlist()}>
+                Add To Watchlist
             </button>
           } else {
             watchList =
-            <button onClick={() => this.addToWatchlist()}>
-              Add To Watchlist
+              <button onClick={() => this.addToWatchlist()}>
+                Add To Watchlist
             </button>
           }
         }
@@ -183,36 +182,37 @@ export class Movie extends React.Component {
                 </section>
                 <section className="movie-info">
                   <section className="movie-overview">
-                    <h3>Overview</h3>
                     <p>{this.props.movieData.overview}</p>
-                  </section>
-                  <section className="movie-release">
-                    <h3>Release Date</h3>
-                    <p>{releaseDate}</p>
-                  </section>
-                  <section className="genres">
-                    <h3>Genre(s)</h3>
-                    <p>{genres}</p>
-                  </section>
-                </section>
-                <section className="recommended">
-                  <section className="recommended-count">
-                    <h3>Recommended Count:</h3>
-                    <p>{this.props.movieRecs.length}</p>
                   </section>
                   {watchList}
                 </section>
               </section>
             </section>
-            <section className="movie-recommendations">
-              <h2>{this.props.movieData.title}'s Recommendations</h2>
-              <label htmlFor="description">Why Recommended</label>
-              {recEntryWindow}
-              <ul className="movie-page-rec-list">
-                {recommendations}
-              </ul>
+            <section className="movie-bottom">
+              <section className="movie-release">
+                <h3>Release Date</h3>
+                <p>{releaseDate}</p>
+              </section>
+              <section className="genres">
+                <h3>Genre(s)</h3>
+                <p>{genres}</p>
+              </section>
+              <section className="recommended">
+                <section className="recommended-count">
+                  <h3>Recommended Count:</h3>
+                  <p>{this.props.movieRecs.length}</p>
+                </section>
+              </section>
             </section>
+          <section className="movie-recommendations">
+            <h2>{this.props.movieData.title}'s Recommendations</h2>
+            <label htmlFor="description">Why Recommended</label>
+            {recEntryWindow}
+            <ul className="movie-page-rec-list">
+              {recommendations}
+            </ul>
           </section>
+        </section>
         </section>
       );
     }
