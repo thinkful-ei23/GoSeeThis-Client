@@ -22,12 +22,14 @@ nav {
 .logoutBtn{
     border: none;
     background: #F5F5F5;
+    cursor: pointer;
 }
 
 .recBtn{
     background: #00c4cc;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .logo{

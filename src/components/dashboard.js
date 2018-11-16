@@ -264,7 +264,9 @@ export class Dashboard extends React.Component {
                   <h2>Recent Activity:</h2>
                 </section>
                 <section className="global-activity">
+                  <div id="inner">
                     <ul className="recent-activity">{recs}</ul>
+                    </div>
                 </section>
               </section>
             </section>
