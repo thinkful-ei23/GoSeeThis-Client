@@ -39,15 +39,15 @@ export class UserRecommended extends React.Component {
       if (!this.props.following.map(follow => follow.id).includes(this.props.userId)) {
         followButton =
           <section className="follow-user" >
-            <button type="button" onClick={() => this.follow()}>Follow</button>
+            <button className="followBtn" type="button" onClick={() => this.follow()}>Follow</button>
           </section>
 
       }
 
       else {
         followButton =
-          <section className="following" onClick={() => this.unFollow()}>
-            <p>Following</p>
+          <section  className="un-follow" >
+            <button className="following" type="button" onClick={() => this.unFollow()}>Following</button>
           </section>
       }
     }

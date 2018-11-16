@@ -6,6 +6,10 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 li {
   list-style: none;
 }

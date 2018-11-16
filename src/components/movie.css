@@ -30,6 +30,30 @@
     width: 150px;
     position: absolute;
     bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.added-to-watchlist{
+    width: 150px;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.createBtn{
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
 }
 
 .movie-page .movie-header {
@@ -175,12 +199,28 @@
     font-size: 20px;
 }
 
+.movie-rec-add-input{
+    padding: 5px;
+}
+
 @media only screen and (max-width: 900px){
     .movie-page .movie-container {
         width: 100%;
         padding: 0px;
         margin-top: 0;
-        height: 1000px;;
+        height: 1200px;;
+    }
+
+    .added-to-watchlist{
+        width: 150px;
+        position: absolute;
+        bottom: 10px;
+        text-decoration: none;
+        background-color:#00c4cc;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        font-size: 12px;
     }
     
     .movie-page .movie-title{
@@ -265,8 +305,16 @@
     }
 
     .movie-recommendations {
-        height: 400px;
+        height: 600px;
         margin-bottom: 5px; 
+    }
+
+    .label-add-rec{
+        padding: 10px;
+    }
+
+    .createBtn{
+        margin: 10px;
     }
     
 }

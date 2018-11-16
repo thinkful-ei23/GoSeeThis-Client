@@ -145,9 +145,9 @@ export class Movie extends React.Component {
       if (!checkedDuplicate) {
 
         recEntryWindow = <form onSubmit={e => this.handleSubmit(e)}>
-          <label>Add a Reccomendation:</label>
-          <input type='text' onChange={e => this.handleChange(e)} />
-          <button type="submit">Create</button>
+          <label className="label-add-rec">Add a Reccomendation:</label>
+          <input className="movie-rec-add-input" type='text' onChange={e => this.handleChange(e)} />
+          <button className="createBtn" type="submit">Create</button>
         </form>;
       }
       else {
@@ -206,7 +206,6 @@ export class Movie extends React.Component {
             </section>
           <section className="movie-recommendations">
             <h2>{this.props.movieData.title}'s Recommendations</h2>
-            <label htmlFor="description">Why Recommended</label>
             {recEntryWindow}
             <ul className="movie-page-rec-list">
               {recommendations}

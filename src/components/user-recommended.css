@@ -31,6 +31,25 @@
 
 }
 
+.followBtn{
+    text-decoration: none;
+background-color:#00c4cc;
+color: white;
+border-radius: 5px;
+border: none;
+width: 150px;
+}
+
+.following{
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    width: 150px;
+
+}
+
 .imageWrapper {
     position: relative;
     width: 250px;
