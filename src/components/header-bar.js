@@ -21,7 +21,7 @@ export class HeaderBar extends React.Component {
         let newRecommendBtn;
         if (this.props.loggedIn) {
             logOutButton = (
-                <button className="logoutBtn" onClick={() => this.logOut()}>Log out</button>
+                <button className="logoutBtn" class='menu' onClick={() => this.logOut()}>Log out</button>
             );
         }
 
@@ -30,10 +30,10 @@ export class HeaderBar extends React.Component {
                 <SearchBar />
             )
             profilebutton = (
-                <Link to="/profile" className="profileBttn" style={{ textDecoration: 'none', color:'#00c4cc' }}><i class="far fa-user fa-2x"></i></Link>
+                <Link to="/profile" className="profileBttn" style={{ textDecoration: 'none', color:'#00c4cc' }}><i class="far fa-user fa-2x menu"></i></Link>
             )
             newRecommendBtn = (
-                <LinkButton to="/recommend" className="recBtn" style={{ textDecoration: 'none', color:'white' }}>
+                <LinkButton to="/recommend" className="recBtn" class="menu" style={{ textDecoration: 'none', color:'black' }}>
                   Recommend
               </LinkButton>
             )
