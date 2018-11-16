@@ -32,7 +32,6 @@ export class NewRecommended extends React.Component {
       movieId: id,
       recDesc
     };
-    console.log(newRec);
     this.props.dispatch(createRec(newRec)).then(() => {
       this.setState({ redirectToNewPage: true });
     })
@@ -49,11 +48,9 @@ export class NewRecommended extends React.Component {
           {this.props.subError.message}
         </div>
       )
-      console.log('IM HERE, THERES AN ERROR');
     }
 
     if (this.state.redirectToNewPage && !this.props.loading) {
-      console.log('Page will redirect!');
       return <Redirect to="/dashboard" />;
     }
     

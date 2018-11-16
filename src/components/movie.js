@@ -27,13 +27,11 @@ export class Movie extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.recInput);
     let processed = this.props.movieData.genres;
     let genreArr = [];
     for (let i = 0; i < processed.length; i++) {
       genreArr.push(processed[i].id);
     }
-    console.log(genreArr);
     const newRec = {
       title: this.props.movieData.title,
       posterUrl: this.props.movieData.poster_path,
@@ -41,7 +39,6 @@ export class Movie extends React.Component {
       movieId: this.props.movieData.id,
       recDesc: this.state.recInput
     };
-    console.log(newRec);
       this.props.dispatch(createRec(newRec)).then(() => {
       this.props.dispatch(fetchMovieRecs(this.props.movieId));
       this.props.dispatch(fetchMovieData(this.props.movieId));
@@ -71,7 +68,6 @@ export class Movie extends React.Component {
   }
 
   removeFromWatchList() {
-    console.log('removeFromWatchList ran!');
     const id = this.props.watchList
       .filter(movie => movie.movieId === this.props.movieData.id)
       .map(movie => movie.id)[0];

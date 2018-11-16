@@ -4,7 +4,6 @@ import { normalizeResponseErrors } from './utils';
 export const addMovieToWatchList = (obj, userId) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   dispatch(addToWatchListRequest());
-  console.log(obj);
   return fetch(`${API_BASE_URL}/watch/${userId}`, {
     method: 'POST',
     headers: {

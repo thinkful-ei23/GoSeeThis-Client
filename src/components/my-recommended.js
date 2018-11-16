@@ -46,7 +46,6 @@ export class MyRecommended extends React.Component {
     }
     e.preventDefault();
     const newDesc = { recDesc: this.state.editStorage };
-    console.log(newDesc);
     this.props
       .dispatch(editRec(rec.id, newDesc))
       .then(() => this.props.dispatch(fetchUserRecs(this.props.user.id)));
@@ -86,7 +85,6 @@ export class MyRecommended extends React.Component {
     }
 
     if (this.props.watchList) {
-      console.log(this.props.watchList);
       watch = this.props.watchList.map((rec, index) => {
         const genres = rec.genres.map(genre => genre.name).join(' , ');
         return (
@@ -117,7 +115,6 @@ export class MyRecommended extends React.Component {
         );
       });
     }
-    console.log(watch);
     if (this.props.recs) {
       recs = this.props.recs.map((rec, index) => {
         if (this.state.editedRec === rec.movieId) {
