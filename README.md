@@ -61,6 +61,7 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 * [David Graves](https://github.com/DaGraves)
 * [Ryan Ureta](https://github.com/rcureta)
 
-## Social Media
+## Social Media + Marketing
 
 * **[Twitter](https://twitter.com/GoSeeThisApp1)**
+* **[ProductHunt](https://www.producthunt.com/posts/goseethis)**
