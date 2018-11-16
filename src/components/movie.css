@@ -13,25 +13,70 @@
     border-radius: 5px;
     background: white;
     padding: 16px;
-    width: 40%;
-    height: 93vh;
+    width: 900px;
+    height: 1000px;
     margin-top: 25px;
 }
 
 .movie-overview{
-    overflow: auto;
-    height: 200px;
+    padding: 12px;
+}
+
+.movie-overview p{
+    font-size: 14px;
+}
+
+.addWatchBtn{
+    width: 150px;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.added-to-watchlist{
+    width: 150px;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.createBtn{
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.movie-page .movie-header {
+    width: 33%;
+    float: left;
+    margin-right: 15px;
 }
 
 .movie-page .movie-poster img{
-    height: 40vh;
-    float: left;
+    width: 100%;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 .movie-page .movie-body {
+    position: relative;
     padding: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    background: white;
+    width: 66%;
+    
 }
 
 .movie-page .recommendations {
@@ -41,13 +86,10 @@
 .movie-page .movie-top {
     display: flex;
     flex-direction: row;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
         width: 100%;
         border-radius: 5px;
-        height: 40vh;
-        margin-bottom: 25px;
-        
+        margin-bottom: 15px;
+        padding: 10px;
         
 }
 
@@ -60,7 +102,7 @@
         transition: 0.3s;
         width: 100%;
         border-radius: 5px;
-        height: 10vh;
+        height: 100px;
         margin-bottom: 25px;
         
         
@@ -68,7 +110,7 @@
 
 .movie-page .movie-title {
     font-family: 'Lato', sans-serif;
-    font-size: 3vw;
+    font-size: 24px;
 }
 
 .movie-recommendations {
@@ -79,7 +121,7 @@
     transition: 0.3s;
     width: 100%;
     border-radius: 5px;
-    height: 33vh;
+    height: 400px;
     margin-bottom: 25px;
     overflow: auto;
     
@@ -116,53 +158,69 @@
     border-right: 1px solid #333;
     width: 33%;
     padding: 10px;
-    height: 10vh;
+    height: 100px;
 }
 
 .movie-release p{
-    font-size: .9vw;
+    font-size: 12px;
 }
 
 .movie-release h3{
-    font-size: 1vw;
+    font-size: 20px;
 }
 
 .genres{
     border-right: 1px solid #333;
     width: 33%;
     padding: 10px;
-    height: 10vh;
+    height: 100px;
 }
 
 .genres p{
-    font-size: .9vw;
+    font-size: 12px;
     
 }
     
 .genres h3{
-    font-size: 1vw;
+    font-size: 20px;
 }
 
 .recommended{
     width: 33%;
     padding: 10px;
-    height: 10vh;
+    height: 100px;
 }
 
 .recommended p{
-    font-size: .9vw;
+    font-size: 12px;
 }
     
 .recommended h3{
-    font-size: 1vw;
+    font-size: 20px;
 }
 
-@media only screen and (max-width: 768px){
+.movie-rec-add-input{
+    padding: 5px;
+}
+
+@media only screen and (max-width: 900px){
     .movie-page .movie-container {
         width: 100%;
         padding: 0px;
         margin-top: 0;
-        height: 775px;;
+        height: 1200px;;
+    }
+
+    .added-to-watchlist{
+        width: 150px;
+        position: absolute;
+        bottom: 10px;
+        text-decoration: none;
+        background-color:#00c4cc;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        font-size: 12px;
     }
     
     .movie-page .movie-title{
@@ -179,11 +237,11 @@
     }
     
     .movie-release p{
-        font-size: 2.5vw;
+        font-size: 12px;
     }
     
     .movie-release h3{
-        font-size: 4vw;
+        font-size: 20px;
     }
     
     .genres{
@@ -194,12 +252,12 @@
     }
     
     .genres p{
-        font-size: 2.5vw;
+        font-size: 12px;
         
     }
         
     .genres h3{
-        font-size: 4vw;
+        font-size: 20px;
     }
     
     .recommended{
@@ -209,11 +267,11 @@
     }
     
     .recommended p{
-        font-size: 2.5vw;
+        font-size: 12px;
     }
         
     .recommended h3{
-        font-size: 4vw;
+        font-size: 20px;
     }
 
     .recommend-description {
@@ -230,11 +288,6 @@
         padding-right:40px;
     }
 
-    .movie-overview{
-        overflow: auto;
-        height: 175px;
-    }
-
     .add-button{
         margin-top: 15px;
     }
@@ -244,16 +297,71 @@
     }
 
     .movie-page .movie-top {
-            height: 300px;    
+            /* height: 300px;     */
     }
 
     .movie-page .movie-poster img{
-        height: 300px;
+        /* height: 300px; */
     }
 
     .movie-recommendations {
-        height: 325px;
+        height: 600px;
         margin-bottom: 5px; 
     }
+
+    .label-add-rec{
+        padding: 10px;
+    }
+
+    .createBtn{
+        margin: 10px;
+    }
     
+}
+
+@media only screen and (max-width: 600px){
+    .movie-page .movie-top {
+        /* height: 300px;     */
+}
+
+.movie-page .movie-poster img{
+    /* height: 300px; */
+}
+
+}
+
+@media only screen and (max-width: 450px){
+    .movie-overview{
+        /* overflow: auto;
+        height: 100px; */
+    }
+
+    .recommended p{
+        font-size: 12px;
+    }
+        
+    .recommended h3{
+        font-size: 15px;
+    }
+
+    .genres p{
+        font-size: 12px;
+        
+    }
+        
+    .genres h3{
+        font-size: 15px;
+    }
+
+    .movie-release p{
+        font-size: 12px;
+    }
+    
+    .movie-release h3{
+        font-size: 15px;
+    }
+
+    .movie-page .movie-container {
+        height: 1200px;;
+    }
 }
