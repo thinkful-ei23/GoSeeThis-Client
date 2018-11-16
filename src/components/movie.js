@@ -135,7 +135,7 @@ export class Movie extends React.Component {
             </button>
           } else {
             watchList =
-              <button onClick={() => this.addToWatchlist()}>
+              <button className="addWatchBtn" onClick={() => this.addToWatchlist()}>
                 Add To Watchlist
             </button>
           }
@@ -184,8 +184,8 @@ export class Movie extends React.Component {
                   <section className="movie-overview">
                     <p>{this.props.movieData.overview}</p>
                   </section>
-                  {watchList}
                 </section>
+                {watchList}
               </section>
             </section>
             <section className="movie-bottom">
