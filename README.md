@@ -59,3 +59,7 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 * [David Folks](https://github.com/DFolks)
 * [David Graves](https://github.com/DaGraves)
 * [Ryan Ureta](https://github.com/rcureta)
+
+## Social Media
+
+* **[Twitter](https://twitter.com/GoSeeThisApp1)**
