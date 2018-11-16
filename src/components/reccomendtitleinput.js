@@ -31,24 +31,19 @@ export class ReccomendTitleInput extends React.Component {
     if (!this.state.query) {
       return (
         <div>
-          <span className="displayOfCurrentRecTitleSelection">
-            Currently Selected Title: None Currently Selected
-          </span>
           <input
 	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
+	    autocomplete="off"
           />
         </div>
       );
     }
 
-    if (!this.props.searchResults && !this.props.loading) {
+    if (!this.props.inputSearchResults && !this.props.loading) {
       return (
         <div>
-          <span className="displayOfCurrentRecTitleSelection">
-            Currently Selected Title: None Currently Selected
-          </span>
           <input
 	  id = "recTitleInput"
             placeholder="Search for..."
@@ -56,7 +51,7 @@ export class ReccomendTitleInput extends React.Component {
           />
         </div>
       );
-    } else if (!this.props.searchResults && this.props.loading) {
+    } else if (!this.props.inputSearchResults && this.props.loading) {
       return (
         <div>
           <input
@@ -70,9 +65,6 @@ export class ReccomendTitleInput extends React.Component {
     } else if (this.props.recMovieData) {
       return (
         <div>
-          <span className="displayOfCurrentRecTitleSelection">
-            Currently Selected Title: {this.props.recMovieData.title}
-          </span>
           <input
 	  id = "recTitleInput"
             placeholder="Search for..."
@@ -84,15 +76,13 @@ export class ReccomendTitleInput extends React.Component {
     } else {
       return (
         <div>
-          <span className="displayOfCurrentRecTitleSelection">
-            Currently Selected Title: None Currently Selected
-          </span>
           <input
 	  id = "recTitleInput"
             placeholder="Search for..."
             onChange={e => this.handleInputChange(e)}
+	    autocomplete="off"
           />
-          <ReccomendTitleSuggestions results={this.props.searchResults} />
+          <ReccomendTitleSuggestions results={this.props.inputSearchResults} />
         </div>
       );
     }
@@ -100,7 +90,7 @@ export class ReccomendTitleInput extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  searchResults: state.movies.searchResults,
+  inputSearchResults: state.movies.inputSearchResults,
   loading: state.movies.loading,
   recMovieData: state.movies.recMovieData
 });

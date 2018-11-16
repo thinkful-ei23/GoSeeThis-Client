@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMovieRecs } from '../actions/recommendations';
 import { fetchMovieData } from '../actions/movies';
-import { addMovieToWatchList } from '../actions/watchList';
+import { addMovieToWatchList, getWatchList, removeMovieFromWatchList } from '../actions/watchList';
 import { POSTER_PATH_BASE_URL } from '../config';
 import './movie.css';
 import { createRec } from '../actions/recommendations';
 import Input from './input';
 import { Link } from 'react-router-dom';
+import requiresLogin from './requires-login';
 
 
 export class Movie extends React.Component {
@@ -18,6 +19,7 @@ export class Movie extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(getWatchList(this.props.currentUser.id));
     this.props.dispatch(fetchMovieRecs(this.props.movieId));
     this.props.dispatch(fetchMovieData(this.props.movieId));
   }
@@ -59,14 +61,26 @@ export class Movie extends React.Component {
       movieId: this.props.movieId,
       title: this.props.movieData.title,
       poster_path: this.props.movieData.poster_path,
-      genres: this.props.movieData.genres
+      genres: this.props.movieData.genres,
+      overview: this.props.movieData.overview
     };
     let userId = this.props.currentUser.id;
     this.props.dispatch(addMovieToWatchList(obj, userId));
+    this.props.dispatch(getWatchList(this.props.currentUser.id));
+  }
+
+  removeFromWatchList() {
+    console.log('removeFromWatchList ran!');
+    const id = this.props.watchList
+      .filter(movie => movie.movieId === this.props.movieData.id)
+      .map(movie => movie.id)[0];
+    const userId = this.props.currentUser.id;
+    this.props.dispatch(removeMovieFromWatchList(id, userId));
+    // this.props.dispatch(this.getWatchList(this.props.currentUser.id));
   }
 
   render() {
-    if (!this.props.movieData || !this.props.movieRecs || !this.props.movieId) {
+    if (!this.props.movieData || !this.props.movieRecs || !this.props.movieId || !this.props.currentUser) {
       return (
         <section className="loading-page">
           <p>Loading...</p>
@@ -81,26 +95,53 @@ export class Movie extends React.Component {
           <section className="recommend-description">
             <p>{rec.recDesc}</p>
             <section className="recommend-description-container">
-              <span>
-                By: <Link to={`/user/${rec.userId.id}`}>
-                  {rec.userId.username}
-                </Link>
-              </span>
+              <span>By: <Link to={`/user/${rec.userId.id}`}>{rec.userId.username}</Link></span>
             </section>
           </section>
         </li>
       ));
 
-
-      let recCheck = this.props.movieRecs;
       let checkedDuplicate = false;
-      for (let i = 0; i < recCheck.length; i++) {
-        if (recCheck[i].userId.id === this.props.currentUser.id) {
-          checkedDuplicate = true
+
+      if (this.props.movieRecs && this.props.currentUser) {
+        let recCheck = this.props.movieRecs;
+        for (let i = 0; i < recCheck.length; i++) {
+          if (recCheck[i].userId.id === this.props.currentUser.id) {
+            checkedDuplicate = true
+          }
         }
       }
 
       let recEntryWindow = '';
+      let watchList;
+      if (this.props.watchList && this.props.movieData) {
+        if (this.props.watchList.map(movie => movie.movieId).includes(this.props.movieData.id)) {
+          if (this.props.loading) {
+            watchList =
+              <button disabled className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
+                Remove from Watchlist
+            </button>;
+          } else {
+            watchList =
+              <button className="added-to-watchlist" onClick={() => this.removeFromWatchList()}>
+                Remove from Watchlist
+            </button>;
+          }
+        } else {
+          if (this.props.loading) {
+            watchList =
+              <button disabled onClick={() => this.addToWatchlist()}>
+                Add To Watchlist
+            </button>
+          } else {
+            watchList =
+              <button onClick={() => this.addToWatchlist()}>
+                Add To Watchlist
+            </button>
+          }
+        }
+      }
+
       if (!checkedDuplicate) {
 
         recEntryWindow = <form onSubmit={e => this.handleSubmit(e)}>
@@ -141,39 +182,37 @@ export class Movie extends React.Component {
                 </section>
                 <section className="movie-info">
                   <section className="movie-overview">
-                    <h3>Overview</h3>
                     <p>{this.props.movieData.overview}</p>
                   </section>
-                  <button className="add-button" onClick={() => this.addToWatchlist()}>
-                    Add To Watchlist
-                  </button>
+                  {watchList}
                 </section>
               </section>
             </section>
             <section className="movie-bottom">
-                  <section className="movie-release">
-                    <h3>Release Date</h3>
-                    <p>{releaseDate}</p>
-                  </section>
-                  <section className="genres">
-                    <h3>Genre(s)</h3>
-                    <p>{genres}</p>
-                  </section>
-                  <section className="recommended">
-                    <section className="recommended-count">
-                      <h3>Recommended Count:</h3>
-                      <p>{this.props.movieRecs.length}</p>
-                    </section>
-                  </section>
+              <section className="movie-release">
+                <h3>Release Date</h3>
+                <p>{releaseDate}</p>
+              </section>
+              <section className="genres">
+                <h3>Genre(s)</h3>
+                <p>{genres}</p>
+              </section>
+              <section className="recommended">
+                <section className="recommended-count">
+                  <h3>Recommended Count:</h3>
+                  <p>{this.props.movieRecs.length}</p>
                 </section>
-            <section className="movie-recommendations">
-              <h2>{this.props.movieData.title}'s Recommendations</h2>
-              {recEntryWindow}
-              <ul className="movie-page-rec-list">
-                {recommendations}
-              </ul>
+              </section>
             </section>
+          <section className="movie-recommendations">
+            <h2>{this.props.movieData.title}'s Recommendations</h2>
+            <label htmlFor="description">Why Recommended</label>
+            {recEntryWindow}
+            <ul className="movie-page-rec-list">
+              {recommendations}
+            </ul>
           </section>
+        </section>
         </section>
       );
     }
@@ -186,8 +225,10 @@ const mapStateToProps = (state, props) => {
     currentUser: state.auth.currentUser,
     movieRecs: state.recs.movieRecs,
     movieId,
-    movieData: state.movies.movieData
+    movieData: state.movies.movieData,
+    watchList: state.user.watchList,
+    loading: state.user.loading
   };
 };
 
-export default connect(mapStateToProps)(Movie);
+export default requiresLogin()(connect(mapStateToProps)(Movie));

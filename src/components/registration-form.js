@@ -66,7 +66,6 @@ export class RegistrationForm extends React.Component {
                         disabled={this.props.pristine || this.props.submitting}>
                         Submit
                     </button>
-                    <Link to="/login" style={{ textDecoration: 'none', color:'#71FFDD' }}>Login</Link>
                 </fieldset>
             
             </form>

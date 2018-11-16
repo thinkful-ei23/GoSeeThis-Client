@@ -18,6 +18,11 @@
     margin-top: 25px;
 }
 
+.movie-overview{
+    overflow: auto;
+    height: 200px;
+}
+
 .movie-page .movie-poster img{
     height: 40vh;
     float: left;
