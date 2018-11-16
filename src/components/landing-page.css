@@ -96,10 +96,6 @@
     background: #00c4cc;
 }
 
-#react-tabs-14[aria-selected="false"]{
-    color: #71ffdd;
-}
-
 @media only screen and (max-width: 768px){
     .landing-image{
         height: 600px;
