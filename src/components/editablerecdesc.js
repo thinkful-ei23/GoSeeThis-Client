@@ -14,15 +14,12 @@ export class EditableRecDesc extends React.Component {
 	}
 
 	handleToggle = () => {
-		console.log(this.props.rec);
 		this.setState({
 			editing: true
 		});
 	}
     onSubmit(values){
-        console.log(values);
         const recDesc = values.description;
-		console.log(recDesc);
 		//this.props.dispatch(editRec(rec.id, e.target.value)).then(() =>
 		//this.props.dispatch(fetchUserRecs(this.props.user.id)));
 	}
