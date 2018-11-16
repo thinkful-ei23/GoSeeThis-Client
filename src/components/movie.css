@@ -1,6 +1,4 @@
 .movie-page {
-    padding-left: 200px;
-    padding-right: 200px;
     display: flex;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
@@ -13,14 +11,23 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    margin-bottom: 25px;
     background: white;
     padding: 16px;
+    width: 40%;
+    height: 93vh;
+    margin-top: 25px;
+}
+
+.movie-overview{
+    overflow: auto;
+    height: 200px;
 }
 
 .movie-page .movie-poster img{
-    height: 500px;
+    height: 40vh;
     float: left;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .movie-page .movie-body {
@@ -34,14 +41,26 @@
 .movie-page .movie-top {
     display: flex;
     flex-direction: row;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+        height: 40vh;
+        margin-bottom: 25px;
+        
+        
+}
+
+.movie-page .movie-bottom {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
-        max-width: 850px;
-        min-width: 550px;;
+        width: 100%;
         border-radius: 5px;
-        height: 500px;
+        height: 10vh;
         margin-bottom: 25px;
         
         
@@ -49,21 +68,20 @@
 
 .movie-page .movie-title {
     font-family: 'Lato', sans-serif;
-    font-size: 45px;
+    font-size: 3vw;
 }
 
 .movie-recommendations {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    max-width: 850px;
-    min-width: 550px;;
+    width: 100%;
     border-radius: 5px;
-    height: 500px;
+    height: 33vh;
     margin-bottom: 25px;
+    overflow: auto;
     
 }
 
@@ -72,8 +90,8 @@
     transition: 0.3s;
     border-radius: 5px;
     padding: 2px 16px;
+    margin: 10px;
     width: 300px;
-    height: 100px;
     background-color: white;
 }
 
@@ -92,4 +110,150 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin: 1em 0;
+}
+
+.movie-release{
+    border-right: 1px solid #333;
+    width: 33%;
+    padding: 10px;
+    height: 10vh;
+}
+
+.movie-release p{
+    font-size: .9vw;
+}
+
+.movie-release h3{
+    font-size: 1vw;
+}
+
+.genres{
+    border-right: 1px solid #333;
+    width: 33%;
+    padding: 10px;
+    height: 10vh;
+}
+
+.genres p{
+    font-size: .9vw;
+    
+}
+    
+.genres h3{
+    font-size: 1vw;
+}
+
+.recommended{
+    width: 33%;
+    padding: 10px;
+    height: 10vh;
+}
+
+.recommended p{
+    font-size: .9vw;
+}
+    
+.recommended h3{
+    font-size: 1vw;
+}
+
+@media only screen and (max-width: 768px){
+    .movie-page .movie-container {
+        width: 100%;
+        padding: 0px;
+        margin-top: 0;
+        height: 775px;;
+    }
+    
+    .movie-page .movie-title{
+        font-size: 20px;
+    }
+
+    .movie-overview h3{
+        display: none;
+    }
+
+    .movie-release{
+        padding: 5px;
+
+    }
+    
+    .movie-release p{
+        font-size: 2.5vw;
+    }
+    
+    .movie-release h3{
+        font-size: 4vw;
+    }
+    
+    .genres{
+        border-right: 1px solid #333;
+        width: 33%;
+        padding: 5px;
+        
+    }
+    
+    .genres p{
+        font-size: 2.5vw;
+        
+    }
+        
+    .genres h3{
+        font-size: 4vw;
+    }
+    
+    .recommended{
+        width: 33%;
+        padding: 5px;
+        
+    }
+    
+    .recommended p{
+        font-size: 2.5vw;
+    }
+        
+    .recommended h3{
+        font-size: 4vw;
+    }
+
+    .recommend-description {
+        width: 100%;
+        height: 100px;
+    }
+
+    .movie-page-rec-list{
+        width: 100%
+    }
+
+    .movie-page-rec-list li{
+        width: 100%;
+        padding-right:40px;
+    }
+
+    .movie-overview{
+        overflow: auto;
+        height: 175px;
+    }
+
+    .add-button{
+        margin-top: 15px;
+    }
+
+    .movie-recommendations h2{
+        font-size: 15px;
+    }
+
+    .movie-page .movie-top {
+            height: 300px;    
+    }
+
+    .movie-page .movie-poster img{
+        height: 300px;
+    }
+
+    .movie-recommendations {
+        height: 325px;
+        margin-bottom: 5px; 
+    }
+    
 }

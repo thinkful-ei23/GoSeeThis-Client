@@ -5,6 +5,8 @@ import LinkButton from './LinkButton';
 import { fetchRecs, fetchFollowingRecs } from '../actions/recommendations';
 import { POSTER_PATH_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 
 import './dashboard.css';
 
@@ -87,35 +89,33 @@ export class Dashboard extends React.Component {
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
         return (
-          <li key={index} className="card">
+          <li key={index} className="dash-card">
             <section className="dash-recommended">
-              <section className="dash-movie-poster">
+              <section className="imageWrapper">
                 <Link to={`/movie/${rec.movieId}`}>
                   <img
                     src={POSTER_PATH_BASE_URL + rec.posterUrl}
                     alt="movie poster"
+                    className="movie-poster"
                   />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`} style={{ textDecoration: 'none', color:'#71ffdd' }}>
+                      {rec.userId.username}
+                    </Link>
+                    </p>
+                  </div>
                 </Link>
               </section>
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`} style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
                   <p>{genres}</p>
-                </section>
-                <section className="dash-rec-user">
-                  <h3>
-                    <Link to={`/user/${rec.userId.id}`}>
-                      {rec.userId.username}
-                    </Link>
-                    :
-                  </h3>
-                </section>
-                <section className="dash-recommend-desc">
-                  <p>{rec.recDesc}</p>
                 </section>
               </section>
             </section>
@@ -176,35 +176,33 @@ export class Dashboard extends React.Component {
           .map(genre => this.props.genres[String(genre)])
           .join(' , ');
         return (
-          <li key={index} className="card">
+          <li key={index} className="dash-card">
             <section className="dash-recommended">
-              <section className="dash-movie-poster">
+              <section className="imageWrapper">
                 <Link to={`/movie/${rec.movieId}`}>
                   <img
                     src={POSTER_PATH_BASE_URL + rec.posterUrl}
                     alt="movie poster"
+                    className="movie-poster"
                   />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`}>
+                      {rec.userId.username}
+                    </Link>
+                    </p>
+                  </div>
                 </Link>
               </section>
               <section className="dash-container">
                 <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
                 <section className="dash-movie-genres">
                   <p>{genres}</p>
-                </section>
-                <section className="dash-rec-user">
-                  <h3>
-                    <Link to={`/user/${rec.userId.id}`}>
-                      {rec.userId.username}
-                    </Link>
-                    :
-                  </h3>
-                </section>
-                <section className="dash-recommend-desc">
-                  <p>{rec.recDesc}</p>
                 </section>
               </section>
             </section>
@@ -215,24 +213,13 @@ export class Dashboard extends React.Component {
 
     return (
       <section className="dash">
-        <section className="dash-buttons">
-          <section className="profileButton">
-            <LinkButton to="/profile" className="profileBtn">
-              My Recomendations
-            </LinkButton>
-          </section>
+        {/* <section className="dash-buttons">
           <section className="recommendButton">
             <LinkButton to="/recommend" className="recBtn">
               + Recommend
-            </LinkButton>
+              </LinkButton>
           </section>
-        </section>
-        <section className="dashboard-container-left">
-          <section className="myRecommended">
-            <section className="recommended-list">
-              <section className="recommendation-header">
-                <h2>Global Recent Activity:</h2>
-                <div>
+          <div className="filter-genre">
                   <input
                     placeholder={`Search for title`}
                     onChange={e => this.handleInputChange(e)}
@@ -240,6 +227,7 @@ export class Dashboard extends React.Component {
                   <select
                     onChange={e => this.setFilterGenre(e)}
                     value={this.state.value}
+                    id="genre-filter-dropdown"
                   >
                     <option value="">Filter by Genre</option>
                     <option value="28">Action</option>
@@ -263,60 +251,37 @@ export class Dashboard extends React.Component {
                     <option value="37">Western</option>
                   </select>
                 </div>
-              </section>
-              <section className="global-activity">
-                <section className="overflow">
-                  <ul className="recent-activity">{recs}</ul>
+        </section> */}
+        <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+          <TabList>
+            <Tab>Recent Activity</Tab>
+            <Tab>Following Activity</Tab>
+          </TabList>
+          <TabPanel>
+            <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+                  <h2>Recent Activity:</h2>
+                </section>
+                <section className="global-activity">
+                    <ul className="recent-activity">{recs}</ul>
                 </section>
               </section>
             </section>
-          </section>
-        </section>
-        <section className="dashboard-container-right">
-          <section className="myRecommended">
-            <section className="recommended-list">
-              <section className="recommendation-header">
-                <h2>Following Activity:</h2>
-                <div>
-                  <input
-                    placeholder={`Search for title`}
-                    onChange={e => this.handleInputChange(e)}
-                  />
-                  <select
-                    onChange={e => this.setFilterGenre(e)}
-                    value={this.state.value}
-                  >
-                    <option value="">Filter by Genre</option>
-                    <option value="28">Action</option>
-                    <option value="12">Adventure</option>
-                    <option value="16">Animation</option>
-                    <option value="35">Comedy</option>
-                    <option value="80">Crime</option>
-                    <option value="99">Documentary</option>
-                    <option value="18">Drama</option>
-                    <option value="10751">Family</option>
-                    <option value="14">Fantasy</option>
-                    <option value="36">History</option>
-                    <option value="27">Horror</option>
-                    <option value="10402">Music</option>
-                    <option value="9648">Mystery</option>
-                    <option value="10749">Romance</option>
-                    <option value="878">Science Fiction</option>
-                    <option value="10770">TV Movie</option>
-                    <option value="53">Thriller</option>
-                    <option value="10752">War</option>
-                    <option value="37">Western</option>
-                  </select>
-                </div>
-              </section>
-              <section className="global-activity">
-                <section className="overflow">
-                  <ul className="recent-activity">{followRecs}</ul>
+          </TabPanel>
+          <TabPanel>
+            <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+                  <h2>Following Activity:</h2>
+                </section>
+                <section className="global-activity">
+                    <ul className="recent-activity">{followRecs}</ul>
                 </section>
               </section>
             </section>
-          </section>
-        </section>
+          </TabPanel>
+        </Tabs>
       </section>
     );
   }
@@ -332,3 +297,4 @@ const mapStateToProps = state => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+

@@ -1,0 +1,77 @@
+
+
+
+.register-form label{
+    color: white;
+}
+
+.register-form input {
+  padding: 5px;
+}
+
+.input-container {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 100;
+  }
+
+  label {
+    font-weight: 100;
+  }
+
+  .register-btn {
+    border: 1px solid #333;
+    color: #333;
+      font-size: 12px;;
+      background-color: #00c4cc;
+      cursor: pointer;
+      padding: 7px 25px;
+      display: inline-block;
+      margin: 20px 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      outline: none;
+      position: relative;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      margin-left: 0;
+      color: white;
+  }
+
+  .register-btn:hover,
+  .register-btn:active {
+    color: #181818;
+    background-color: #fff;
+  }
+
+  .login-para {
+    font-size: 16px;
+    font-weight: 100;
+  }
+
+  .login-link:hover,
+  .login-link:active {
+    font-weight: 600;
+  }
+
+  @media only screen and (max-width: 768px){
+    .register-form{
+      padding: 16px;
+      width: 100%;
+      margin-top: 5px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .register-form label{
+    margin: 0;
+}
+
+.register-form input {
+  padding: 2px;
+}
+
+  }
+

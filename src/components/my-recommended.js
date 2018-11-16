@@ -7,6 +7,8 @@ import { POSTER_PATH_BASE_URL } from '../config';
 import requiresLogin from './requires-login';
 import LinkButton from './LinkButton';
 import { Link } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 import './my-recommended.css';
 
 export class MyRecommended extends React.Component {
@@ -73,7 +75,7 @@ export class MyRecommended extends React.Component {
         <li key={index}>
           <p><Link to={`/user/${follow.id}`}>{follow.username}</Link></p>
         </li>
-      )); 
+      ));
     }
 
     if (this.props.followers) {
@@ -88,29 +90,31 @@ export class MyRecommended extends React.Component {
       watch = this.props.watchList.map((rec, index) => {
         const genres = rec.genres.map(genre => genre.name).join(' , ');
         return (
-          <li key={index} className="card">
-            <section className="recommended">
-              <section className="movie-poster">
+          <li key={index} className="dash-card">
+            <section className="dash-recommended">
+              <section className="imageWrapper">
                 <Link to={`/movie/${rec.movieId}`}>
                   <img
                     src={POSTER_PATH_BASE_URL + rec.poster_path}
                     alt="movie poster"
+                    className="movie-poster"
                   />
                 </Link>
               </section>
-              <section className="delete-button">
-                <p onClick={() => this.handleDeleteWatch(rec)}>x</p>
-              </section>
-              <section className="container">
-                <section className="movie-title">
+              <section className="dash-container">
+                <section className="dash-movie-title">
                   <h3>
-                    <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                   </h3>
                 </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
+                <section className="watch-delete-button">
+                <p className="deleteBttn" onClick={() => this.handleDeleteWatch(rec)}><i class="fas fa-trash-alt"></i></p>
               </section>
-              <section> {genres}</section>
-            <section>{rec.overview}</section>
-	</section>
+              </section>
+            </section>
           </li>
         );
       });
@@ -119,26 +123,28 @@ export class MyRecommended extends React.Component {
       recs = this.props.recs.map((rec, index) => {
         if (this.state.editedRec === rec.movieId) {
           return (
-            <li key={index} className="card">
-              <section className="recommended">
-                <section className="movie-poster">
+            <li key={index} className="dash-card">
+              <section className="dash-recommended">
+                <section className="imageWrapper">
                   <Link to={`/movie/${rec.movieId}`}>
                     <img
                       src={POSTER_PATH_BASE_URL + rec.posterUrl}
                       alt="movie poster"
+                      className="movie-poster"
                     />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                  </div>
                   </Link>
                 </section>
-                <section className="delete-button">
-                  <p onClick={() => this.handleDelete(rec)}>x</p>
-                </section>
-                <section className="container">
-                  <section className="movie-title">
+                <section className="dash-container">
+                  <section className="dash-movie-title">
                     <h3>
-                      <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                      <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                     </h3>
                   </section>
-                  <section className="recommend-desc">
+                  <section className="profile-recommend-desc">
                     <form onSubmit={e => this.handleEdit(rec, e)}>
                       <input
                         type="text"
@@ -147,8 +153,12 @@ export class MyRecommended extends React.Component {
                         onChange={this.handleEditChange}
 			required
                       />
-                      <button type="submit">Edit</button>
+                      <button type="submit"><i class="fas fa-check-circle"></i></button>
+                      <section className="profile-delete-button">
+                  <p className="deleteBttn" onClick={() => this.handleDelete(rec)}><i class="fas fa-trash-alt"></i></p>
+                </section>
                     </form>
+
                   </section>
                 </section>
               </section>
@@ -160,33 +170,37 @@ export class MyRecommended extends React.Component {
             .join(' , ');
 
           return (
-            <li key={index} className="card">
-              <section className="recommended">
-                <section className="movie-poster">
+            <li key={index} className="dash-card">
+              <section className="dash-recommended">
+                <section className="imageWrapper">
                   <Link to={`/movie/${rec.movieId}`}>
                     <img
                       src={POSTER_PATH_BASE_URL + rec.posterUrl}
                       alt="movie poster"
+                      className="movie-poster"
                     />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                  </div>
                   </Link>
                 </section>
-                <section className="delete-button">
-                  <p onClick={() => this.handleDelete(rec)}>x</p>
-                </section>
-                <section className="container">
-                  <section className="movie-title">
+                <section className="dash-container">
+                  <section className="dash-movie-title">
                     <h3>
-                      <Link to={`/movie/${rec.movieId}`}>{rec.title}</Link>
+                      <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
                     </h3>
                   </section>
-                  <section className="movie-genres">{genres}</section>
-                  <section className="recommend-desc">
-                    <section>
-                      <p>{rec.recDesc}</p>
-                      <section onClick={() => this.handleToggle(rec)}>
-                        <button>Edit Description</button>
-                      </section>
+                  <section className="dash-movie-genres">
+                    <p>{genres}</p>
+                  </section>
+                  <section className="profile-recommend-desc">
+                      <section className="editBtn" onClick={() => this.handleToggle(rec)}>
+                      <i class="fas fa-edit"></i>
                     </section>
+                    <section className="profile-delete-button">
+                  <p className="deleteBttn" onClick={() => this.handleDelete(rec)}><i class="fas fa-trash-alt"></i></p>
+                </section>
                   </section>
                 </section>
               </section>
@@ -199,8 +213,8 @@ export class MyRecommended extends React.Component {
       username = this.props.user.username;
     }
     return (
-      <section className="myRecommended">
-        <section className="username">
+      <section className="myProfile">
+        {/* <section className="username">
           <h2>
             <Link
               to={`/user/${this.props.user.id}`}
@@ -209,35 +223,58 @@ export class MyRecommended extends React.Component {
               {username}
             </Link>
           </h2>
-        </section>
-
-        <section className="recommended-list">
-          <section className="recommendButton">
-            <LinkButton to="/recommend" className="recBtn">
-              + Recommend
-            </LinkButton>
-          </section>
-          <section className="recomendation-header">
-            <h2>My Recomendations:</h2>
-          </section>
-          <ul> {recs}</ul>
-        </section>
-        <section>
-          <section>My Watchlist:</section>
-          <ul> {watch}</ul>
-        </section>
-        <section className='following-list'>
-          <h2>Following: </h2>
-          <ul>
-            {following}
-          </ul>
-        </section>
-        <section className='followers-list'>
-          <h2>Followers: </h2>
-          <ul>
-            {followers}
-          </ul>
-        </section>
+        </section> */}
+        <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+          <TabList>
+            <Tab>My Watchlist</Tab>
+            <Tab>My Recomendations</Tab>
+            <Tab>Following/Followers</Tab>
+          </TabList>
+          <TabPanel>
+            <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+                  <h2>My Watchlist:</h2>
+                </section>
+                <section className="global-activity">
+                  <section className="overflow">
+                    <ul className="recent-activity">{watch}</ul>
+                  </section>
+                </section>
+              </section>
+            </section>
+          </TabPanel>
+          <TabPanel>
+          <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+              <h2>My Recomendations:</h2>
+              </section>
+              <section className="global-activity">
+                  <section className="overflow">
+                    <ul className="recent-activity">{recs}</ul>
+                    </section>
+                </section>
+              </section>
+            </section>
+          </TabPanel>
+          <TabPanel>
+            <section className="follow-section" >
+              <section className='following-list'>
+                <h2>Following: </h2>
+                <ul>
+                  {following}
+                </ul>
+              </section>
+              <section className='followers-list' >
+                <h2>Followers: </h2>
+                <ul>
+                  {followers}
+                </ul>
+              </section>
+            </section>
+          </TabPanel>
+        </Tabs>
       </section>
     );
   }
