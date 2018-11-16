@@ -53,6 +53,7 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 * Feed filter (by title and by genre)
 * Making genre clickable link to movie search by genre
 * Links to stream sources (Netflix, Hulu, iTunes, etc).
+* Event confirmation (When deleting recommendations, unfollowing a user, etc).
 
 ## Contributors
 * [Tarik Desire](https://github.com/tdesire)
