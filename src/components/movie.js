@@ -167,7 +167,7 @@ export class Movie extends React.Component {
       if (!checkedDuplicate) {
         recEntryWindow = (
           <form onSubmit={e => this.handleSubmit(e)}>
-            <label>Add a Reccomendation:</label>
+            <label>Add a Recommendation:</label>
             <input type="text" onChange={e => this.handleChange(e)} />
             <button type="submit">Create</button>
           </form>
