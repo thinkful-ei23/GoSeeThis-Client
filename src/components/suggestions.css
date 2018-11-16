@@ -1,7 +1,17 @@
 .suggestions {
-    width: 211px;
+    width: 500px;
     height: 300px;
     background-color: black;
     position: absolute;
     overflow: auto;
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+@media (max-width:768px){
+    .suggestions {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
 }

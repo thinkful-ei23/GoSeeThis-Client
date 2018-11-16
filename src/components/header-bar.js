@@ -44,7 +44,7 @@ export class HeaderBar extends React.Component {
                 </div>
                 <ul>
                     <li><a>{searchbar}</a></li>
-                    <li><a><Link to="/profile" style={{ textDecoration: 'none', color:'white' }}>{username}</Link></a></li>
+                    <li><a><Link to="/profile" style={{ textDecoration: 'none', color:'#333' }}>{username}</Link></a></li>
                     <li><a>{logOutButton}</a></li>
                     <li><a><LinkButton to="/recommend" className="recBtn">
                   + Recommend

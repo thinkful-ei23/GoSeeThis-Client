@@ -1,15 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 import RegistrationForm from './registration-form';
+import LoginForm from './login-form';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import './landing-page.css';
 
 export function LandingPage(props) {
+  if (props.loggedIn) {
+    return <Redirect to="/dashboard" />;
+}
+
   return (
    
     <main className='home'>
     <section className='landing-image'>
-    <RegistrationForm />
+    <div className="register-login-forms">
+    <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+          <TabList>
+            <Tab>Join</Tab>
+            <Tab>Login</Tab>
+          </TabList>
+          <TabPanel>
+          <RegistrationForm />
+          </TabPanel>
+          <TabPanel>
+          <LoginForm />
+          </TabPanel>
+        </Tabs>
+        </div>
       <div className='img'>
       </div>
     </section>

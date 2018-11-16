@@ -156,6 +156,16 @@
     .movie-page .movie-container {
         width: 100%;
         padding: 0px;
+        margin-top: 0;
+        height: 775px;;
+    }
+    
+    .movie-page .movie-title{
+        font-size: 24px;
+    }
+
+    .movie-overview h3{
+        display: none;
     }
 
     .movie-release{
@@ -217,10 +227,28 @@
 
     .movie-overview{
         overflow: auto;
-        height: 27vh;
+        height: 200px;
     }
 
     .add-button{
         margin-top: 15px;
     }
+
+    .movie-recommendations h2{
+        font-size: 15px;
+    }
+
+    .movie-page .movie-top {
+            height: 300px;    
+    }
+
+    .movie-page .movie-poster img{
+        height: 300px;
+    }
+
+    .movie-recommendations {
+        height: 325px;
+        margin-bottom: 5px; 
+    }
+    
 }

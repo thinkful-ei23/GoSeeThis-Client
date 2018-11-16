@@ -27,7 +27,6 @@ export class RegistrationForm extends React.Component {
                 onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-                <legend className="register-title">Join</legend>
                 <fieldset>
                     <div className="input-container">
                         <label htmlFor="firstName">First name:</label>

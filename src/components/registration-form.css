@@ -1,21 +1,12 @@
-.register-form{
-    padding: 16px;
-    width: 30%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-    margin-bottom: 25px;
-    margin-top: 25px;
-    margin-left: 25px;
-    background-color:rgba(0,0,0,0.5);
-    height: 53vh;
-}
-.register-title{
-    color: white;
-}
+
+
 
 .register-form label{
     color: white;
+}
+
+.register-form input {
+  padding: 5px;
 }
 
 .input-container {
@@ -62,5 +53,24 @@
   .login-link:hover,
   .login-link:active {
     font-weight: 600;
+  }
+
+  @media only screen and (max-width: 768px){
+    .register-form{
+      padding: 16px;
+      width: 100%;
+      margin-top: 5px;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .register-form label{
+    margin: 0;
+}
+
+.register-form input {
+  padding: 2px;
+}
+
   }
 

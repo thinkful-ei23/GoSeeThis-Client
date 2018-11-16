@@ -29,7 +29,7 @@ nav ul{
 }
 
 nav .active li a{
-    color: #333;
+    color: white;
     
 }
 
@@ -37,6 +37,7 @@ nav .active li a{
 nav ul li{
     list-style: none;
     display: inline-block;
+    margin-left: 10px;
     margin-right: 10px;
     
 }
@@ -60,8 +61,16 @@ nav ul li a{
     font-size: 30px;
     display: none;
 }
-
-@media (max-width:768px){
+@media (max-width:1155px){
+    nav ul li{
+        list-style: none;
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+        
+    }
+}
+@media (max-width:880px){
     .toggle{
         display: block;
     }
@@ -83,6 +92,7 @@ nav ul li a{
     nav .active{
         display: block;
         background: whitesmoke;
+        padding: 0;
     }
 
     header nav ul li a form ul{
