@@ -22,7 +22,6 @@ export class UserRecommended extends React.Component {
   }
 
   unFollow() {
-    console.log('unFollow ran!')
     const unfollowed = {
       following: this.props.userId
     }
