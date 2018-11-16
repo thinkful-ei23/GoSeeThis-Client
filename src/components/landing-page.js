@@ -46,14 +46,14 @@ export function LandingPage(props) {
           </section>
           <section className="about-second">
           <h3>Why all the negativity?</h3> 
-          <p>Indiania Jones and the Kingdom
-              Of The Crystal Skull 77% While Wet Hot American Summer sits at 33% Really?
+          <p>Most places where you get to talk about movies, half of the disucssion is defending
+            why you like the movie. It makes talking movies no fun.
             </p>
           </section>
           <section className="about-third">
           <h3>Lets just enjoy movies!</h3> 
-          <p>Indiania Jones and the Kingdom
-              Of The Crystal Skull 77% While Wet Hot American Summer sits at 33% Really?
+          <p>At GoSeeThis the whole point is to learn about new movies and just enjoy
+            movies. 
             </p>
           </section>
         </section>
