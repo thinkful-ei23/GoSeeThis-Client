@@ -1,0 +1,57 @@
+
+  
+  .login-btn:hover,
+  .login-btn:active {
+    color: #fff;
+    background: #181818;
+  }
+  
+  #username-login{
+    padding-top: 25px;
+    color: white;
+  }
+
+  #password-login{
+    padding-top: 25px;
+    color: white;
+  }
+
+  #loginBtn{
+    margin-top: 200px;
+    border: 1px solid #333;
+    color: #333;
+      font-size: 12px;;
+      background-color: #00c4cc;
+      cursor: pointer;
+      padding: 7px 25px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      outline: none;
+      position: relative;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      transition: all 0.3s;
+      margin-left: 0;
+      color: white;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 7px;
+    margin-bottom: 13px;
+    font-size: 17px;
+    font-weight: 100;
+  }
+  
+  label {
+    font-weight: 100;
+  }
+
+  @media only screen and (max-width: 768px){
+    #loginBtn{
+      margin-top: 100px;
+    }
+  }

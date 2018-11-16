@@ -1,91 +1,43 @@
 import {
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_ERROR
+  FETCH_MOVIES_INPUT_SUCCESS,
+  FETCH_MOVIES_ERROR,
+  FETCH_MOVIE_DATA_REQUEST,
+  FETCH_MOVIE_DATA_SUCCESS,
+  FETCH_MOVIE_DATA_ERROR,
+  STORE_REC_MOVIE,
+  DELETE_REC_MOVIE
 } from '../actions/movies';
 
 const initialState = {
   loading: false,
   searchResults: null,
-  error: false,
-  genre: [
-    {
-      "id": 28,
-      "name": "Action"
-    },
-    {
-      "id": 12,
-      "name": "Adventure"
-    },
-    {
-      "id": 16,
-      "name": "Animation"
-    },
-    {
-      "id": 35,
-      "name": "Comedy"
-    },
-    {
-      "id": 80,
-      "name": "Crime"
-    },
-    {
-      "id": 99,
-      "name": "Documentary"
-    },
-    {
-      "id": 18,
-      "name": "Drama"
-    },
-    {
-      "id": 10751,
-      "name": "Family"
-    },
-    {
-      "id": 14,
-      "name": "Fantasy"
-    },
-    {
-      "id": 36,
-      "name": "History"
-    },
-    {
-      "id": 27,
-      "name": "Horror"
-    },
-    {
-      "id": 10402,
-      "name": "Music"
-    },
-    {
-      "id": 9648,
-      "name": "Mystery"
-    },
-    {
-      "id": 10749,
-      "name": "Romance"
-    },
-    {
-      "id": 878,
-      "name": "Science Fiction"
-    },
-    {
-      "id": 10770,
-      "name": "TV Movie"
-    },
-    {
-      "id": 53,
-      "name": "Thriller"
-    },
-    {
-      "id": 10752,
-      "name": "War"
-    },
-    {
-      "id": 37,
-      "name": "Western"
-    }
-  ]
+  inputSearchResults: null,
+  recMovieData: null,
+  error: null,
+  movieData: null,
+  genres: {
+    "28": "Action",
+    "12": "Adventure",
+    "16": "Animation",
+    "35": "Comedy",
+    "80": "Crime",
+    "99": "Documentary",
+    "18": "Drama",
+    "10751": "Family",
+    "14": "Fantasy",
+    "36": "History",
+    "27": "Horror",
+    "10402": "Music",
+    "9648": "Mystery",
+    "10749": "Romance",
+    "878": "Science Fiction",
+    "10770": "TV Movie",
+    "53": "Thriller",
+    "10752": "War",
+    "37": "Western"
+  }
 }
 
 export default function reducer(state=initialState, action) {
@@ -102,6 +54,13 @@ export default function reducer(state=initialState, action) {
     });
   }
 
+ if (action.type === FETCH_MOVIES_INPUT_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      inputSearchResults: action.movies
+    });
+  }
+
   if (action.type === FETCH_MOVIES_ERROR) {
     return Object.assign({}, state, {
       loading: false,
@@ -109,5 +68,39 @@ export default function reducer(state=initialState, action) {
     });
   }
 
+  if (action.type === FETCH_MOVIE_DATA_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true
+    });
+  }
+
+  if (action.type === FETCH_MOVIE_DATA_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      movieData: action.data
+    });
+  }
+
+  if (action.type === STORE_REC_MOVIE) { 
+    return Object.assign({},state,{
+    recMovieData: action.data
+    });
+  }
+
+   if (action.type === DELETE_REC_MOVIE) {
+    return Object.assign({},state,{
+    recMovieData: null
+    });
+  }
+
+
+
+  if (action.type === FETCH_MOVIE_DATA_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+  
   return state;
 }

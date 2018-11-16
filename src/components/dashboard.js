@@ -1,52 +1,302 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-
+import LinkButton from './LinkButton';
+import { fetchRecs, fetchFollowingRecs } from '../actions/recommendations';
+import { POSTER_PATH_BASE_URL } from '../config';
+import { Link } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      genreVal: '',
+      searchVal: ''
+    };
+  }
 
+  componentDidMount() {
+    this.props.dispatch(fetchRecs());
+    this.props.dispatch(fetchFollowingRecs());
+  }
 
-    render() {
+  handleInputChange(e) {
+    const searchVal = e.target.value;
+    this.setState({ searchVal });
+  }
+
+  setFilterGenre(e) {
+    this.setState({ genreVal: e.target.value });
+  }
+
+  setSearchFilter(e) {
+    this.setState({ filterBy: e.target.value });
+  }
+
+  render() {
+    let recs;
+    let genreFilteredRecs;
+    let titleFilteredRecs;
+    let fullFilteredRecs;
+    let arr;
+
+    if (this.props.recs) {
+      if (this.state.genreVal) {
+        let arr = this.props.recs;
+        let val = parseInt(this.state.genreVal);
+        genreFilteredRecs = arr.filter(rec => {
+          const found = rec.genre_ids.find(element => {
+            return element === val;
+          });
+          if (found) {
+            return rec;
+          }
+        });
+      }
+
+      if (this.state.searchVal) {
+        let arr = this.props.recs;
+        let val = this.state.searchVal;
+        titleFilteredRecs = arr.filter(rec => {
+          const title = rec.title.toLowerCase();
+          val = val.toLowerCase();
+          return title.includes(val);
+        });
+      }
+
+      if (this.state.searchVal && this.state.genreVal) {
+        fullFilteredRecs = genreFilteredRecs.filter(rec => {
+          const title = rec.title.toLowerCase();
+          let val = this.state.searchVal.toLowerCase();
+          return title.includes(val);
+        });
+      }
+      if (fullFilteredRecs) {
+        arr = fullFilteredRecs;
+      } else if (titleFilteredRecs) {
+        arr = titleFilteredRecs;
+      } else if (genreFilteredRecs) {
+        arr = genreFilteredRecs;
+      } else {
+        arr = this.props.recs;
+      }
+      recs = arr.map((rec, index) => {
+        const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
         return (
-            <div className="dashboard">
-            <section className="search">
-                <input type="text" placeholder="Search.."></input>
-                <button type="submit"><i className="fa fa-search"></i></button>
+          <li key={index} className="dash-card">
+            <section className="dash-recommended">
+              <section className="imageWrapper">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                    alt="movie poster"
+                    className="movie-poster"
+                  />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`} style={{ textDecoration: 'none', color:'#71ffdd' }}>
+                      {rec.userId.username}
+                    </Link>
+                    </p>
+                  </div>
+                </Link>
+              </section>
+              <section className="dash-container">
+                <section className="dash-movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`} style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
+                  </h3>
+                </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
+              </section>
             </section>
-            <section className="header">
-                <h2>Recent Activity</h2>
-            </section>
-            <section className="recentActivity">
-                <ul className="activity">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam 
-                    quis leo viverra, viverra nibh sed, posuere eros. Nullam a nunc 
-                    quis ipsum commodo bibendum. Maecenas vitae lobortis tellus, vitae 
-                    mollis risus. Aliquam a malesuada mi, non accumsan tortor. Ut lorem ex, 
-                    mollis tincidunt eleifend vitae, ultrices eget dui. Etiam iaculis nisi 
-                    sit amet arcu convallis commodo. Aliquam rhoncus ut lectus sit amet 
-                    elementum. Donec cursus tortor id malesuada lobortis. Proin nec quam 
-                    ante. Nam sit amet eleifend ex. Phasellus consequat odio ac viverra 
-                    hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Phasellus tempus finibus massa ullamcorper consequat. Mauris consequat 
-                    iaculis nisl, vitae venenatis dui vestibulum eget.</p>
-                </ul>
-            </section>
-            <section className="newButton">
-                <button type="submit">New Recommended</button>
-            </section>
-        </div>
+          </li>
         );
+      });
     }
+
+    let followRecs;
+    let genreFilteredFollowRecs;
+    let titleFilteredFollowRecs;
+    let fullFilteredFollowRecs;
+    let followArr;
+
+    if (this.props.followingRecs) {
+      if (this.state.genreVal) {
+        let arr = this.props.followingRecs;
+        let val = parseInt(this.state.genreVal);
+        genreFilteredFollowRecs = arr.filter(rec => {
+          const found = rec.genre_ids.find(element => {
+            return element === val;
+          });
+          if (found) {
+            return rec;
+          }
+        });
+      }
+
+      if (this.state.searchVal) {
+        let arr = this.props.followingRecs;
+        let val = this.state.searchVal;
+        titleFilteredFollowRecs = arr.filter(rec => {
+          const title = rec.title.toLowerCase();
+          val = val.toLowerCase();
+          return title.includes(val);
+        });
+      }
+
+      if (this.state.searchVal && this.state.genreVal) {
+        fullFilteredFollowRecs = genreFilteredFollowRecs.filter(rec => {
+          const title = rec.title.toLowerCase();
+          let val = this.state.searchVal.toLowerCase();
+          return title.includes(val);
+        });
+      }
+      if (fullFilteredFollowRecs) {
+        followArr = fullFilteredFollowRecs;
+      } else if (titleFilteredFollowRecs) {
+        followArr = titleFilteredFollowRecs;
+      } else if (genreFilteredFollowRecs) {
+        followArr = genreFilteredFollowRecs;
+      } else {
+        followArr = this.props.followingRecs;
+      }
+
+      followRecs = followArr.map((rec, index) => {
+        const genres = rec.genre_ids
+          .map(genre => this.props.genres[String(genre)])
+          .join(' , ');
+        return (
+          <li key={index} className="dash-card">
+            <section className="dash-recommended">
+              <section className="imageWrapper">
+                <Link to={`/movie/${rec.movieId}`}>
+                  <img
+                    src={POSTER_PATH_BASE_URL + rec.posterUrl}
+                    alt="movie poster"
+                    className="movie-poster"
+                  />
+                  <div className="cornerLink">
+                    <p className="cornerLink-desc">
+                      {rec.recDesc}</p>
+                    <p className="cornerLink-username"><Link to={`/user/${rec.userId.id}`}>
+                      {rec.userId.username}
+                    </Link>
+                    </p>
+                  </div>
+                </Link>
+              </section>
+              <section className="dash-container">
+                <section className="dash-movie-title">
+                  <h3>
+                    <Link to={`/movie/${rec.movieId}`}  style={{ textDecoration: 'none', color:'#00c4cc' }}>{rec.title}</Link>
+                  </h3>
+                </section>
+                <section className="dash-movie-genres">
+                  <p>{genres}</p>
+                </section>
+              </section>
+            </section>
+          </li>
+        );
+      });
+    }
+
+    return (
+      <section className="dash">
+        {/* <section className="dash-buttons">
+          <section className="recommendButton">
+            <LinkButton to="/recommend" className="recBtn">
+              + Recommend
+              </LinkButton>
+          </section>
+          <div className="filter-genre">
+                  <input
+                    placeholder={`Search for title`}
+                    onChange={e => this.handleInputChange(e)}
+                  />
+                  <select
+                    onChange={e => this.setFilterGenre(e)}
+                    value={this.state.value}
+                    id="genre-filter-dropdown"
+                  >
+                    <option value="">Filter by Genre</option>
+                    <option value="28">Action</option>
+                    <option value="12">Adventure</option>
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">History</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Music</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10749">Romance</option>
+                    <option value="878">Science Fiction</option>
+                    <option value="10770">TV Movie</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">War</option>
+                    <option value="37">Western</option>
+                  </select>
+                </div>
+        </section> */}
+        <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+          <TabList>
+            <Tab>Recent Activity</Tab>
+            <Tab>Following Activity</Tab>
+          </TabList>
+          <TabPanel>
+            <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+                  <h2>Recent Activity:</h2>
+                </section>
+                <section className="global-activity">
+                  <div id="inner">
+                    <ul className="recent-activity">{recs}</ul>
+                    </div>
+                </section>
+              </section>
+            </section>
+          </TabPanel>
+          <TabPanel>
+            <section className="dashRecommended">
+              <section className="dash-recommended-list">
+                <section className="dash-recommendation-header">
+                  <h2>Following Activity:</h2>
+                </section>
+                <section className="global-activity">
+                    <ul className="recent-activity">{followRecs}</ul>
+                </section>
+              </section>
+            </section>
+          </TabPanel>
+        </Tabs>
+      </section>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-    const {currentUser} = state.auth;
-    return {
-        username: state.auth.currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
-    };
+  return {
+    recs: state.recs.recs,
+    user: state.auth.currentUser,
+    genres: state.movies.genres,
+    followingRecs: state.recs.followingRecs
+  };
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+

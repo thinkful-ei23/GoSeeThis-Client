@@ -1,0 +1,31 @@
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 200px;
+    background-color: black;
+    overflow-x: auto;
+    overflow-y: auto;
+      margin-top: 0;
+    position: absolute;
+    overflow: auto;
+    margin-left: 10px;
+    margin-top: -10px;
+}
+
+.suggestions li {
+    text-align: left;
+    padding: 10px;
+}
+
+@media (max-width:768px){
+    .suggestions {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+}
+
+.header-bar li a {
+	width: 211px;
+}

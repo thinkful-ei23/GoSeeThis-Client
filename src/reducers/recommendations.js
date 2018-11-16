@@ -2,14 +2,20 @@ import {
   FETCH_RECS_REQUEST,
   FETCH_RECS_SUCCESS,
   FETCH_RECS_ERROR,
+  CREATE_REC_DATA_REQUEST,
+  CREATE_REC_DATA_SUCCESS,
+  CREATE_REC_DATA_ERROR,
   FETCH_MOVIE_RECS_REQUEST,
   FETCH_MOVIE_RECS_SUCCESS,
   FETCH_MOVIE_RECS_ERROR,
   FETCH_USER_RECS_REQUEST,
   FETCH_USER_RECS_SUCCESS,
   FETCH_USER_RECS_ERROR,
-  SELECT_MOVIE,
-  SELECT_USER
+  EDIT_REC_SUCCESS,
+  EDIT_REC_ERROR,
+  FETCH_FOLLOWING_RECS_REQUEST,
+  FETCH_FOLLOWING_RECS_SUCCESS,
+  FETCH_FOLLOWING_RECS_ERROR
 } from '../actions/recommendations';
 
 const initialState = {
@@ -17,18 +23,18 @@ const initialState = {
   recs: null,
   movieRecs: null,
   userRecs: null,
-  movieId: null,
-  userId: null,
-  error: false
+  followingRecs: null,
+  user: null,
+  error: null
 };
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state = initialState, action) {
   if (action.type === FETCH_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
     });
   }
-  
+
   if (action.type === FETCH_RECS_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
@@ -43,12 +49,34 @@ export default function reducer(state=initialState, action) {
     });
   }
 
+  if (action.type === CREATE_REC_DATA_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  };
+
+  if (action.type === CREATE_REC_DATA_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: null,
+      recs: [...state.recs, action.rec]
+    });
+  }
+
+  if (action.type === CREATE_REC_DATA_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+
   if (action.type === FETCH_MOVIE_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
     });
   }
-  
+
   if (action.type === FETCH_MOVIE_RECS_SUCCESS) {
     return Object.assign({}, state, {
       loading: false,
@@ -62,7 +90,6 @@ export default function reducer(state=initialState, action) {
       error: action.error
     });
   }
-
   if (action.type === FETCH_USER_RECS_REQUEST) {
     return Object.assign({}, state, {
       loading: true
@@ -83,17 +110,39 @@ export default function reducer(state=initialState, action) {
     });
   }
 
-  if (action.type === SELECT_MOVIE) {
+  if (action.type === EDIT_REC_SUCCESS) {
     return Object.assign({}, state, {
-      movieId: action.movieId
+      loading: false
     });
   }
 
-  if (action.type === SELECT_USER) {
+  if (action.type === EDIT_REC_ERROR) {
     return Object.assign({}, state, {
-      userId: action.userId
+      loading: false,
+      error: action.error
     });
   }
-  
+
+  if (action.type === FETCH_FOLLOWING_RECS_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+
+  if (action.type === FETCH_FOLLOWING_RECS_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      followingRecs: action.recs
+    });
+  }
+
+  if (action.type === FETCH_FOLLOWING_RECS_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }
+
   return state;
 }

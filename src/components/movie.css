@@ -1,0 +1,367 @@
+.movie-page {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato', sans-serif;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.movie-page .movie-container {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    background: white;
+    padding: 16px;
+    width: 900px;
+    height: 1000px;
+    margin-top: 25px;
+}
+
+.movie-overview{
+    padding: 12px;
+}
+
+.movie-overview p{
+    font-size: 14px;
+}
+
+.addWatchBtn{
+    width: 150px;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.added-to-watchlist{
+    width: 150px;
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.createBtn{
+    text-decoration: none;
+    background-color:#00c4cc;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.movie-page .movie-header {
+    width: 33%;
+    float: left;
+    margin-right: 15px;
+}
+
+.movie-page .movie-poster img{
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.movie-page .movie-body {
+    position: relative;
+    padding: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    background: white;
+    width: 66%;
+    
+}
+
+.movie-page .recommendations {
+    clear: both;
+}
+
+.movie-page .movie-top {
+    display: flex;
+    flex-direction: row;
+        width: 100%;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        padding: 10px;
+        
+}
+
+.movie-page .movie-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+        height: 100px;
+        margin-bottom: 25px;
+        
+        
+}
+
+.movie-page .movie-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 24px;
+}
+
+.movie-recommendations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+    border-radius: 5px;
+    height: 400px;
+    margin-bottom: 25px;
+    overflow: auto;
+    
+}
+
+.recommend-description {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    padding: 2px 16px;
+    margin: 10px;
+    width: 300px;
+    background-color: white;
+}
+
+.recommend-description:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.recommend-description-container {
+    padding: 2px 16px;
+    
+    
+}
+
+.movie-page-rec-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1em 0;
+}
+
+.movie-release{
+    border-right: 1px solid #333;
+    width: 33%;
+    padding: 10px;
+    height: 100px;
+}
+
+.movie-release p{
+    font-size: 12px;
+}
+
+.movie-release h3{
+    font-size: 20px;
+}
+
+.genres{
+    border-right: 1px solid #333;
+    width: 33%;
+    padding: 10px;
+    height: 100px;
+}
+
+.genres p{
+    font-size: 12px;
+    
+}
+    
+.genres h3{
+    font-size: 20px;
+}
+
+.recommended{
+    width: 33%;
+    padding: 10px;
+    height: 100px;
+}
+
+.recommended p{
+    font-size: 12px;
+}
+    
+.recommended h3{
+    font-size: 20px;
+}
+
+.movie-rec-add-input{
+    padding: 5px;
+}
+
+@media only screen and (max-width: 900px){
+    .movie-page .movie-container {
+        width: 100%;
+        padding: 0px;
+        margin-top: 0;
+        height: 1200px;;
+    }
+
+    .added-to-watchlist{
+        width: 150px;
+        position: absolute;
+        bottom: 10px;
+        text-decoration: none;
+        background-color:#00c4cc;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        font-size: 12px;
+    }
+    
+    .movie-page .movie-title{
+        font-size: 20px;
+    }
+
+    .movie-overview h3{
+        display: none;
+    }
+
+    .movie-release{
+        padding: 5px;
+
+    }
+    
+    .movie-release p{
+        font-size: 12px;
+    }
+    
+    .movie-release h3{
+        font-size: 20px;
+    }
+    
+    .genres{
+        border-right: 1px solid #333;
+        width: 33%;
+        padding: 5px;
+        
+    }
+    
+    .genres p{
+        font-size: 12px;
+        
+    }
+        
+    .genres h3{
+        font-size: 20px;
+    }
+    
+    .recommended{
+        width: 33%;
+        padding: 5px;
+        
+    }
+    
+    .recommended p{
+        font-size: 12px;
+    }
+        
+    .recommended h3{
+        font-size: 20px;
+    }
+
+    .recommend-description {
+        width: 100%;
+    }
+
+    .movie-page-rec-list{
+        width: 100%
+    }
+
+    .movie-page-rec-list li{
+        width: 100%;
+        padding-right:40px;
+    }
+
+    .add-button{
+        margin-top: 15px;
+    }
+
+    .movie-recommendations h2{
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .movie-page .movie-top {
+            /* height: 300px;     */
+    }
+
+    .movie-page .movie-poster img{
+        /* height: 300px; */
+    }
+
+    .movie-recommendations {
+        height: 600px;
+        margin-bottom: 5px; 
+    }
+
+    .label-add-rec{
+        padding: 10px;
+    }
+
+    .createBtn{
+        margin: 10px;
+    }
+    
+}
+
+@media only screen and (max-width: 600px){
+    .movie-page .movie-top {
+        /* height: 300px;     */
+}
+
+.movie-page .movie-poster img{
+    /* height: 300px; */
+}
+
+}
+
+@media only screen and (max-width: 450px){
+    .movie-overview{
+        /* overflow: auto;
+        height: 100px; */
+    }
+
+    .recommended p{
+        font-size: 12px;
+    }
+        
+    .recommended h3{
+        font-size: 15px;
+    }
+
+    .genres p{
+        font-size: 12px;
+        
+    }
+        
+    .genres h3{
+        font-size: 15px;
+    }
+
+    .movie-release p{
+        font-size: 12px;
+    }
+    
+    .movie-release h3{
+        font-size: 15px;
+    }
+
+    .movie-page .movie-container {
+        height: 1200px;;
+    }
+}

@@ -2,4 +2,37 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgb(209, 209, 209);
+  font-family: 'Oswald', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

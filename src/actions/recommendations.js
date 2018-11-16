@@ -1,36 +1,118 @@
-import {API_BASE_URL} from '../config';
+import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
-
+import { SubmissionError } from 'redux-form';
 export const FETCH_RECS_REQUEST = 'FETCH_RECS_REQUEST';
 export const fetchRecsRequest = () => ({
   type: FETCH_RECS_REQUEST
 });
 
 export const FETCH_RECS_SUCCESS = 'FETCH_RECS_SUCCESS';
-export const fetchRecsSuccess = (recs) => ({
+export const fetchRecsSuccess = recs => ({
   type: FETCH_RECS_SUCCESS,
   recs
 });
 
 export const FETCH_RECS_ERROR = 'FETCH_RECS_ERROR';
-export const fetchRecsError = (error) => ({
+export const fetchRecsError = error => ({
   type: FETCH_RECS_ERROR,
   error
 });
 
 export const fetchRecs = () => dispatch => {
   dispatch(fetchRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations`, {
+  return fetch(`${API_BASE_URL}/recommendations`, {
     method: 'GET'
   })
-  .then(res => normalizeResponseErrors(res))
-  .then(recs => {
-    dispatch(fetchRecsSuccess(recs));
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(recs => {
+      dispatch(fetchRecsSuccess(recs));
+    })
+    .catch(err => {
+      dispatch(fetchRecsError(err));
+    });
+};
+
+export const CREATE_REC_DATA_REQUEST = 'CREATE_REC_DATA_REQUEST';
+export const createRecDataRequest = () => ({
+  type: CREATE_REC_DATA_REQUEST
+});
+
+export const CREATE_REC_DATA_SUCCESS = 'CREATE_REC_DATA_SUCCESS';
+export const createRecDataSuccess = rec => ({
+  type: CREATE_REC_DATA_SUCCESS,
+  rec
+});
+
+export const CREATE_REC_DATA_ERROR = 'CREATE_REC_DATA_ERROR';
+export const createRecDataError = error => ({
+  type: CREATE_REC_DATA_ERROR,
+  error
+});
+
+export const deleteRec = id => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/recommendations/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  }).then(() => dispatch(fetchRecs()));
+};
+
+export const EDIT_REC_SUCCESS = 'EDIT_REC_SUCCESS';
+export const editRecSuccess = data => ({
+  type: EDIT_REC_SUCCESS,
+  data
+});
+
+export const EDIT_REC_ERROR = 'EDIT_REC_ERROR';
+export const editRecError = err => ({
+  type: EDIT_REC_ERROR,
+  err
+});
+
+export const editRec = (id, update) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/recommendations/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(update)
   })
-  .catch(err => {
-    dispatch(fetchRecsError(err));
-  });
-}
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(data => dispatch(editRecSuccess(data)))
+    .then(err => dispatch(editRecError(err)));
+};
+
+export const createRec = rec => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(createRecDataRequest());
+  return fetch(`${API_BASE_URL}/recommendations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(rec)
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(({ data }) => dispatch(createRecDataSuccess(data)))
+    .then(() => dispatch(fetchRecs()))
+    .catch(err => {
+      dispatch(createRecDataError(err));
+      return Promise.reject(
+        new SubmissionError({
+          _error: err.message 
+        }) 
+      );
+    });
+};
 
 export const FETCH_MOVIE_RECS_REQUEST = 'FETCH_MOVIE_RECS_REQUEST';
 export const fetchMovieRecsRequest = () => ({
@@ -38,73 +120,96 @@ export const fetchMovieRecsRequest = () => ({
 });
 
 export const FETCH_MOVIE_RECS_SUCCESS = 'FETCH_MOVIE_RECS_SUCCESS';
-export const fetchMovieRecsSuccess = (recs) => ({
+export const fetchMovieRecsSuccess = recs => ({
   type: FETCH_MOVIE_RECS_SUCCESS,
   recs
 });
 
 export const FETCH_MOVIE_RECS_ERROR = 'FETCH_MOVIE_RECS_ERROR';
-export const fetchMovieRecsError = (error) => ({
+export const fetchMovieRecsError = error => ({
   type: FETCH_MOVIE_RECS_ERROR,
   error
 });
 
-export const fetchMovieRecs = (movieId) => dispatch => {
+export const fetchMovieRecs = movieId => dispatch => {
   dispatch(fetchMovieRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
+  return fetch(`${API_BASE_URL}/recommendations/movies/${movieId}`, {
     method: 'GET'
   })
-  .then(res => normalizeResponseErrors(res))
-  .then(res => res.json())
-  .then(recs => {
-    dispatch(fetchMovieRecsSuccess(recs));
-  })
-  .catch(err => {
-    dispatch(fetchMovieRecsError(err));
-  });
-}
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(recs => {
+      dispatch(fetchMovieRecsSuccess(recs));
+    })
+    .catch(err => {
+      dispatch(fetchMovieRecsError(err));
+    });
+};
 
 export const FETCH_USER_RECS_REQUEST = 'FETCH_USER_RECS_REQUEST';
 export const fetchUserRecsRequest = () => ({
-  type: FETCH_MOVIE_RECS_REQUEST
+  type: FETCH_USER_RECS_REQUEST
 });
 
 export const FETCH_USER_RECS_SUCCESS = 'FETCH_USER_RECS_SUCCESS';
-export const fetchUserRecsSuccess = (recs) => ({
-  type: FETCH_MOVIE_RECS_SUCCESS,
+export const fetchUserRecsSuccess = recs => ({
+  type: FETCH_USER_RECS_SUCCESS,
   recs
 });
 
 export const FETCH_USER_RECS_ERROR = 'FETCH_USER_RECS_ERROR';
-export const fetchUserRecsError = (error) => ({
-  type: FETCH_MOVIE_RECS_ERROR,
+export const fetchUserRecsError = error => ({
+  type: FETCH_USER_RECS_ERROR,
   error
 });
 
-export const fetchUserRecs = (userId) => dispatch => {
-  dispatch(fetchMovieRecsRequest());
-  fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
+export const fetchUserRecs = userId => dispatch => {
+  dispatch(fetchUserRecsRequest());
+  return fetch(`${API_BASE_URL}/recommendations/users/${userId}`, {
     method: 'GET'
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(recs => {
+      dispatch(fetchUserRecsSuccess(recs));
+    })
+    .catch(err => {
+      dispatch(fetchUserRecsError(err));
+    });
+};
+
+export const FETCH_FOLLOWING_RECS_REQUEST = 'FETCH_FOLLOWING_RECS_REQUEST';
+export const fetchFollowingRecsRequest = () => ({
+  type: FETCH_FOLLOWING_RECS_REQUEST
+});
+
+export const FETCH_FOLLOWING_RECS_SUCCESS = 'FETCH_FOLLOWING_RECS_SUCCESS';
+export const fetchFollowingRecsSuccess = (recs) => ({
+  type: FETCH_FOLLOWING_RECS_SUCCESS,
+  recs
+});
+
+export const FETCH_FOLLOWING_RECS_ERROR = 'FETCH_FOLLOWING_RECS_ERROR';
+export const fetchFollowingRecsError = (error) => ({
+  type: FETCH_FOLLOWING_RECS_ERROR,
+  error
+});
+
+export const fetchFollowingRecs = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  dispatch(fetchFollowingRecsRequest());
+  return fetch(`${API_BASE_URL}/recommendations/following`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
   })
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(recs => {
-    dispatch(fetchMovieRecsSuccess(recs));
+    dispatch(fetchFollowingRecsSuccess(recs));
   })
   .catch(err => {
-    dispatch(fetchMovieRecsError(err));
+    dispatch(fetchFollowingRecsError(err));
   });
 };
-
-export const SELECT_MOVIE = 'SELECT_MOVIE';
-export const selectMovie = (movieId) => ({
-  type: SELECT_MOVIE,
-  movieId
-});
-
-export const SELECT_USER = 'SELECT_USER';
-export const selectUser = (userId) => ({
-  type: SELECT_USER,
-  userId
-});
-
