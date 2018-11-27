@@ -34,7 +34,7 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 * jwt
 
 ## API Documentation
-[Click to view API documentation](https://developers.themoviedb.org/3/getting-started/introduction)
+[Click to view tmDB API documentation](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ## Features List
 ### V1
