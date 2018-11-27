@@ -40,20 +40,22 @@ export function LandingPage(props) {
         <section className="about-bottom">
           <section className="about-first">
             <h3>Tired of the biased reviews?</h3> 
-              <p>Indiania Jones and the Kingdom
-              Of The Crystal Skull 77% While Wet Hot American Summer sits at 33% Really?
+              <p>Indiana Jones and the Kingdom
+              Of The Crystal Skull earned a 77% on Rotten Tomatoes, while Wet Hot American Summer 
+              sits at 33%. Really?
             </p>
           </section>
           <section className="about-second">
           <h3>Why all the negativity?</h3> 
-          <p>Most places where you get to talk about movies, half of the disucssion is defending
-            why you like the movie. It makes talking movies no fun.
+          <p>Most review-aggregation websites attempt to decide for the consumer whether or not a movie
+            is worth watching. In most cases, you're discouraged rather than encouraged to watch a film.
             </p>
           </section>
           <section className="about-third">
           <h3>Lets just enjoy movies!</h3> 
-          <p>At GoSeeThis the whole point is to learn about new movies and just enjoy
-            movies. 
+          <p>GoSeeThis puts the power in the hands of the individual. We encourage users to recommend 
+              movies they personally feel are entertaining. This allows for an open space for people
+              to share and explore new movies!
             </p>
           </section>
         </section>
