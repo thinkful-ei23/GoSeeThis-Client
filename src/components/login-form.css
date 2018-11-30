@@ -49,7 +49,7 @@
   label {
     font-weight: 100;
   }
-
+  .form-error{color:white;}
   @media only screen and (max-width: 768px){
     #loginBtn{
       margin-top: 100px;
