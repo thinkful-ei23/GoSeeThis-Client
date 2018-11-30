@@ -81,5 +81,5 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 
 Screenshots:
 
-![alt text](https://ryan-ureta.herokuapp.com/static/media/goseethis.63554266.png)
+## ![alt text](https://ryan-ureta.herokuapp.com/static/media/goseethis.63554266.png)
 
