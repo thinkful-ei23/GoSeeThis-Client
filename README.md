@@ -1,6 +1,5 @@
 ![alt text](https://i.imgur.com/vh06Bf6.png)
 
-
 Share your favorite movies with fellow film buffs, put together that watchlist you've been scheming on for the past 3 years, and discover new gems with GoSeeThis. Check out the **[live app!](https://goseethis-client.herokuapp.com/)**
 
 #### Sample Users
@@ -79,3 +78,8 @@ The server-side GitHub repo can be found [here](https://github.com/thinkful-ei23
 
 * **[Twitter](https://twitter.com/GoSeeThisApp1)**
 * **[Product Hunt](https://www.producthunt.com/posts/goseethis)**
+
+Screenshots:
+
+![alt text](https://ryan-ureta.herokuapp.com/static/media/goseethis.63554266.png)
+
